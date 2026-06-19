@@ -1,0 +1,13 @@
+.git
+.gitignore
+node_modules
+dist
+.firebase
+firebase-debug.log
+*-serviceaccount*.json
+*-sa-key*.json
+serviceAccount*.json
+.DS_Store
+.vscode
+.idea
+*.log
