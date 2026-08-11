@@ -16,56 +16,59 @@ GyaanaSetu creates a personalized, highly interactive, and engaging learning env
 ## 🚀 Key Features
 
 *   📝 **Intelligent Notebook Grading (Computer Vision & LLMs)**  
-    Students can handwrite answers in their physical notebooks, snap a picture, and instantly receive intelligent grading. The platform leverages state-of-the-art vision models (**Llama 4 Scout Multimodal**) to read the handwriting, cross-reference it with the expected NCERT rubric, and provide granular scoring along with constructive feedback.
+    Students can handwrite answers in their physical notebooks, snap a picture, and instantly receive intelligent grading. The platform leverages state-of-the-art vision models (**Llama 3.2 Vision** via Groq) to read handwriting, cross-reference it with the expected rubric, and provide granular scoring along with constructive feedback.
 
 *   🤖 **Conversational AI Tutor**  
-    A floating, context-aware AI companion overlay that students can interact with at any time. It helps clarify doubts, explain complex concepts interactively, and is fully responsive to the active study session.
+    A floating, context-aware AI companion powered by **Llama-3.3-70b-versatile**. It helps clarify doubts, explain complex concepts interactively, and acts as an intelligent assistant during study sessions.
+
+*   💻 **CodeIT Integrated Editor**  
+    A built-in code editor (powered by Monaco Editor) for programming problems. Supports strict proctoring mode to prevent cheating during lab assessments.
 
 *   📅 **Smart Attendance & Timetable Management**  
-    Facilitates digital classrooms with dynamic attendance tracking and automated timetable generation for seamless scheduling.
+    Facilitates digital classrooms with dynamic QR-based attendance tracking and automated timetable generation for seamless scheduling.
 
-*   ☁️ **Cloud-Native Architecture**  
-    Built entirely on Google Cloud Platform (GCP) and Firebase, ensuring high availability, scalable data storage, and low-latency API responses.
+*   ☁️ **Serverless Architecture**  
+    Fully decentralized and autoscaling backend using **Vercel Serverless Functions** combined with **Firebase** for low-latency, real-time data access.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Architecture & Tech Stack
 
 ### Frontend
-*   **React (Vite)**: Lightning-fast, modern component architecture.
-*   **Vanilla CSS**: Custom Glassmorphism UI, smooth micro-animations, and dynamic themes.
+*   **React + Vite**: Lightning-fast, modern component architecture.
+*   **Vanilla CSS**: Custom Glassmorphism UI, smooth micro-animations, and dynamic Dark/Light themes.
+*   **Libraries**: `react-pdf` for curriculum delivery, `html5-qrcode` for attendance scanners, `@monaco-editor/react` for the CodeIT environment, and `lucide-react` for iconography.
 
-### Backend & AI
-*   **Google Cloud Functions**: Serverless, autoscaling endpoints (Node.js).
+### Backend API
+*   **Vercel Serverless Functions**: Node.js & Express API endpoints hosted natively on Vercel.
 *   **Groq API**: Blazing fast AI inference using:
-    *   `llama-3.3-70b-versatile` for conversational AI logic.
-    *   `meta-llama/llama-4-scout-17b-16e-instruct` for optical character recognition and visual answer evaluation.
-*   **Firebase Firestore**: Real-time NoSQL database.
-*   **Firebase Authentication**: Secure user management.
+    *   `llama-3.3-70b-versatile` for conversational AI logic and content generation.
+    *   `llama-3.2-90b-vision-preview` (or equivalent) for optical character recognition and visual answer evaluation.
 
-### Deployment
-*   **Google Cloud Run**: Containerized frontend hosting.
-*   **Google Cloud Storage**: Scalable asset and curriculum delivery.
+### Database & Auth
+*   **Firebase Firestore**: Real-time NoSQL database for users, progress tracking, and timetables.
+*   **Firebase Authentication**: Secure user identity management.
+*   **Firebase Storage**: Scalable asset and PDF curriculum delivery.
 
 ---
 
 ## 🔒 Security
 
-All sensitive API keys and service account credentials are securely managed through environment variables and excluded from source control.
+All sensitive API keys and service account credentials (Firebase Admin, Groq) are securely managed through Vercel Environment Variables and excluded from source control.
 
 ---
 
-## 🏃‍♂️ Getting Started
+## 🏃‍♂️ Getting Started (Local Development)
 
 ### Prerequisites
 *   [Node.js](https://nodejs.org/) (v20+)
-*   [Firebase CLI](https://firebase.google.com/docs/cli)
+*   [Vercel CLI](https://vercel.com/docs/cli) (`npm i -g vercel`)
 
-### Local Development
+### Setup Instructions
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/GyaanaSetu.git
+   git clone https://github.com/JeetBagdai/GyaanaSetu.git
    cd GyaanaSetu
    ```
 
@@ -74,7 +77,7 @@ All sensitive API keys and service account credentials are securely managed thro
    npm install
    ```
 
-3. **Install Backend Dependencies**
+3. **Install Backend API Dependencies**
    ```bash
    cd api
    npm install
@@ -82,15 +85,24 @@ All sensitive API keys and service account credentials are securely managed thro
    ```
 
 4. **Environment Variables**
-   Set up your `.env` files using `.env.example` as a reference. You will need:
-   * Firebase config keys
-   * A valid `GROQ_API_KEY` for AI features
+   Create a `.env` file in the root directory using `.env.example` as a reference. You will need:
+   *   `FIREBASE_SERVICE_ACCOUNT` (or specific key/email variables)
+   *   `GROQ_API_KEY` for AI features
+   *   Firebase client configuration variables
 
-5. **Run the App**
+5. **Run the Full Stack Locally**
+   We use Vercel CLI to simultaneously spin up the Vite frontend and the serverless Express API.
    ```bash
-   npm run dev
+   npx vercel dev
    ```
-   Open `http://localhost:5173` to view the app in the browser.
+   Open `http://localhost:3000` to view the app.
+
+---
+
+## 🌍 Deployment
+
+This project is configured for seamless deployment on **Vercel**. 
+Simply connect your GitHub repository to Vercel, ensuring the Root Directory is set to the project root, and populate the Environment Variables in the Vercel Dashboard. The `vercel.json` configuration handles all API routing automatically.
 
 ---
 
