@@ -1,6 +1,6 @@
 # 🎓 GyaanaSetu
 
-**🌐 Live Demo:** [https://gyaanasetu.vercel.app](https://gyaanasetu.vercel.app)
+**🌐 Live Demo:** [https://gyaanasetu.vercel.app](https://gyaanasetu-bnmit.vercel.app/)
 
 > **A Next-Generation, AI-Powered Learning Ecosystem.** 
 > Revolutionizing the way students interact with educational material by bridging traditional learning with cutting-edge Cloud Architecture, Computer Vision, and Large Language Models (LLMs).
