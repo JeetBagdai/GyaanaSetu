@@ -20,7 +20,7 @@ const STUDENT_NAV = [
 
 const TEACHER_NAV_BASE = [
   { to: '/dashboard',  label: 'Dashboard',   icon: LayoutDashboard, color: '#ea580c' },
-  { to: '/projects',   label: 'Projects',    icon: FolderGit2,      color: '#ea580c' },
+  { to: '/teacher-projects',   label: 'Projects',    icon: FolderGit2,      color: '#ea580c' },
   { to: '/attendance', label: 'Attendance',  icon: ClipboardCheck,  color: '#e85d04' },
   { to: '/performance', label: 'Performance', icon: BarChart3,       color: '#e65c00' },
   { to: '/timetable',  label: 'My Schedule', icon: Calendar,        color: '#f59e0b' },

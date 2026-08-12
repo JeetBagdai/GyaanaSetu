@@ -152,32 +152,32 @@ export default function Projects() {
                     </div>
                   </div>
                 ) : selectedSubject === subject ? (
-                  <div style={{ background: 'var(--bg-app)', padding: '1rem', borderRadius: '8px', marginTop: 'auto' }}>
-                    <form onSubmit={handleSubmit}>
-                      <div style={{ marginBottom: '1rem' }}>
-                        <label className="form-label" style={{ fontSize: '0.8rem' }}>GitHub Repository URL</label>
+                  <div style={{ background: 'var(--bg-app)', padding: '1.25rem', borderRadius: '8px', marginTop: 'auto', border: '1px solid var(--border)' }}>
+                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                      <div>
+                        <label className="form-label" style={{ fontSize: '0.8rem', display: 'block', marginBottom: '6px', color: 'var(--text-secondary)' }}>GitHub Repository URL</label>
                         <input 
                           type="url" 
                           className="form-input" 
                           placeholder="https://github.com/..."
                           value={githubLink}
                           onChange={e => setGithubLink(e.target.value)}
-                          style={{ padding: '0.5rem', fontSize: '0.85rem' }}
+                          style={{ padding: '0.6rem', fontSize: '0.85rem', width: '100%', boxSizing: 'border-box' }}
                         />
                       </div>
-                      <div style={{ marginBottom: '1rem' }}>
-                        <label className="form-label" style={{ fontSize: '0.8rem' }}>Project Report URL (Drive, PDF, etc)</label>
+                      <div>
+                        <label className="form-label" style={{ fontSize: '0.8rem', display: 'block', marginBottom: '6px', color: 'var(--text-secondary)' }}>Project Report URL (Drive, PDF, etc)</label>
                         <input 
                           type="url" 
                           className="form-input" 
                           placeholder="https://docs.google.com/..."
                           value={reportLink}
                           onChange={e => setReportLink(e.target.value)}
-                          style={{ padding: '0.5rem', fontSize: '0.85rem' }}
+                          style={{ padding: '0.6rem', fontSize: '0.85rem', width: '100%', boxSizing: 'border-box' }}
                         />
                       </div>
-                      <div style={{ display: 'flex', gap: '0.5rem' }}>
-                        <button type="button" className="btn btn-ghost" style={{ flex: 1, padding: '0.5rem', fontSize: '0.85rem' }} onClick={() => setSelectedSubject(null)} disabled={submitting}>Cancel</button>
+                      <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
+                        <button type="button" className="btn btn-ghost" style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem' }} onClick={() => setSelectedSubject(null)} disabled={submitting}>Cancel</button>
                         <button type="submit" className="btn btn-primary" style={{ flex: 1, padding: '0.5rem', fontSize: '0.85rem' }} disabled={submitting || (!githubLink && !reportLink)}>
                           {submitting ? 'Submitting...' : 'Submit'}
                         </button>

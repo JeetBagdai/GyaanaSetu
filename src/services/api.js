@@ -388,9 +388,23 @@ export const generateTimetable = async (data, token) => {
 }
 
 export const getTimetable = async (classId, token) => {
-  const snap = await getDoc(doc(db, 'timetables', classId || 'default'))
+  let docId = classId || 'default'
+  let section = null
+  const match = docId.match(/^(.*?)-([A-Z])$/)
+  if (match) {
+    docId = match[1]
+    section = match[2]
+  }
+
+  const snap = await getDoc(doc(db, 'timetables', docId))
   if (!snap.exists()) return { schedule: null }
-  return snap.data()
+  
+  const data = snap.data()
+  if (section && data.schedule && data.schedule[`schedule${section}`]) {
+    return { ...data, schedule: data.schedule[`schedule${section}`], classId }
+  }
+  
+  return data
 }
 
 export const saveTimetable = async (data, token) => {
@@ -420,5 +434,12 @@ export const sendChatMessage = (messages, userRole, semester, token) =>
   }, token)
 
 // ── DASHBOARD ──────────────────────────────────────
-export const getDashboardStats = (role, classId, token) =>
-  apiFetch(`/dashboard/stats?role=${role}&classId=${classId || 'default'}`, {}, token)
+export const getDashboardStats = async (role, classId, token) => {
+  // Mocking stats for now since backend is not implemented
+  return {
+    chaptersRead: 12,
+    attendanceDays: 14,
+    avgQuizScore: 85,
+    streakDays: 5
+  }
+}

@@ -19,7 +19,19 @@ export default function TeacherProjects() {
   const prjSubjects = getProjectSubjects(Number(selectedSem))
   const theorySubjects = getTheorySubjects(Number(selectedSem))
   const labSubjects = getPracticalSubjects(Number(selectedSem))
+  
+  // Parse teacher's subjects
+  const teacherAssignedSubjects = (profile?.subjects || '').split(',').filter(Boolean).map(s => {
+    const match = s.trim().match(/(.+)\s*\(Sem\s*(\d+)\)/i)
+    if (match) return match[1].trim()
+    return s.trim()
+  })
+
+  // Only include subjects for this semester that are assigned to this teacher
   const allSubjects = [...new Set([...prjSubjects, ...theorySubjects, ...labSubjects])]
+  const mySubjects = profile?.role === 'admin' ? allSubjects : allSubjects.filter(sub => 
+    teacherAssignedSubjects.some(assigned => assigned.toLowerCase() === sub.toLowerCase() || assigned.includes(sub) || sub.includes(assigned))
+  )
 
   useEffect(() => {
     // Fetch project settings
@@ -57,7 +69,9 @@ export default function TeacherProjects() {
       await setDoc(doc(db, 'project_settings', docId), {
         semester: Number(selectedSem),
         subject,
-        enabled: !currentState
+        enabled: !currentState,
+        updatedAt: new Date().toISOString(),
+        updatedBy: profile?.name || 'Unknown Teacher'
       })
     } catch (err) {
       console.error(err)
@@ -89,7 +103,7 @@ export default function TeacherProjects() {
           </p>
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1rem' }}>
-            {allSubjects.map(subject => {
+            {mySubjects.map(subject => {
               const isPrj = prjSubjects.includes(subject)
               const isEnabled = isPrj || projectSettings[subject]?.enabled
               
@@ -110,6 +124,11 @@ export default function TeacherProjects() {
                 </div>
               )
             })}
+            {mySubjects.length === 0 && (
+              <div style={{ gridColumn: '1 / -1', padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+                You do not have any subjects assigned for Semester {selectedSem}.
+              </div>
+            )}
           </div>
         </div>
       </div>

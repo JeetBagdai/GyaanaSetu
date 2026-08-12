@@ -8,7 +8,7 @@ import {
   Network, FlaskConical, Sigma, Layers,
   BookOpen, ClipboardCheck, Calendar,
   MessageCircle, Brain,
-  Cpu, Eye, Database, Cloud, Code2, BarChart3
+  Cpu, Eye, Database, Cloud, Code2, BarChart3, MapPin
 } from 'lucide-react'
 import './Dashboard.css'
 
@@ -143,11 +143,18 @@ export default function Dashboard() {
           <div style={{ fontWeight: 700, fontSize: '1.05rem' }}>
             {profile?.name || 'Welcome'}
           </div>
-          <div className="text-muted text-sm">
-            {isTeacher
-              ? 'AIML Department · BNM Institute of Technology'
-              : `${profile?.department || 'AIML'} · Sem ${profile?.semester || 5} · BNMIT`}
-          </div>
+            <div className="text-muted text-sm" style={{ marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <MapPin size={14} /> 
+              {isTeacher 
+              ? `${profile?.department || 'AIML'} Department · BNMIT` 
+              : `${profile?.department || 'AIML'} · ${(() => {
+                  const classMatch = profile?.classId?.match(/SEM(\d+)(?:-([A-Z]))?/);
+                  if (classMatch) {
+                    return `Sem ${classMatch[1]}${classMatch[2] ? ` Sec ${classMatch[2]}` : ''}`;
+                  }
+                  return `Sem ${profile?.semester || 5}`;
+                })()} · BNMIT`}
+            </div>
           {!isTeacher && profile?.usn && (
             <div style={{ marginTop: '0.35rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
               <span style={{
@@ -270,7 +277,13 @@ export default function Dashboard() {
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                             <Icon size={16} color={subj.color} />
                             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: subj.color, background: `${subj.color}15`, padding: '0.15rem 0.4rem', borderRadius: '4px' }}>
-                              Sem {subj.sem}
+                              {(() => {
+                                const classMatch = profile?.classId?.match(/SEM(\d+)(?:-([A-Z]))?/);
+                                if (classMatch) {
+                                  return `Sem ${classMatch[1]}${classMatch[2] ? ` - ${classMatch[2]}` : ''}`;
+                                }
+                                return `Sem ${subj.sem}`;
+                              })()}
                             </span>
                           </div>
                         </div>

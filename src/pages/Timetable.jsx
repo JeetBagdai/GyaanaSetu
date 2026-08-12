@@ -243,7 +243,12 @@ export default function Timetable() {
   const [schedule,  setSchedule]  = useState(null)
   const [fetching,  setFetching]  = useState(!isTeacher)
   const studentSem = profile?.classId || 'AIML-SEM5'
-  const studentSemLabel = AIML_SEMESTERS.find(s => s.id === studentSem)?.label || 'Sem 5'
+  let studentSemLabel = 'Sem 5'
+  
+  const semMatch = studentSem.match(/SEM(\d+)(?:-([A-Z]))?/)
+  if (semMatch) {
+    studentSemLabel = `Sem ${semMatch[1]}${semMatch[2] ? ` Sec ${semMatch[2]}` : ''}`
+  }
 
   // ── Fetch all semesters in parallel for teacher ──
   useEffect(() => {
@@ -252,13 +257,23 @@ export default function Timetable() {
       setFetchingAll(true)
       try {
         const token = await getToken()
+        
+        const allQueries = []
+        const SECTIONS = ['A', 'B', 'C', 'D']
+        AIML_SEMESTERS.forEach(sem => {
+          allQueries.push({ id: sem.id, label: sem.label, num: sem.num })
+          SECTIONS.forEach(sec => {
+            allQueries.push({ id: `${sem.id}-${sec}`, label: `${sem.label} Sec ${sec}`, num: sem.num, section: sec })
+          })
+        })
+
         const results = await Promise.all(
-          AIML_SEMESTERS.map(async sem => {
+          allQueries.map(async query => {
             try {
-              const data = await getTimetable(sem.id, token)
-              return { semLabel: sem.label, semNum: sem.num, schedule: data?.schedule || null }
+              const data = await getTimetable(query.id, token)
+              return { semLabel: query.label, semNum: query.num, section: query.section, schedule: data?.schedule || null }
             } catch {
-              return { semLabel: sem.label, semNum: sem.num, schedule: null }
+              return { semLabel: query.label, semNum: query.num, section: query.section, schedule: null }
             }
           })
         )
