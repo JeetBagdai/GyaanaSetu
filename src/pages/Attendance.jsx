@@ -29,6 +29,9 @@ const getCurrentLocation = () => {
         { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
       )
     }
+  })
+}
+
 const AIML_SEMESTERS = [
   { id: 'AIML-SEM3', label: 'Semester 3' },
   { id: 'AIML-SEM4', label: 'Semester 4' },
