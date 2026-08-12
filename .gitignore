@@ -40,3 +40,4 @@ npm-debug.log*
 
 API.txt
 gyaanasetu-bnmit-firebase-adminsdk-*.json
+.env*
