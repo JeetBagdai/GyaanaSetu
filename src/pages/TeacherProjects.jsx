@@ -10,7 +10,29 @@ import './Dashboard.css'
 export default function TeacherProjects() {
   const { profile } = useAuth()
   
+  const availableSemesters = React.useMemo(() => {
+    if (!profile) return SEMESTERS
+    if (profile.role === 'admin') return SEMESTERS
+    
+    const assignedSems = new Set()
+    const subjects = (profile.subjects || '').split(',').filter(Boolean)
+    subjects.forEach(s => {
+      const match = s.trim().match(/Sem\s*(\d+)/i)
+      if (match) assignedSems.add(match[1])
+    })
+    
+    const filtered = SEMESTERS.filter(sem => assignedSems.has(sem.id))
+    return filtered.length > 0 ? filtered : SEMESTERS // fallback
+  }, [profile])
+
   const [selectedSem, setSelectedSem] = useState('5')
+  
+  useEffect(() => {
+    if (availableSemesters.length > 0 && !availableSemesters.find(s => s.id === selectedSem)) {
+      setSelectedSem(availableSemesters[0].id)
+    }
+  }, [availableSemesters, selectedSem])
+
   const [projectSettings, setProjectSettings] = useState({})
   const [submissions, setSubmissions] = useState([])
   const [loading, setLoading] = useState(true)
@@ -88,7 +110,7 @@ export default function TeacherProjects() {
         </div>
         <div>
           <select className="form-input" value={selectedSem} onChange={e => setSelectedSem(e.target.value)} style={{ padding: '0.5rem', width: '200px' }}>
-            {SEMESTERS.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+            {availableSemesters.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
           </select>
         </div>
       </div>

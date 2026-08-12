@@ -443,3 +443,96 @@ export const getDashboardStats = async (role, classId, token) => {
     streakDays: 5
   }
 }
+
+export const getTeacherPerformanceStats = async (classId, subject, token) => {
+  const studentsQuery = query(collection(db, 'users'), where('role', '==', 'student'), where('classId', '==', classId));
+  const studentsSnap = await getDocs(studentsQuery);
+  const students = [];
+  const usns = [];
+  
+  studentsSnap.forEach(d => {
+    const s = { id: d.id, ...d.data() };
+    students.push(s);
+    if (s.usn) usns.push(s.usn);
+  });
+
+  if (students.length === 0) return { studentPerformance: [] };
+
+  const semesterStr = classId.match(/SEM(\d+)/)?.[1] || "";
+
+  const quizQ = query(collection(db, 'quizResults'), where('subject', '==', subject));
+  const quizSnap = await getDocs(quizQ);
+  const allQuiz = [];
+  quizSnap.forEach(d => allQuiz.push(d.data()));
+
+  const progQ = query(collection(db, 'progress'), where('subject', '==', subject));
+  const progSnap = await getDocs(progQ);
+  const allProg = [];
+  progSnap.forEach(d => allProg.push(d.data()));
+
+  const probQ = query(collection(db, 'coding_problems'), where('subject', '==', subject));
+  const probSnap = await getDocs(probQ);
+  const problemIds = new Set();
+  probSnap.forEach(d => problemIds.add(d.id));
+  
+  const isPractical = problemIds.size > 0;
+  const allSubmissions = [];
+
+  if (isPractical && usns.length > 0) {
+    const chunks = [];
+    for (let i = 0; i < usns.length; i += 10) {
+      chunks.push(usns.slice(i, i + 10));
+    }
+    for (const chunk of chunks) {
+      if (chunk.length === 0) continue;
+      const subQ = query(collection(db, 'submissions'), where('studentUSN', 'in', chunk));
+      const subSnap = await getDocs(subQ);
+      subSnap.forEach(d => {
+        const data = d.data();
+        if (data.score === 100 && problemIds.has(data.problemId)) {
+          allSubmissions.push(data);
+        }
+      });
+    }
+  }
+
+  const studentPerformance = students.map(student => {
+    const studentProg = allProg.filter(p => p.userId === student.id);
+    const modulesCompleted = new Set(studentProg.map(p => p.chapter)).size;
+    
+    const studentQuiz = allQuiz.filter(q => q.userId === student.id);
+    const avgScore = studentQuiz.length > 0 
+      ? Math.round(studentQuiz.reduce((a, b) => a + Number(b.scorePercent || 0), 0) / studentQuiz.length) 
+      : 0;
+    
+    const topicCounts = {};
+    studentQuiz.forEach(q => {
+      (q.weakTopics || []).forEach(t => {
+        topicCounts[t] = (topicCounts[t] || 0) + 1;
+      });
+    });
+    const worstTopics = Object.entries(topicCounts).sort((a, b) => b[1] - a[1]).slice(0, 3).map(x => x[0]);
+
+    let codeItPercent = null;
+    if (isPractical) {
+      const studentSubs = allSubmissions.filter(s => s.studentUSN === student.usn);
+      const solvedCount = new Set(studentSubs.map(s => s.problemId)).size;
+      codeItPercent = Math.round((solvedCount / problemIds.size) * 100);
+    }
+
+    return {
+      id: student.id,
+      name: student.name,
+      usn: student.usn,
+      chaptersRead: modulesCompleted,
+      score: avgScore,
+      weakTopics: worstTopics,
+      codeItPercent,
+      isPractical,
+      quizzes: studentQuiz,
+      progress: studentProg
+    };
+  });
+
+  return { studentPerformance };
+}

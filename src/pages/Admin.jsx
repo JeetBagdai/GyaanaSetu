@@ -58,13 +58,13 @@ const FACULTY_LIST = [
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 
 const SUBJECT_COLORS = {
-  'Machine Learning':            { bg: '#fff2e8', text: '#ea580c' },
-  'Deep Learning':               { bg: '#ffedd5', text: '#e85d04' },
-  'Natural Language Processing': { bg: '#ffedd5', text: '#a64200' },
-  'Computer Vision':             { bg: '#fffbeb', text: '#d97706' },
-  'Big Data Analytics':          { bg: '#fee2e2', text: '#ef4444' },
-  'Cloud Computing':             { bg: '#f0fdf4', text: '#16a34a' },
-  Default:                       { bg: '#f5f3ff', text: '#ea580c' },
+  'Machine Learning':            { bg: 'var(--color-orange-soft)', text: 'var(--primary)' },
+  'Deep Learning':               { bg: 'var(--color-orange-soft)', text: 'var(--primary)' },
+  'Natural Language Processing': { bg: 'var(--color-orange-soft)', text: 'var(--primary)' },
+  'Computer Vision':             { bg: 'var(--color-orange-soft)', text: 'var(--primary)' },
+  'Big Data Analytics':          { bg: 'var(--color-orange-soft)', text: 'var(--primary)' },
+  'Cloud Computing':             { bg: 'var(--color-orange-soft)', text: 'var(--primary)' },
+  Default:                       { bg: 'var(--sem-1-bg)', text: 'var(--primary)' },
 }
 
 const GROQ_KEY = import.meta.env.VITE_GROQ_API_KEY || ''

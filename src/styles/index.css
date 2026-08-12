@@ -156,6 +156,16 @@
   --primary-hover:        #ea580c;
   --surface:              #221508;
   --border:               #3d2810;
+
+  /* Semester Colors for Timetable (Dark Mode) */
+  --sem-1-bg: rgba(234, 88, 12, 0.15);  --sem-1-text: #f97316;
+  --sem-2-bg: rgba(58, 175, 169, 0.15); --sem-2-text: #4ade80;
+  --sem-3-bg: rgba(37, 99, 235, 0.15);  --sem-3-text: #60a5fa;
+  --sem-4-bg: rgba(217, 119, 6, 0.15);  --sem-4-text: #fbbf24;
+  --sem-5-bg: rgba(239, 68, 68, 0.15);  --sem-5-text: #f87171;
+  --sem-6-bg: rgba(22, 163, 74, 0.15);  --sem-6-text: #4ade80;
+  --sem-7-bg: rgba(147, 51, 234, 0.15); --sem-7-text: #c084fc;
+  --sem-8-bg: rgba(2, 132, 199, 0.15);  --sem-8-text: #38bdf8;
 }
 
 /* ── Reset & Base ── */
@@ -210,6 +220,13 @@ button {
 
 input, textarea, select {
   font-family: var(--font-body);
+  color: var(--text-primary);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+}
+
+select option {
+  background-color: var(--bg-card);
   color: var(--text-primary);
 }
 

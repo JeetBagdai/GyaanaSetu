@@ -51,13 +51,13 @@ const SEM_COLORS = [
 ]
 
 const SUBJECT_COLORS = {
-  'Machine Learning':            { bg: 'var(--color-orange-soft)', text: 'var(--color-orange)' },
-  'Deep Learning':               { bg: 'var(--color-orange-soft)', text: 'var(--color-orange)' },
-  'Natural Language Processing': { bg: 'var(--color-orange-soft)', text: 'var(--color-orange)' },
-  'Computer Vision':             { bg: 'var(--color-orange-soft)', text: 'var(--color-orange)' },
-  'Big Data Analytics':          { bg: 'var(--color-orange-soft)', text: 'var(--color-orange)' },
-  'Cloud Computing':             { bg: 'var(--color-orange-soft)', text: 'var(--color-orange)' },
-  Default:                       { bg: '#f5f3ff', text: '#ea580c' },
+  'Machine Learning':            { bg: 'var(--color-orange-soft)', text: 'var(--primary)' },
+  'Deep Learning':               { bg: 'var(--color-orange-soft)', text: 'var(--primary)' },
+  'Natural Language Processing': { bg: 'var(--color-orange-soft)', text: 'var(--primary)' },
+  'Computer Vision':             { bg: 'var(--color-orange-soft)', text: 'var(--primary)' },
+  'Big Data Analytics':          { bg: 'var(--color-orange-soft)', text: 'var(--primary)' },
+  'Cloud Computing':             { bg: 'var(--color-orange-soft)', text: 'var(--primary)' },
+  Default:                       { bg: 'var(--sem-1-bg)', text: 'var(--primary)' },
 }
 
 function getColor(s) { return (SUBJECT_COLORS[s] || SUBJECT_COLORS.Default).bg }
