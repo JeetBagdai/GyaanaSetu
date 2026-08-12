@@ -1,0 +1,512 @@
+[
+    {
+        "title": "Pattern Matching using Brute Force",
+        "description": "Given a text string and a pattern string, find the first starting index of the pattern in the text using the Brute Force algorithm. If the pattern is not found, return -1.",
+        "difficulty": "Easy",
+        "inputFormat": "First line contains the text string. Second line contains the pattern string.",
+        "outputFormat": "Integer representing the 0-based index of the first match, or -1.",
+        "note": "Both strings consist of lowercase English letters.",
+        "sampleTestCases": [
+            {"input": "hello world\nworld", "output": "6"},
+            {"input": "abracadabra\ncad", "output": "4"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    lines = sys.stdin.read().splitlines()\n    if len(lines) >= 2:\n        text, pattern = lines[0], lines[1]\n        # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String text = sc.nextLine();\n        String pattern = sc.nextLine();\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string text, pattern;\n    getline(cin, text);\n    getline(cin, pattern);\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "KMP Pattern Matching",
+        "description": "Implement the Knuth-Morris-Pratt (KMP) algorithm to find all occurrences of a pattern in a text. Return the starting indices separated by space. If none, return -1.",
+        "difficulty": "Medium",
+        "inputFormat": "First line: text. Second line: pattern.",
+        "outputFormat": "Space-separated integers of starting indices or -1.",
+        "note": "Text length <= 10^5, pattern length <= 10^5.",
+        "sampleTestCases": [
+            {"input": "ababcabcabababd\nabab", "output": "0 8 10"},
+            {"input": "aaaaa\nbb", "output": "-1"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    lines = sys.stdin.read().splitlines()\n    if len(lines) >= 2:\n        text, pattern = lines[0], lines[1]\n        # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String text = sc.nextLine();\n        String pattern = sc.nextLine();\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string text, pattern;\n    getline(cin, text);\n    getline(cin, pattern);\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Infix to Postfix Conversion",
+        "description": "Convert a given infix mathematical expression to a postfix expression using a stack.",
+        "difficulty": "Medium",
+        "inputFormat": "A single string representing the infix expression (without spaces).",
+        "outputFormat": "A single string representing the postfix expression.",
+        "note": "Supported operators: +, -, *, /, ^. Parentheses may be present. Operands are single letters.",
+        "sampleTestCases": [
+            {"input": "a+b*(c^d-e)", "output": "abcd^e-*+"},
+            {"input": "A*B+C/D", "output": "AB*CD/+"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    infix = sys.stdin.read().strip()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String infix = sc.nextLine();\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string infix;\n    cin >> infix;\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Postfix Expression Evaluation",
+        "description": "Evaluate a given postfix expression containing single digit operands and basic operators (+, -, *, /, %).",
+        "difficulty": "Easy",
+        "inputFormat": "A single string representing the postfix expression.",
+        "outputFormat": "An integer representing the evaluated result.",
+        "note": "Assume valid postfix expression and division by zero will not occur.",
+        "sampleTestCases": [
+            {"input": "231*+9-", "output": "-4"},
+            {"input": "82/3*", "output": "12"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    postfix = sys.stdin.read().strip()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String postfix = sc.nextLine();\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string postfix;\n    cin >> postfix;\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Circular Queue Operations",
+        "description": "Implement a Circular Queue of size N. Perform a series of Enqueue (E x) and Dequeue (D) operations. Print the queue elements from front to rear after all operations.",
+        "difficulty": "Medium",
+        "inputFormat": "First line: N (queue size) and Q (number of operations). Next Q lines: operations (E x or D).",
+        "outputFormat": "Space-separated integers representing the queue content. If empty, print 'Empty'.",
+        "note": "Ignore Dequeue if empty, ignore Enqueue if full.",
+        "sampleTestCases": [
+            {"input": "3 5\nE 1\nE 2\nE 3\nD\nE 4", "output": "2 3 4"},
+            {"input": "2 3\nE 10\nD\nD", "output": "Empty"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Doubly Ended Queue",
+        "description": "Implement a Deque. Operations: Insert Front (IF x), Insert Rear (IR x), Delete Front (DF), Delete Rear (DR). Print elements from front to rear after Q operations.",
+        "difficulty": "Medium",
+        "inputFormat": "First line: Q (operations count). Next Q lines: operations.",
+        "outputFormat": "Space-separated elements of the deque.",
+        "note": "The deque can grow infinitely.",
+        "sampleTestCases": [
+            {"input": "5\nIR 10\nIF 20\nIR 30\nDF\nDR", "output": "10"},
+            {"input": "3\nIF 5\nIF 10\nIR 15", "output": "10 5 15"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Priority Queue using Arrays",
+        "description": "Implement a Priority Queue using an array. Perform insertions and extract max operations. Print the max elements extracted.",
+        "difficulty": "Medium",
+        "inputFormat": "First line: Q (operations). Next Q lines: I x (insert x) or E (extract max).",
+        "outputFormat": "For each E operation, print the extracted max value.",
+        "note": "Print 'Empty' if E is called on an empty queue.",
+        "sampleTestCases": [
+            {"input": "4\nI 5\nI 10\nE\nE", "output": "10\n5"},
+            {"input": "2\nE\nI 3", "output": "Empty"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "SLL Front Insertion",
+        "description": "Insert N elements to the front of a Singly Linked List. Print the list elements after all insertions.",
+        "difficulty": "Easy",
+        "inputFormat": "First line: N. Second line: N space-separated integers.",
+        "outputFormat": "Space-separated integers representing the SLL.",
+        "note": "Since elements are inserted at the front, they will appear in reverse order of input.",
+        "sampleTestCases": [
+            {"input": "4\n1 2 3 4", "output": "4 3 2 1"},
+            {"input": "2\n10 20", "output": "20 10"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Count Nodes in SLL",
+        "description": "Given elements to append to a SLL, write a function to count the number of nodes in the SLL.",
+        "difficulty": "Easy",
+        "inputFormat": "First line: N (number of elements). Second line: N elements.",
+        "outputFormat": "An integer representing the count of nodes.",
+        "note": "Do not just print N, implement the SLL and count.",
+        "sampleTestCases": [
+            {"input": "5\n1 2 3 4 5", "output": "5"},
+            {"input": "1\n10", "output": "1"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "DLL End Insertion",
+        "description": "Create a Doubly Linked List by inserting N elements at the end. Print the list forwards and backwards.",
+        "difficulty": "Medium",
+        "inputFormat": "First line: N. Second line: N elements.",
+        "outputFormat": "Two lines: First line forwards, Second line backwards.",
+        "note": "DLL nodes should have prev and next pointers.",
+        "sampleTestCases": [
+            {"input": "3\n1 2 3", "output": "1 2 3\n3 2 1"},
+            {"input": "2\n5 10", "output": "5 10\n10 5"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Polynomial Addition using Linked List",
+        "description": "Add two polynomials represented by linked lists. Each term has a coefficient and an exponent. Print the resulting polynomial.",
+        "difficulty": "Hard",
+        "inputFormat": "First line N (terms in Poly1). Next N lines: coeff exp. Next line M. Next M lines: coeff exp.",
+        "outputFormat": "Resulting polynomial terms in descending order of exponents: coeff exp ...",
+        "note": "Add coefficients of matching exponents. Do not print terms with 0 coefficient.",
+        "sampleTestCases": [
+            {"input": "2\n3 2\n4 0\n2\n5 2\n1 1", "output": "8 2 1 1 4 0"},
+            {"input": "1\n2 1\n1\n-2 1", "output": "0"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Reverse a Singly Linked List",
+        "description": "Given a Singly Linked List, reverse it in-place and print the new list.",
+        "difficulty": "Medium",
+        "inputFormat": "First line: N. Second line: N elements to be inserted at the end.",
+        "outputFormat": "Space-separated elements of the reversed list.",
+        "note": "Use O(1) auxiliary space.",
+        "sampleTestCases": [
+            {"input": "4\n1 2 3 4", "output": "4 3 2 1"},
+            {"input": "1\n10", "output": "10"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Josephus Problem via Circular Linked List",
+        "description": "Solve the Josephus problem using a Circular Linked List. Given N people standing in a circle and a step count K, find the survivor.",
+        "difficulty": "Hard",
+        "inputFormat": "First line: N and K.",
+        "outputFormat": "Integer representing the survivor (1-based index).",
+        "note": "Person 1 to N. Count K people and eliminate the K-th person. Repeat.",
+        "sampleTestCases": [
+            {"input": "5 2", "output": "3"},
+            {"input": "7 3", "output": "4"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Binary Tree Traversals",
+        "description": "Given the array representation of a complete binary tree (1-based index), print its Inorder, Preorder, and Postorder traversals.",
+        "difficulty": "Medium",
+        "inputFormat": "First line: N. Second line: N elements.",
+        "outputFormat": "Three lines: Inorder, Preorder, and Postorder space-separated elements.",
+        "note": "Left child of i is 2*i, right child is 2*i + 1.",
+        "sampleTestCases": [
+            {"input": "5\n1 2 3 4 5", "output": "4 2 5 1 3\n1 2 4 5 3\n4 5 2 3 1"},
+            {"input": "3\n1 2 3", "output": "2 1 3\n1 2 3\n2 3 1"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Maximum Depth of a Complete Binary Tree",
+        "description": "Find the maximum depth (height) of a complete binary tree given its array representation.",
+        "difficulty": "Easy",
+        "inputFormat": "First line: N. Second line: N elements.",
+        "outputFormat": "An integer representing the height (root is at height 1).",
+        "note": "Height is the number of nodes along the longest path from root to leaf.",
+        "sampleTestCases": [
+            {"input": "5\n1 2 3 4 5", "output": "3"},
+            {"input": "1\n10", "output": "1"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Print all Root to Leaf Paths",
+        "description": "Given a complete binary tree in array form, print all paths from the root to the leaves, one path per line.",
+        "difficulty": "Medium",
+        "inputFormat": "First line: N. Second line: N elements.",
+        "outputFormat": "Paths, each on a new line, nodes separated by spaces. Paths should be printed from left to right.",
+        "note": "A leaf is a node with no children.",
+        "sampleTestCases": [
+            {"input": "5\n1 2 3 4 5", "output": "1 2 4\n1 2 5\n1 3"},
+            {"input": "3\n1 2 3", "output": "1 2\n1 3"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Binary Search Tree Creation",
+        "description": "Create a BST by inserting N elements in the given order. Print its Inorder traversal to verify it is sorted.",
+        "difficulty": "Easy",
+        "inputFormat": "First line: N. Second line: N integers.",
+        "outputFormat": "Space-separated integers of the Inorder traversal.",
+        "note": "Insert into BST without self-balancing.",
+        "sampleTestCases": [
+            {"input": "6\n5 3 7 2 4 6", "output": "2 3 4 5 6 7"},
+            {"input": "4\n10 5 15 20", "output": "5 10 15 20"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Evaluate Binary Expression Tree",
+        "description": "Given a postfix expression, build an expression tree and then evaluate it to return the result.",
+        "difficulty": "Hard",
+        "inputFormat": "A single string postfix expression with single-digit operands.",
+        "outputFormat": "The evaluated integer result.",
+        "note": "Operators: +, -, *, /",
+        "sampleTestCases": [
+            {"input": "53+82/-", "output": "4"},
+            {"input": "23*4+", "output": "10"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Search in a BST",
+        "description": "Insert N elements into a BST. Then, given Q queries, print 'Found' or 'Not Found' for each query.",
+        "difficulty": "Medium",
+        "inputFormat": "First line N. Second line N integers. Third line Q. Next Q lines: query integers.",
+        "outputFormat": "For each query, print 'Found' or 'Not Found' on a new line.",
+        "note": "",
+        "sampleTestCases": [
+            {"input": "5\n10 5 15 2 7\n2\n7\n12", "output": "Found\nNot Found"},
+            {"input": "3\n2 1 3\n1\n3", "output": "Found"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Construct MAX-Heap",
+        "description": "Given N elements, build a MAX-Heap and print the array representation of the heap.",
+        "difficulty": "Medium",
+        "inputFormat": "First line N. Second line N elements.",
+        "outputFormat": "Space-separated elements of the MAX-Heap.",
+        "note": "Insert elements one by one and heapify up.",
+        "sampleTestCases": [
+            {"input": "5\n1 2 3 4 5", "output": "5 4 2 1 3"},
+            {"input": "4\n10 20 5 30", "output": "30 20 5 10"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Delete from MAX-Heap",
+        "description": "Build a MAX-Heap from N elements. Perform Q delete (extract max) operations. Print the array representation of the heap after operations.",
+        "difficulty": "Medium",
+        "inputFormat": "First line N. Second line N elements. Third line Q.",
+        "outputFormat": "Space-separated elements of the remaining MAX-Heap.",
+        "note": "Replace root with last element and heapify down.",
+        "sampleTestCases": [
+            {"input": "5\n1 2 3 4 5\n1", "output": "4 3 2 1"},
+            {"input": "4\n10 20 5 30\n2", "output": "10 5"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Hashing with Linear Probing",
+        "description": "Implement a Hash Table of size M using Linear Probing for collision resolution. Hash function: H(k) = k % M. Insert N elements and print the final table. Empty slots should print -1.",
+        "difficulty": "Medium",
+        "inputFormat": "First line M and N. Second line N elements.",
+        "outputFormat": "M space-separated integers representing the hash table.",
+        "note": "If table is full, insertion fails (silently ignore).",
+        "sampleTestCases": [
+            {"input": "7 4\n10 17 24 3", "output": "-1 -1 -1 10 17 24 3"},
+            {"input": "5 3\n5 10 15", "output": "5 10 15 -1 -1"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Hashing with Chaining",
+        "description": "Implement a Hash Table of size M using Chaining. Hash function: H(k) = k % M. Insert N elements. Print the elements of each bucket separated by spaces. Empty buckets print 'Empty'.",
+        "difficulty": "Medium",
+        "inputFormat": "First line M and N. Second line N elements.",
+        "outputFormat": "M lines, i-th line contains the elements in bucket i.",
+        "note": "Append new elements to the end of the chain.",
+        "sampleTestCases": [
+            {"input": "3 4\n10 20 13 33", "output": "Empty\n10 13 33\n20"},
+            {"input": "2 2\n2 4", "output": "2 4\nEmpty"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "AVL Tree Balance Factor",
+        "description": "Insert N elements into a standard BST. For each node in the BST, calculate its Balance Factor (Height of Left Subtree - Height of Right Subtree). Print the node values and their balance factors in Inorder traversal.",
+        "difficulty": "Hard",
+        "inputFormat": "First line N. Second line N elements.",
+        "outputFormat": "N lines, each with 'value balance_factor'.",
+        "note": "Height of an empty subtree is 0.",
+        "sampleTestCases": [
+            {"input": "5\n10 5 15 2 7", "output": "2 0\n5 0\n7 0\n10 0\n15 0"},
+            {"input": "3\n1 2 3", "output": "1 -2\n2 -1\n3 0"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Red-Black Tree Properties Check",
+        "description": "Given a BST, verify if it satisfies the properties of a Red-Black Tree. (Given node colors).",
+        "difficulty": "Hard",
+        "inputFormat": "First line N. Next N lines: value color ('R' or 'B').",
+        "outputFormat": "'Yes' if it is a valid Red-Black Tree, else 'No'.",
+        "note": "Root must be black, no red node can have a red child, all paths from node to descendants have same number of black nodes.",
+        "sampleTestCases": [
+            {"input": "3\n10 B\n5 R\n15 R", "output": "Yes"},
+            {"input": "2\n10 R\n5 B", "output": "No"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Graph BFS Traversal",
+        "description": "Given an unweighted directed graph with N vertices and M edges, perform a Breadth First Search starting from vertex 0. Print the visited vertices.",
+        "difficulty": "Medium",
+        "inputFormat": "First line N and M. Next M lines contain edges u v.",
+        "outputFormat": "Space-separated vertices in BFS order.",
+        "note": "Visit adjacent vertices in ascending numerical order.",
+        "sampleTestCases": [
+            {"input": "4 4\n0 1\n0 2\n1 3\n2 3", "output": "0 1 2 3"},
+            {"input": "3 2\n0 1\n1 2", "output": "0 1 2"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Graph DFS Traversal",
+        "description": "Given an unweighted directed graph with N vertices and M edges, perform a Depth First Search starting from vertex 0. Print the visited vertices.",
+        "difficulty": "Medium",
+        "inputFormat": "First line N and M. Next M lines contain edges u v.",
+        "outputFormat": "Space-separated vertices in DFS order.",
+        "note": "Visit adjacent vertices in ascending numerical order.",
+        "sampleTestCases": [
+            {"input": "4 4\n0 1\n0 2\n1 3\n2 3", "output": "0 1 3 2"},
+            {"input": "3 2\n0 1\n1 2", "output": "0 1 2"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Detect Cycle in a Directed Graph",
+        "description": "Given a directed graph, output 'Yes' if it contains a cycle, else 'No'.",
+        "difficulty": "Hard",
+        "inputFormat": "First line N and M. Next M lines contain edges u v.",
+        "outputFormat": "'Yes' or 'No'.",
+        "note": "Use DFS and a recursion stack to detect back edges.",
+        "sampleTestCases": [
+            {"input": "3 3\n0 1\n1 2\n2 0", "output": "Yes"},
+            {"input": "3 2\n0 1\n1 2", "output": "No"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Path between Two Vertices",
+        "description": "Given a directed graph and two vertices S and D, determine if there is a path from S to D.",
+        "difficulty": "Medium",
+        "inputFormat": "First line N and M. Next M lines contain edges u v. Last line contains S and D.",
+        "outputFormat": "'Yes' or 'No'.",
+        "note": "Use BFS or DFS.",
+        "sampleTestCases": [
+            {"input": "4 3\n0 1\n1 2\n2 3\n0 3", "output": "Yes"},
+            {"input": "4 2\n0 1\n2 3\n0 3", "output": "No"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Disjoint Sets Union-Find",
+        "description": "Implement a Disjoint Set data structure with N elements. Operations: Union(u, v) and Find(u, v). Find should output 'Yes' if u and v are in the same set, else 'No'.",
+        "difficulty": "Medium",
+        "inputFormat": "First line N and Q. Next Q lines: operations (U u v or F u v).",
+        "outputFormat": "For each F operation, print 'Yes' or 'No' on a new line.",
+        "note": "Elements are 0-indexed.",
+        "sampleTestCases": [
+            {"input": "5 4\nU 0 1\nU 1 2\nF 0 2\nF 0 3", "output": "Yes\nNo"},
+            {"input": "3 2\nU 0 2\nF 0 2", "output": "Yes"}
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    input_data = sys.stdin.read().split()\n    # Your code here\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Your code here\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}"
+        }
+    }
+]
