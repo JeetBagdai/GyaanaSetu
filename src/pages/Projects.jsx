@@ -151,12 +151,49 @@ export default function Projects() {
                       </div>
                     </div>
                   </div>
+                ) : selectedSubject === subject ? (
+                  <div style={{ background: 'var(--bg-app)', padding: '1rem', borderRadius: '8px', marginTop: 'auto' }}>
+                    <form onSubmit={handleSubmit}>
+                      <div style={{ marginBottom: '1rem' }}>
+                        <label className="form-label" style={{ fontSize: '0.8rem' }}>GitHub Repository URL</label>
+                        <input 
+                          type="url" 
+                          className="form-input" 
+                          placeholder="https://github.com/..."
+                          value={githubLink}
+                          onChange={e => setGithubLink(e.target.value)}
+                          style={{ padding: '0.5rem', fontSize: '0.85rem' }}
+                        />
+                      </div>
+                      <div style={{ marginBottom: '1rem' }}>
+                        <label className="form-label" style={{ fontSize: '0.8rem' }}>Project Report URL (Drive, PDF, etc)</label>
+                        <input 
+                          type="url" 
+                          className="form-input" 
+                          placeholder="https://docs.google.com/..."
+                          value={reportLink}
+                          onChange={e => setReportLink(e.target.value)}
+                          style={{ padding: '0.5rem', fontSize: '0.85rem' }}
+                        />
+                      </div>
+                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <button type="button" className="btn btn-ghost" style={{ flex: 1, padding: '0.5rem', fontSize: '0.85rem' }} onClick={() => setSelectedSubject(null)} disabled={submitting}>Cancel</button>
+                        <button type="submit" className="btn btn-primary" style={{ flex: 1, padding: '0.5rem', fontSize: '0.85rem' }} disabled={submitting || (!githubLink && !reportLink)}>
+                          {submitting ? 'Submitting...' : 'Submit'}
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 ) : (
                   <div style={{ marginTop: 'auto' }}>
                     <button 
                       className="btn btn-primary" 
                       style={{ width: '100%', display: 'flex', justifyContent: 'center', gap: '0.5rem' }}
-                      onClick={() => setSelectedSubject(subject)}
+                      onClick={() => {
+                        setSelectedSubject(subject)
+                        setGithubLink('')
+                        setReportLink('')
+                      }}
                     >
                       <UploadCloud size={16} /> Submit Project
                     </button>
@@ -165,55 +202,6 @@ export default function Projects() {
               </motion.div>
             )
           })}
-        </div>
-      )}
-
-      {/* Submission Modal */}
-      {selectedSubject && (
-        <div className="modal-backdrop" onClick={() => !submitting && setSelectedSubject(null)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '1rem' }}>
-          <motion.div 
-            className="card" 
-            initial={{ scale: 0.9, opacity: 0 }} 
-            animate={{ scale: 1, opacity: 1 }} 
-            onClick={e => e.stopPropagation()}
-            style={{ width: '100%', maxWidth: '500px', padding: '2rem' }}
-          >
-            <h2 style={{ marginBottom: '1.5rem', fontSize: '1.25rem' }}>Submit Project</h2>
-            <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
-              Submitting for: <strong>{selectedSubject}</strong>
-            </p>
-
-            <form onSubmit={handleSubmit}>
-              <div style={{ marginBottom: '1rem' }}>
-                <label className="form-label">GitHub Repository URL</label>
-                <input 
-                  type="url" 
-                  className="form-input" 
-                  placeholder="https://github.com/username/repo"
-                  value={githubLink}
-                  onChange={e => setGithubLink(e.target.value)}
-                />
-              </div>
-
-              <div style={{ marginBottom: '1.5rem' }}>
-                <label className="form-label">Project Report URL (Drive, PDF, etc)</label>
-                <input 
-                  type="url" 
-                  className="form-input" 
-                  placeholder="https://docs.google.com/..."
-                  value={reportLink}
-                  onChange={e => setReportLink(e.target.value)}
-                />
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
-                <button type="button" className="btn btn-ghost" onClick={() => setSelectedSubject(null)} disabled={submitting}>Cancel</button>
-                <button type="submit" className="btn btn-primary" disabled={submitting || (!githubLink && !reportLink)}>
-                  {submitting ? 'Submitting...' : 'Submit'}
-                </button>
-              </div>
-            </form>
-          </motion.div>
         </div>
       )}
     </div>
