@@ -1,0 +1,692 @@
+[
+    {
+        "title": "Cloud Storage Cost Calculator",
+        "description": "Calculate the total cost of storing data in the cloud. You are given the storage size in GB, the cost per GB, and the number of months.",
+        "difficulty": "Easy",
+        "inputFormat": "Three space-separated integers: size in GB, cost per GB, and months.",
+        "outputFormat": "A single integer representing the total cost.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "10 2 5",
+                "output": "100"
+            },
+            {
+                "input": "50 1 12",
+                "output": "600"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Cloud Scalability Predictor",
+        "description": "A cloud application needs to scale horizontally. Each server can handle a fixed number of requests per second. Given the total incoming requests and server capacity, find the minimum number of servers needed.",
+        "difficulty": "Easy",
+        "inputFormat": "Two space-separated integers: total requests and server capacity.",
+        "outputFormat": "A single integer representing the number of servers.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "1000 200",
+                "output": "5"
+            },
+            {
+                "input": "1050 200",
+                "output": "6"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Virtual Machine Setup Time",
+        "description": "Setting up the first VM takes B minutes. Each subsequent VM takes an additional I minutes. Given B, I, and N (number of VMs), calculate the total time to set up all N VMs.",
+        "difficulty": "Easy",
+        "inputFormat": "Three space-separated integers: B, I, N.",
+        "outputFormat": "A single integer representing total setup time.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "10 2 3",
+                "output": "36"
+            },
+            {
+                "input": "5 1 4",
+                "output": "26"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "App Engine Auto-Scaler",
+        "description": "Google App Engine automatically scales instances. If current CPU utilization exceeds a threshold T, it adds 1 instance. If it drops below T-20, it removes 1 instance. Given the initial instances, threshold T, and a series of CPU utilizations, find the final number of instances.",
+        "difficulty": "Medium",
+        "inputFormat": "The first line contains an integer N (initial instances) and T (threshold). The second line contains an integer K (number of readings). The third line contains K space-separated integers (CPU readings).",
+        "outputFormat": "A single integer representing the final number of instances.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "5 80\n4\n85 90 50 40",
+                "output": "6"
+            },
+            {
+                "input": "2 70\n3\n40 80 90",
+                "output": "3"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Git Commit History Analyzer",
+        "description": "You are given N commit hashes. Find the hash that appears most frequently (simulating a reverted or duplicated commit issue). If there is a tie, print the one that appeared first.",
+        "difficulty": "Medium",
+        "inputFormat": "The first line contains N. The next N lines contain one string each (commit hash).",
+        "outputFormat": "A single string representing the most frequent commit hash.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "4\na1b2\nc3d4\na1b2\ne5f6",
+                "output": "a1b2"
+            },
+            {
+                "input": "3\nxyz\nabc\nxyz",
+                "output": "xyz"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Cloud Task Scheduler - FCFS",
+        "description": "Simulate First-Come-First-Serve scheduling in CloudSim. Given N tasks with their burst times, calculate the total waiting time. All tasks arrive at time 0.",
+        "difficulty": "Medium",
+        "inputFormat": "The first line contains N. The second line contains N space-separated integers (burst times).",
+        "outputFormat": "A single integer representing the total waiting time.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "3\n10 5 8",
+                "output": "25"
+            },
+            {
+                "input": "4\n2 3 5 4",
+                "output": "14"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Cloud Task Scheduler - SJF",
+        "description": "Simulate Shortest Job First scheduling in CloudSim. Given N tasks with their burst times (all arriving at time 0), calculate the total waiting time.",
+        "difficulty": "Medium",
+        "inputFormat": "The first line contains N. The second line contains N space-separated integers (burst times).",
+        "outputFormat": "A single integer representing the total waiting time.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "3\n10 5 8",
+                "output": "18"
+            },
+            {
+                "input": "4\n2 3 5 4",
+                "output": "11"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Cloud Load Balancer",
+        "description": "A load balancer distributes incoming requests to M servers using Round Robin. Given M servers and N requests, find how many requests the first server processes.",
+        "difficulty": "Easy",
+        "inputFormat": "Two space-separated integers: M and N.",
+        "outputFormat": "A single integer representing the number of requests handled by the first server.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "3 10",
+                "output": "4"
+            },
+            {
+                "input": "5 12",
+                "output": "3"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "AWS EC2 Instance Matcher",
+        "description": "You need an EC2 instance with at least C CPU cores and R GB RAM. Given N instance types with their CPU and RAM, find the number of suitable instances.",
+        "difficulty": "Easy",
+        "inputFormat": "The first line contains C, R, N. The next N lines contain two integers each (CPU and RAM of the instance).",
+        "outputFormat": "A single integer representing the number of suitable instances.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "4 16 3\n2 8\n4 16\n8 32",
+                "output": "2"
+            },
+            {
+                "input": "2 4 2\n1 2\n2 2",
+                "output": "0"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Docker Container Bin Packing",
+        "description": "You have N Docker containers with varying memory requirements and servers with a fixed memory capacity M. Find the minimum number of servers required using the First Fit algorithm.",
+        "difficulty": "Hard",
+        "inputFormat": "The first line contains N and M. The second line contains N space-separated integers (memory of each container).",
+        "outputFormat": "A single integer representing the minimum number of servers.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "4 10\n4 8 1 4",
+                "output": "2"
+            },
+            {
+                "input": "5 10\n5 5 5 5 5",
+                "output": "3"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Docker Image Size Calculator",
+        "description": "A Docker image is built from a base image and several layers. Given the base image size and the sizes of N layers, calculate the total image size.",
+        "difficulty": "Easy",
+        "inputFormat": "The first line contains B (base size) and N. The second line contains N space-separated integers (layer sizes).",
+        "outputFormat": "A single integer representing the total size.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "100 3\n10 20 30",
+                "output": "160"
+            },
+            {
+                "input": "50 2\n5 5",
+                "output": "60"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Kubernetes Pod Scheduler",
+        "description": "Kubernetes needs to schedule a pod requiring P CPU units. There are N nodes available, each with some free CPU units. Find the index (1-based) of the first node that can accommodate the pod. Output -1 if none can.",
+        "difficulty": "Medium",
+        "inputFormat": "The first line contains P and N. The second line contains N space-separated integers (free CPU of nodes).",
+        "outputFormat": "A single integer (the 1-based index or -1).",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "5 3\n2 4 6",
+                "output": "3"
+            },
+            {
+                "input": "10 2\n5 8",
+                "output": "-1"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Azure Database Transaction Simulator",
+        "description": "Simulate a key-value store. You are given N operations: 1 means SET (key value), 2 means GET (key), 3 means DELETE (key). For each GET, print the value or -1 if it does not exist.",
+        "difficulty": "Hard",
+        "inputFormat": "The first line contains N. The next N lines contain operations.",
+        "outputFormat": "Space-separated integers for each GET operation.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "5\n1 5 10\n2 5\n3 5\n2 5\n1 2 20",
+                "output": "10 -1"
+            },
+            {
+                "input": "3\n2 1\n1 1 5\n2 1",
+                "output": "-1 5"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Edge Node Latency Optimizer",
+        "description": "You have N edge nodes with their latencies from a user. Find the minimum latency.",
+        "difficulty": "Easy",
+        "inputFormat": "The first line contains N. The second line contains N space-separated integers (latencies).",
+        "outputFormat": "A single integer representing the minimum latency.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "4\n50 20 30 10",
+                "output": "10"
+            },
+            {
+                "input": "3\n100 200 150",
+                "output": "100"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Git Merge Conflict Detector",
+        "description": "You have two branches modifying files. Given N files modified in branch A and M files modified in branch B, find the number of files modified in both (potential conflicts).",
+        "difficulty": "Medium",
+        "inputFormat": "The first line contains N and M. The next line contains N space-separated file IDs for A. The next line contains M space-separated file IDs for B.",
+        "outputFormat": "A single integer representing the number of conflicts.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "3 3\n1 2 3\n2 3 4",
+                "output": "2"
+            },
+            {
+                "input": "2 2\n10 20\n30 40",
+                "output": "0"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Cloud Resource Under-provisioning",
+        "description": "Given N tasks with their required execution times and a hard deadline D, find how many tasks will fail to complete if they are run sequentially.",
+        "difficulty": "Medium",
+        "inputFormat": "The first line contains N and D. The second line contains N space-separated integers (execution times).",
+        "outputFormat": "A single integer representing the number of failed tasks.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "4 10\n3 4 5 2",
+                "output": "2"
+            },
+            {
+                "input": "3 20\n5 5 5",
+                "output": "0"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "S3 Bucket File Organizer",
+        "description": "You have N file sizes uploaded to an S3 bucket. Calculate the total size of files that are strictly greater than S MB.",
+        "difficulty": "Easy",
+        "inputFormat": "The first line contains N and S. The second line contains N space-separated integers.",
+        "outputFormat": "A single integer representing the total size.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "5 10\n5 15 8 20 12",
+                "output": "47"
+            },
+            {
+                "input": "3 5\n2 3 4",
+                "output": "0"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Azure Data Factory Pipeline",
+        "description": "A data pipeline has N stages. Each stage takes T time. However, every 3rd stage takes double time (data validation). Calculate total time.",
+        "difficulty": "Medium",
+        "inputFormat": "Two space-separated integers: N and T.",
+        "outputFormat": "A single integer representing total time.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "4 5",
+                "output": "25"
+            },
+            {
+                "input": "6 10",
+                "output": "80"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Kubernetes Replica Set Controller",
+        "description": "A replica set requires R pods. Currently, there are C pods. If C < R, output \"Scale Up X\" where X is the difference. If C > R, output \"Scale Down X\". If equal, output \"Optimal\".",
+        "difficulty": "Easy",
+        "inputFormat": "Two space-separated integers: R and C.",
+        "outputFormat": "A string representing the action.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "5 3",
+                "output": "Scale Up 2"
+            },
+            {
+                "input": "2 4",
+                "output": "Scale Down 2"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "GCP BigQuery Cost Estimator",
+        "description": "BigQuery charges X cents per GB scanned. Given N queries and the MB scanned by each, calculate the total cost in cents (rounded down). 1 GB = 1000 MB for this problem.",
+        "difficulty": "Medium",
+        "inputFormat": "The first line contains N and X. The second line contains N space-separated integers (MBs).",
+        "outputFormat": "A single integer representing the total cost.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "3 5\n500 1500 2000",
+                "output": "20"
+            },
+            {
+                "input": "2 10\n100 200",
+                "output": "3"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Data Center Energy Consumption",
+        "description": "A data center consumes P watts at idle. For every 10% CPU utilization, it consumes an extra E watts. Given base P, extra E, and N CPU utilization percentages, find the total power consumed. (Calculate E * (utilization // 10) for each reading)",
+        "difficulty": "Medium",
+        "inputFormat": "The first line contains P, E, N. The second line contains N space-separated integers.",
+        "outputFormat": "A single integer representing total power.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "100 10 2\n50 20",
+                "output": "270"
+            },
+            {
+                "input": "50 5 3\n10 100 0",
+                "output": "205"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Docker Command Validator",
+        "description": "A container can be started (1) and stopped (0). It cannot be started if already running, and cannot be stopped if not running. Given N commands, check if the sequence is valid. Start state is stopped.",
+        "difficulty": "Medium",
+        "inputFormat": "The first line contains N. The second line contains N space-separated integers.",
+        "outputFormat": "String \"Valid\" or \"Invalid\".",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "4\n1 0 1 0",
+                "output": "Valid"
+            },
+            {
+                "input": "3\n1 1 0",
+                "output": "Invalid"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Virtual Machine Migration",
+        "description": "To save power, VMs are migrated from Server A to Server B. Server B has C capacity remaining. You have N VMs on Server A with given sizes. Find the maximum number of VMs that can be migrated to B.",
+        "difficulty": "Medium",
+        "inputFormat": "The first line contains N and C. The second line contains N space-separated integers. Sort them and pack as many as possible.",
+        "outputFormat": "A single integer representing the count.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "4 10\n5 2 4 3",
+                "output": "3"
+            },
+            {
+                "input": "3 5\n6 7 8",
+                "output": "0"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Cloud Pricing Optimizer",
+        "description": "You need to run a task for H hours. Provider A charges X per hour. Provider B charges Y flat fee + Z per hour. Determine which provider is cheaper (Output \"A\", \"B\", or \"Any\").",
+        "difficulty": "Easy",
+        "inputFormat": "Four space-separated integers: H, X, Y, Z.",
+        "outputFormat": "String \"A\", \"B\", or \"Any\".",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "10 5 20 2",
+                "output": "B"
+            },
+            {
+                "input": "5 10 10 10",
+                "output": "A"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Git Branching Simulator",
+        "description": "You start on branch \"main\". You are given N commands. \"1 name\" means create and switch to branch name. \"2 name\" means switch to branch name. Print the final branch name.",
+        "difficulty": "Medium",
+        "inputFormat": "The first line contains N. The next N lines contain operations.",
+        "outputFormat": "A single string representing the final branch.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "3\n1 dev\n1 feature\n2 main",
+                "output": "main"
+            },
+            {
+                "input": "2\n1 bugfix\n2 bugfix",
+                "output": "bugfix"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Cloud Storage Bandwidth",
+        "description": "You have N users downloading a file of size S MB. The total available bandwidth is B MB/s. Calculate the total time required for all users to finish downloading if bandwidth is equally shared. (ceil(N*S/B))",
+        "difficulty": "Medium",
+        "inputFormat": "Three space-separated integers: N, S, B.",
+        "outputFormat": "A single integer representing the time.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "5 10 2",
+                "output": "25"
+            },
+            {
+                "input": "2 5 10",
+                "output": "1"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Kubernetes Node Health Checker",
+        "description": "N nodes send heartbeats. A node is unhealthy if it misses M consecutive heartbeats. Given a binary matrix of N nodes and K time intervals (1=beat, 0=miss), find how many nodes are unhealthy.",
+        "difficulty": "Hard",
+        "inputFormat": "The first line contains N, K, M. The next N lines contain K space-separated integers.",
+        "outputFormat": "A single integer representing the count of unhealthy nodes.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "2 5 3\n1 0 0 0 1\n1 1 0 1 1",
+                "output": "1"
+            },
+            {
+                "input": "3 4 2\n0 0 1 1\n1 0 1 0\n0 0 0 0",
+                "output": "2"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Docker Compose Port Mapper",
+        "description": "N containers try to bind to host ports. If a port is already bound, the container fails. Given N port requests, find how many containers fail.",
+        "difficulty": "Easy",
+        "inputFormat": "The first line contains N. The second line contains N space-separated integers (ports).",
+        "outputFormat": "A single integer representing the number of failures.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "4\n8080 8080 3306 8080",
+                "output": "2"
+            },
+            {
+                "input": "3\n80 443 22",
+                "output": "0"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Cloudsim Server Overload",
+        "description": "A server is overloaded if its CPU usage exceeds 90%. Given N CPU readings, find the maximum consecutive number of readings where the server was overloaded.",
+        "difficulty": "Medium",
+        "inputFormat": "The first line contains N. The second line contains N space-separated integers.",
+        "outputFormat": "A single integer representing the max consecutive overloads.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "6\n95 92 80 91 99 95",
+                "output": "3"
+            },
+            {
+                "input": "4\n80 85 90 89",
+                "output": "0"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Azure Disaster Recovery Time",
+        "description": "Calculate the total downtime during a disaster. You are given N outage events with start and end times in minutes from midnight. Calculate total non-overlapping downtime.",
+        "difficulty": "Hard",
+        "inputFormat": "The first line contains N. The next N lines contain start and end times.",
+        "outputFormat": "A single integer representing total downtime.",
+        "note": "Ensure efficient logic to handle constraints.",
+        "sampleTestCases": [
+            {
+                "input": "2\n10 20\n15 30",
+                "output": "20"
+            },
+            {
+                "input": "3\n1 5\n10 15\n2 4",
+                "output": "9"
+            }
+        ],
+        "starterCode": {
+            "python": "def solve():\n    # Write your code here\n    pass\n\nif __name__ == \"__main__\":\n    solve()",
+            "java": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}",
+            "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}"
+        }
+    }
+]

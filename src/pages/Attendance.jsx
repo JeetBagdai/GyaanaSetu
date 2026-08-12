@@ -29,18 +29,6 @@ const getCurrentLocation = () => {
         { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
       )
     }
-  })
-}
-
-const AIML_SUBJECTS = [
-  { code: '21AI501', name: 'Machine Learning' },
-  { code: '21AI502', name: 'Deep Learning' },
-  { code: '21AI503', name: 'Natural Language Processing' },
-  { code: '21AI504', name: 'Computer Vision' },
-  { code: '21AI505', name: 'Big Data Analytics' },
-  { code: '21AI506', name: 'Cloud Computing' },
-]
-
 const AIML_SEMESTERS = [
   { id: 'AIML-SEM3', label: 'Semester 3' },
   { id: 'AIML-SEM4', label: 'Semester 4' },

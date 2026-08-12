@@ -19,6 +19,8 @@ import Profile from './pages/Profile'
 import TeacherPerformance from './pages/TeacherPerformance'
 import CodeITList from './pages/CodeITList'
 import CodeITEditor from './pages/CodeITEditor'
+import Projects from './pages/Projects'
+import TeacherProjects from './pages/TeacherProjects'
 
 function RootRedirect() {
   const { profile } = useAuth()
@@ -127,6 +129,16 @@ export default function App() {
             <Route path="/profile" element={
               <ProtectedRoute>
                 <AppLayout><Profile /></AppLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/projects" element={
+              <ProtectedRoute>
+                <AppLayout><Projects /></AppLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/teacher-projects" element={
+              <ProtectedRoute>
+                <AppLayout><TeacherProjects /></AppLayout>
               </ProtectedRoute>
             } />
 

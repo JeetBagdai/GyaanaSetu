@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext'
 import { getToken } from '../services/auth'
 import { sendChatMessage } from '../services/api'
 import { BookOpen, FolderOpen, Layers, Clock, Play, Pause, BrainCircuit, CheckCircle2, ChevronRight, X, Send, Loader2 } from 'lucide-react'
-import { SEMESTERS, SUBJECTS_BY_SEM, getModulesForSubject } from '../data/learningContent'
+import { SEMESTERS, SUBJECTS_BY_SEM, getModulesForSubject, getTheorySubjects } from '../data/learningContent'
 import './Learning.css'
 
 export default function Learning() {
@@ -19,7 +19,7 @@ export default function Learning() {
 
   // UI State
   const [semester, setSemester] = useState(isStudent ? profileSem.toString() : '3')
-  const [subject, setSubject] = useState(SUBJECTS_BY_SEM[semester]?.[0] || '')
+  const [subject, setSubject] = useState(getTheorySubjects(semester)?.[0] || '')
   const [modules, setModules] = useState([])
   const [selectedModule, setSelectedModule] = useState(null)
 
@@ -37,7 +37,7 @@ export default function Learning() {
 
   // Sync subjects when semester changes
   useEffect(() => {
-    const subs = SUBJECTS_BY_SEM[semester] || []
+    const subs = getTheorySubjects(semester) || []
     if (!subs.includes(subject)) {
       setSubject(subs[0] || '')
     }
@@ -152,7 +152,7 @@ export default function Learning() {
               onChange={e => setSubject(e.target.value)}
               style={{ padding: '0.5rem', fontSize: '0.9rem', width: '100%', textOverflow: 'ellipsis', overflow: 'hidden' }}
             >
-              {(SUBJECTS_BY_SEM[semester] || []).map(s => <option key={s} value={s}>{s}</option>)}
+              {(getTheorySubjects(semester) || []).map(s => <option key={s} value={s}>{s}</option>)}
             </select>
           </div>
 

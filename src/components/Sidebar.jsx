@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import {
   LayoutDashboard, BookOpen, ClipboardCheck,
   Calendar, MessageCircle, ShieldCheck,
-  LogOut, GraduationCap, LayoutGrid, BarChart3, Code2
+  LogOut, GraduationCap, LayoutGrid, BarChart3, Code2, FolderGit2
 } from 'lucide-react'
 import './Sidebar.css'
 
@@ -12,6 +12,7 @@ const STUDENT_NAV = [
   { to: '/dashboard',  label: 'Dashboard',  icon: LayoutDashboard, color: '#ea580c' },
   { to: '/learning',   label: 'Learning',   icon: BookOpen,         color: '#ea580c' },
   { to: '/codeit',     label: 'CodeIT',     icon: Code2,            color: '#ea580c' },
+  { to: '/projects',   label: 'Projects',   icon: FolderGit2,       color: '#ea580c' },
   { to: '/attendance', label: 'Attendance', icon: ClipboardCheck,   color: '#e85d04' },
   { to: '/timetable',  label: 'Timetable',  icon: Calendar,         color: '#f59e0b' },
   { to: '/chatbot',    label: 'AI Tutor',   icon: MessageCircle,    color: '#e65c00' },
@@ -19,6 +20,7 @@ const STUDENT_NAV = [
 
 const TEACHER_NAV_BASE = [
   { to: '/dashboard',  label: 'Dashboard',   icon: LayoutDashboard, color: '#ea580c' },
+  { to: '/projects',   label: 'Projects',    icon: FolderGit2,      color: '#ea580c' },
   { to: '/attendance', label: 'Attendance',  icon: ClipboardCheck,  color: '#e85d04' },
   { to: '/performance', label: 'Performance', icon: BarChart3,       color: '#e65c00' },
   { to: '/timetable',  label: 'My Schedule', icon: Calendar,        color: '#f59e0b' },
@@ -38,9 +40,9 @@ function getNav(profile) {
   if (profile?.role === 'admin')   return ADMIN_NAV
   if (profile?.role === 'teacher') {
     if (profile?.timetableManager === true) {
-      // Insert Manage Timetable after My Schedule
+      // Insert Manage Timetable after My Schedule (index 4 -> 5 now that Projects is there)
       const nav = [...TEACHER_NAV_BASE]
-      nav.splice(3, 0, TIMETABLE_MANAGER_ITEM)
+      nav.splice(4, 0, TIMETABLE_MANAGER_ITEM)
       return nav
     }
     return TEACHER_NAV_BASE

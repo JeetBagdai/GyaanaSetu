@@ -1,0 +1,692 @@
+[
+    {
+        "title": "Distance Between Two 3D Objects",
+        "description": "Calculate the Euclidean distance between two 3D objects in a virtual scene.",
+        "difficulty": "Easy",
+        "inputFormat": "Six space-separated integers: x1 y1 z1 x2 y2 z2",
+        "outputFormat": "A single float rounded to 2 decimal places.",
+        "note": "Use the 3D distance formula.",
+        "sampleTestCases": [
+            {
+                "input": "0 0 0 3 4 0",
+                "output": "5.00"
+            },
+            {
+                "input": "1 2 3 4 5 6",
+                "output": "5.20"
+            }
+        ],
+        "starterCode": {
+            "python": "import math\nx1,y1,z1,x2,y2,z2 = map(int, input().split())\nprint(f\"{math.dist((x1,y1,z1),(x2,y2,z2)):.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int x1=sc.nextInt(), y1=sc.nextInt(), z1=sc.nextInt();\n        int x2=sc.nextInt(), y2=sc.nextInt(), z2=sc.nextInt();\n        double dist = Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2)+Math.pow(z2-z1,2));\n        System.out.printf(\"%.2f\\n\", dist);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <cmath>\n#include <iomanip>\nusing namespace std;\nint main() {\n    int x1,y1,z1,x2,y2,z2;\n    cin>>x1>>y1>>z1>>x2>>y2>>z2;\n    double dist = sqrt(pow(x2-x1,2)+pow(y2-y1,2)+pow(z2-z1,2));\n    cout<<fixed<<setprecision(2)<<dist<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Translate a 3D Object",
+        "description": "In Unity, translating an object modifies its transform.position. Given an initial position (x, y, z) and a translation vector (tx, ty, tz), find the new position.",
+        "difficulty": "Easy",
+        "inputFormat": "Six space-separated integers: x y z tx ty tz",
+        "outputFormat": "Three space-separated integers representing the new coordinates.",
+        "note": "Simply add the components.",
+        "sampleTestCases": [
+            {
+                "input": "10 10 10 5 -5 2",
+                "output": "15 5 12"
+            },
+            {
+                "input": "0 0 0 1 2 3",
+                "output": "1 2 3"
+            }
+        ],
+        "starterCode": {
+            "python": "x,y,z,tx,ty,tz = map(int, input().split())\nprint(f\"{x+tx} {y+ty} {z+tz}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int x=sc.nextInt(), y=sc.nextInt(), z=sc.nextInt();\n        int tx=sc.nextInt(), ty=sc.nextInt(), tz=sc.nextInt();\n        System.out.println((x+tx)+\" \"+(y+ty)+\" \"+(z+tz));\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    int x,y,z,tx,ty,tz;\n    cin>>x>>y>>z>>tx>>ty>>tz;\n    cout<<(x+tx)<<\" \"<<(y+ty)<<\" \"<<(z+tz)<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Scale an AR Model",
+        "description": "Given the base dimensions (width, height, depth) of a 3D model and a uniform scaling factor S, find the new dimensions.",
+        "difficulty": "Easy",
+        "inputFormat": "Four space-separated numbers: w, h, d (integers) and S (float)",
+        "outputFormat": "Three space-separated floats rounded to 2 decimal places representing the new w, h, and d.",
+        "note": "Multiply each dimension by S.",
+        "sampleTestCases": [
+            {
+                "input": "10 20 5 1.5",
+                "output": "15.00 30.00 7.50"
+            },
+            {
+                "input": "2 4 8 0.5",
+                "output": "1.00 2.00 4.00"
+            }
+        ],
+        "starterCode": {
+            "python": "w, h, d, s = map(float, input().split())\nprint(f\"{w*s:.2f} {h*s:.2f} {d*s:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double w=sc.nextDouble(), h=sc.nextDouble(), d=sc.nextDouble(), s=sc.nextDouble();\n        System.out.printf(\"%.2f %.2f %.2f\\n\", w*s, h*s, d*s);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double w, h, d, s;\n    cin>>w>>h>>d>>s;\n    cout<<fixed<<setprecision(2)<<w*s<<\" \"<<h*s<<\" \"<<d*s<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Rotate a UI Element",
+        "description": "In VR/AR interfaces, 2D UI elements are sometimes rotated. Given a point (x, y) and an angle in degrees, compute its new coordinates after rotating around the origin (0,0) counter-clockwise.",
+        "difficulty": "Medium",
+        "inputFormat": "Three space-separated numbers: x, y (floats) and angle (float).",
+        "outputFormat": "Two space-separated floats rounded to 2 decimal places.",
+        "note": "Use x_new = x*cos(A) - y*sin(A), y_new = x*sin(A) + y*cos(A). Convert angle to radians.",
+        "sampleTestCases": [
+            {
+                "input": "1 0 90",
+                "output": "0.00 1.00"
+            },
+            {
+                "input": "0 1 90",
+                "output": "-1.00 0.00"
+            }
+        ],
+        "starterCode": {
+            "python": "import math\nx,y,ang = map(float, input().split())\nrad = math.radians(ang)\nnx = x*math.cos(rad) - y*math.sin(rad)\nny = x*math.sin(rad) + y*math.cos(rad)\nprint(f\"{nx:.2f} {ny:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double x=sc.nextDouble(), y=sc.nextDouble(), ang=sc.nextDouble();\n        double rad = Math.toRadians(ang);\n        double nx = x*Math.cos(rad) - y*Math.sin(rad);\n        double ny = x*Math.sin(rad) + y*Math.cos(rad);\n        System.out.printf(\"%.2f %.2f\\n\", nx, ny);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <cmath>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double x, y, ang;\n    cin>>x>>y>>ang;\n    double rad = ang * M_PI / 180.0;\n    double nx = x*cos(rad) - y*sin(rad);\n    double ny = x*sin(rad) + y*cos(rad);\n    cout<<fixed<<setprecision(2)<<nx<<\" \"<<ny<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Simulating 3D Projectiles",
+        "description": "Calculate the maximum height (H) and time of flight (T) of a 3D projectile launched with an initial velocity V at an angle Theta (in degrees) from the ground. Assume gravity g = 9.8 m/s^2.",
+        "difficulty": "Medium",
+        "inputFormat": "Two space-separated floats: V and Theta.",
+        "outputFormat": "Two space-separated floats rounded to 2 decimal places representing H and T.",
+        "note": "H = (V*sin(Theta))^2 / (2g), T = 2*V*sin(Theta) / g",
+        "sampleTestCases": [
+            {
+                "input": "20 45",
+                "output": "10.20 2.89"
+            },
+            {
+                "input": "15 30",
+                "output": "2.87 1.53"
+            }
+        ],
+        "starterCode": {
+            "python": "import math\nv, th = map(float, input().split())\nrad = math.radians(th)\nh = (v * math.sin(rad))**2 / (2 * 9.8)\nt = 2 * v * math.sin(rad) / 9.8\nprint(f\"{h:.2f} {t:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double v=sc.nextDouble(), th=sc.nextDouble();\n        double rad = Math.toRadians(th);\n        double h = Math.pow(v * Math.sin(rad), 2) / 19.6;\n        double t = 2 * v * Math.sin(rad) / 9.8;\n        System.out.printf(\"%.2f %.2f\\n\", h, t);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <cmath>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double v, th;\n    cin>>v>>th;\n    double rad = th * M_PI / 180.0;\n    double h = pow(v * sin(rad), 2) / 19.6;\n    double t = 2 * v * sin(rad) / 9.8;\n    cout<<fixed<<setprecision(2)<<h<<\" \"<<t<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Point in Bounding Box",
+        "description": "Determine if a given 3D point (px, py, pz) lies inside an axis-aligned bounding box defined by its minimum coordinates (minX, minY, minZ) and maximum coordinates (maxX, maxY, maxZ).",
+        "difficulty": "Medium",
+        "inputFormat": "Nine space-separated integers: px py pz minX minY minZ maxX maxY maxZ",
+        "outputFormat": "Print \"Inside\" if the point is strictly inside the box, otherwise \"Outside\".",
+        "note": "Compare each coordinate with min and max.",
+        "sampleTestCases": [
+            {
+                "input": "5 5 5 0 0 0 10 10 10",
+                "output": "Inside"
+            },
+            {
+                "input": "11 5 5 0 0 0 10 10 10",
+                "output": "Outside"
+            }
+        ],
+        "starterCode": {
+            "python": "px,py,pz,mix,miy,miz,max,may,maz = map(int, input().split())\nif mix < px < max and miy < py < may and miz < pz < maz:\n    print(\"Inside\")\nelse:\n    print(\"Outside\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int px=sc.nextInt(), py=sc.nextInt(), pz=sc.nextInt();\n        int mix=sc.nextInt(), miy=sc.nextInt(), miz=sc.nextInt();\n        int max=sc.nextInt(), may=sc.nextInt(), maz=sc.nextInt();\n        if(px>mix && px<max && py>miy && py<may && pz>miz && pz<maz)\n            System.out.println(\"Inside\");\n        else\n            System.out.println(\"Outside\");\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    int px,py,pz,mix,miy,miz,max,may,maz;\n    cin>>px>>py>>pz>>mix>>miy>>miz>>max>>may>>maz;\n    if(px>mix && px<max && py>miy && py<may && pz>miz && pz<maz)\n        cout<<\"Inside\"<<endl;\n    else\n        cout<<\"Outside\"<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Orthographic Camera Projection",
+        "description": "An orthographic camera projects a 3D point (x, y, z) onto a 2D plane (ignoring perspective). If the camera looks down the Z-axis, find the projected (x, y) coordinates.",
+        "difficulty": "Easy",
+        "inputFormat": "Three space-separated floats: x, y, z.",
+        "outputFormat": "Two space-separated floats rounded to 2 decimal places: x and y.",
+        "note": "Simply ignore the Z component.",
+        "sampleTestCases": [
+            {
+                "input": "1.5 2.5 10.0",
+                "output": "1.50 2.50"
+            },
+            {
+                "input": "-3.1 4.4 -5.5",
+                "output": "-3.10 4.40"
+            }
+        ],
+        "starterCode": {
+            "python": "x,y,z = map(float, input().split())\nprint(f\"{x:.2f} {y:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double x=sc.nextDouble(), y=sc.nextDouble(), z=sc.nextDouble();\n        System.out.printf(\"%.2f %.2f\\n\", x, y);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double x, y, z;\n    cin>>x>>y>>z;\n    cout<<fixed<<setprecision(2)<<x<<\" \"<<y<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Flappy Bird Collision",
+        "description": "In a Flappy Bird clone built with Unity, the bird is a circle with center (bx, by) and radius r. A pipe is a rectangle defined by bottom-left corner (px, py), width w, and height h. Check if they intersect.",
+        "difficulty": "Hard",
+        "inputFormat": "Seven space-separated floats: bx by r px py w h",
+        "outputFormat": "Print \"Collision\" if they intersect, else \"Safe\".",
+        "note": "Find the closest point on the rectangle to the circle center, and check the distance.",
+        "sampleTestCases": [
+            {
+                "input": "5 5 1 4 4 2 10",
+                "output": "Collision"
+            },
+            {
+                "input": "0 0 1 5 5 2 2",
+                "output": "Safe"
+            }
+        ],
+        "starterCode": {
+            "python": "bx,by,r,px,py,w,h = map(float, input().split())\ncx = max(px, min(bx, px+w))\ncy = max(py, min(by, py+h))\ndx, dy = bx - cx, by - cy\nif dx*dx + dy*dy <= r*r:\n    print(\"Collision\")\nelse:\n    print(\"Safe\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double bx=sc.nextDouble(), by=sc.nextDouble(), r=sc.nextDouble();\n        double px=sc.nextDouble(), py=sc.nextDouble(), w=sc.nextDouble(), h=sc.nextDouble();\n        double cx = Math.max(px, Math.min(bx, px+w));\n        double cy = Math.max(py, Math.min(by, py+h));\n        double dx = bx-cx, dy = by-cy;\n        if(dx*dx + dy*dy <= r*r) System.out.println(\"Collision\");\n        else System.out.println(\"Safe\");\n    }\n}",
+            "cpp": "#include <iostream>\n#include <cmath>\nusing namespace std;\nint main() {\n    double bx,by,r,px,py,w,h;\n    cin>>bx>>by>>r>>px>>py>>w>>h;\n    double cx = max(px, min(bx, px+w));\n    double cy = max(py, min(by, py+h));\n    double dx = bx-cx, dy = by-cy;\n    if(dx*dx + dy*dy <= r*r) cout<<\"Collision\"<<endl;\n    else cout<<\"Safe\"<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Solar System Animation",
+        "description": "A planet revolves around a star (at 0,0) in a circular orbit of radius R with an angular speed of W degrees per second. Find its position (x, y) after T seconds if it starts at (R, 0).",
+        "difficulty": "Hard",
+        "inputFormat": "Three space-separated floats: R, W, T.",
+        "outputFormat": "Two space-separated floats rounded to 2 decimal places for x and y.",
+        "note": "Angle = W * T. Use trig functions.",
+        "sampleTestCases": [
+            {
+                "input": "10 10 9",
+                "output": "0.00 10.00"
+            },
+            {
+                "input": "5 45 2",
+                "output": "0.00 5.00"
+            }
+        ],
+        "starterCode": {
+            "python": "import math\nr,w,t = map(float, input().split())\nang = math.radians(w*t)\nprint(f\"{r*math.cos(ang):.2f} {r*math.sin(ang):.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double r=sc.nextDouble(), w=sc.nextDouble(), t=sc.nextDouble();\n        double ang = Math.toRadians(w*t);\n        System.out.printf(\"%.2f %.2f\\n\", r*Math.cos(ang), r*Math.sin(ang));\n    }\n}",
+            "cpp": "#include <iostream>\n#include <cmath>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double r, w, t;\n    cin>>r>>w>>t;\n    double ang = w*t * M_PI / 180.0;\n    cout<<fixed<<setprecision(2)<<r*cos(ang)<<\" \"<<r*sin(ang)<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Animation Frames Count",
+        "description": "You are creating an animation clip in Blender. Given the duration in seconds and the framerate (FPS), calculate the total number of frames.",
+        "difficulty": "Easy",
+        "inputFormat": "Two integers: duration and fps.",
+        "outputFormat": "A single integer for total frames.",
+        "note": "Simply multiply duration by fps.",
+        "sampleTestCases": [
+            {
+                "input": "10 60",
+                "output": "600"
+            },
+            {
+                "input": "5 24",
+                "output": "120"
+            }
+        ],
+        "starterCode": {
+            "python": "d, f = map(int, input().split())\nprint(d*f)",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int d=sc.nextInt(), f=sc.nextInt();\n        System.out.println(d*f);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    int d, f;\n    cin>>d>>f;\n    cout<<(d*f)<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Linear Interpolation (Lerp)",
+        "description": "In Unity, Vector3.Lerp smoothly interpolates between two points A and B by a factor t (0 to 1). Given A(x1,y1,z1), B(x2,y2,z2) and t, find the interpolated point.",
+        "difficulty": "Medium",
+        "inputFormat": "Seven space-separated floats: x1 y1 z1 x2 y2 z2 t",
+        "outputFormat": "Three space-separated floats rounded to 2 decimal places.",
+        "note": "P = A + (B-A)*t",
+        "sampleTestCases": [
+            {
+                "input": "0 0 0 10 10 10 0.5",
+                "output": "5.00 5.00 5.00"
+            },
+            {
+                "input": "1 2 3 5 6 7 0.25",
+                "output": "2.00 3.00 4.00"
+            }
+        ],
+        "starterCode": {
+            "python": "x1,y1,z1,x2,y2,z2,t = map(float, input().split())\nprint(f\"{x1+(x2-x1)*t:.2f} {y1+(y2-y1)*t:.2f} {z1+(z2-z1)*t:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double x1=sc.nextDouble(), y1=sc.nextDouble(), z1=sc.nextDouble();\n        double x2=sc.nextDouble(), y2=sc.nextDouble(), z2=sc.nextDouble(), t=sc.nextDouble();\n        System.out.printf(\"%.2f %.2f %.2f\\n\", x1+(x2-x1)*t, y1+(y2-y1)*t, z1+(z2-z1)*t);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double x1,y1,z1,x2,y2,z2,t;\n    cin>>x1>>y1>>z1>>x2>>y2>>z2>>t;\n    cout<<fixed<<setprecision(2)<<x1+(x2-x1)*t<<\" \"<<y1+(y2-y1)*t<<\" \"<<z1+(z2-z1)*t<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Windmill Rotation State",
+        "description": "A windmill modeled in Blender rotates around the Z-axis. It starts at an angle of 0 degrees and rotates at R revolutions per minute. What is its angle (modulo 360) after S seconds?",
+        "difficulty": "Medium",
+        "inputFormat": "Two floats: R and S.",
+        "outputFormat": "A single float representing the angle [0, 360), rounded to 2 decimal places.",
+        "note": "Angle = (R * 360 / 60) * S % 360.",
+        "sampleTestCases": [
+            {
+                "input": "10 15",
+                "output": "180.00"
+            },
+            {
+                "input": "5 45",
+                "output": "270.00"
+            }
+        ],
+        "starterCode": {
+            "python": "r, s = map(float, input().split())\nang = ((r * 360 / 60) * s) % 360\nprint(f\"{ang:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double r=sc.nextDouble(), s=sc.nextDouble();\n        double ang = ((r * 360 / 60) * s) % 360;\n        System.out.printf(\"%.2f\\n\", ang);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <cmath>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double r, s;\n    cin>>r>>s;\n    double ang = fmod(((r * 360 / 60) * s), 360.0);\n    cout<<fixed<<setprecision(2)<<ang<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Calculate Face Normal",
+        "description": "In 3D graphics, the normal of a triangular face with vertices A, B, C is essential for lighting. Calculate the unnormalized cross product (B-A) x (C-A).",
+        "difficulty": "Hard",
+        "inputFormat": "Nine space-separated floats for A(x,y,z), B(x,y,z), C(x,y,z).",
+        "outputFormat": "Three space-separated floats rounded to 2 decimal places.",
+        "note": "If U = B-A and V = C-A, normal is (UyVz - UzVy, UzVx - UxVz, UxVy - UyVx).",
+        "sampleTestCases": [
+            {
+                "input": "0 0 0 1 0 0 0 1 0",
+                "output": "0.00 0.00 1.00"
+            },
+            {
+                "input": "1 2 3 4 5 6 7 8 0",
+                "output": "9.00 -18.00 9.00"
+            }
+        ],
+        "starterCode": {
+            "python": "ax,ay,az,bx,by,bz,cx,cy,cz = map(float, input().split())\nux,uy,uz = bx-ax, by-ay, bz-az\nvx,vy,vz = cx-ax, cy-ay, cz-az\nnx = uy*vz - uz*vy\nny = uz*vx - ux*vz\nnz = ux*vy - uy*vx\nprint(f\"{nx:.2f} {ny:.2f} {nz:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double ax=sc.nextDouble(), ay=sc.nextDouble(), az=sc.nextDouble();\n        double bx=sc.nextDouble(), by=sc.nextDouble(), bz=sc.nextDouble();\n        double cx=sc.nextDouble(), cy=sc.nextDouble(), cz=sc.nextDouble();\n        double ux=bx-ax, uy=by-ay, uz=bz-az;\n        double vx=cx-ax, vy=cy-ay, vz=cz-az;\n        double nx = uy*vz - uz*vy;\n        double ny = uz*vx - ux*vz;\n        double nz = ux*vy - uy*vx;\n        System.out.printf(\"%.2f %.2f %.2f\\n\", nx, ny, nz);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double ax,ay,az,bx,by,bz,cx,cy,cz;\n    cin>>ax>>ay>>az>>bx>>by>>bz>>cx>>cy>>cz;\n    double ux=bx-ax, uy=by-ay, uz=bz-az;\n    double vx=cx-ax, vy=cy-ay, vz=cz-az;\n    double nx = uy*vz - uz*vy;\n    double ny = uz*vx - ux*vz;\n    double nz = ux*vy - uy*vx;\n    cout<<fixed<<setprecision(2)<<nx<<\" \"<<ny<<\" \"<<nz<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Lighting Intensity (Dot Product)",
+        "description": "A basic diffuse lighting shader computes the dot product between the surface normal N and the light direction L. Given normalized vectors N and L, compute max(0, N dot L).",
+        "difficulty": "Medium",
+        "inputFormat": "Six space-separated floats: Nx Ny Nz Lx Ly Lz.",
+        "outputFormat": "A single float rounded to 2 decimal places.",
+        "note": "Compute dot product, then take max with 0.",
+        "sampleTestCases": [
+            {
+                "input": "0 1 0 0 1 0",
+                "output": "1.00"
+            },
+            {
+                "input": "1 0 0 -1 0 0",
+                "output": "0.00"
+            }
+        ],
+        "starterCode": {
+            "python": "nx,ny,nz,lx,ly,lz = map(float, input().split())\ndp = nx*lx + ny*ly + nz*lz\nprint(f\"{max(0, dp):.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double nx=sc.nextDouble(), ny=sc.nextDouble(), nz=sc.nextDouble();\n        double lx=sc.nextDouble(), ly=sc.nextDouble(), lz=sc.nextDouble();\n        double dp = nx*lx + ny*ly + nz*lz;\n        System.out.printf(\"%.2f\\n\", Math.max(0, dp));\n    }\n}",
+            "cpp": "#include <iostream>\n#include <iomanip>\n#include <algorithm>\nusing namespace std;\nint main() {\n    double nx,ny,nz,lx,ly,lz;\n    cin>>nx>>ny>>nz>>lx>>ly>>lz;\n    double dp = nx*lx + ny*ly + nz*lz;\n    cout<<fixed<<setprecision(2)<<max(0.0, dp)<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Texture Color Blending",
+        "description": "Blend two RGB colors C1 and C2 based on an alpha value A (0 to 1). Result = C1*(1-A) + C2*A. Colors are given as integers 0-255.",
+        "difficulty": "Medium",
+        "inputFormat": "Seven numbers: R1 G1 B1 R2 G2 B2 A (A is float).",
+        "outputFormat": "Three space-separated integers representing the resulting RGB (rounded down to nearest int).",
+        "note": "Apply the formula and use integer casting.",
+        "sampleTestCases": [
+            {
+                "input": "255 0 0 0 0 255 0.5",
+                "output": "127 0 127"
+            },
+            {
+                "input": "100 150 200 50 100 150 0.2",
+                "output": "90 140 190"
+            }
+        ],
+        "starterCode": {
+            "python": "r1,g1,b1,r2,g2,b2,a = input().split()\nr1,g1,b1,r2,g2,b2 = map(int, [r1,g1,b1,r2,g2,b2])\na = float(a)\nr = int(r1*(1-a) + r2*a)\ng = int(g1*(1-a) + g2*a)\nb = int(b1*(1-a) + b2*a)\nprint(f\"{r} {g} {b}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int r1=sc.nextInt(), g1=sc.nextInt(), b1=sc.nextInt();\n        int r2=sc.nextInt(), g2=sc.nextInt(), b2=sc.nextInt();\n        double a=sc.nextDouble();\n        int r = (int)(r1*(1-a) + r2*a);\n        int g = (int)(g1*(1-a) + g2*a);\n        int b = (int)(b1*(1-a) + b2*a);\n        System.out.println(r+\" \"+g+\" \"+b);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    int r1,g1,b1,r2,g2,b2;\n    double a;\n    cin>>r1>>g1>>b1>>r2>>g2>>b2>>a;\n    int r = (int)(r1*(1-a) + r2*a);\n    int g = (int)(g1*(1-a) + g2*a);\n    int b = (int)(b1*(1-a) + b2*a);\n    cout<<r<<\" \"<<g<<\" \"<<b<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Audio Clip Duration",
+        "description": "Given the file size S in bytes, sample rate SR in Hz, channels C, and bits per sample B, calculate the duration of the audio clip in seconds.",
+        "difficulty": "Easy",
+        "inputFormat": "Four integers: S, SR, C, B.",
+        "outputFormat": "A single float rounded to 2 decimal places.",
+        "note": "Duration = S / (SR * C * (B / 8)).",
+        "sampleTestCases": [
+            {
+                "input": "1764000 44100 2 16",
+                "output": "10.00"
+            },
+            {
+                "input": "500000 22050 1 8",
+                "output": "22.68"
+            }
+        ],
+        "starterCode": {
+            "python": "s, sr, c, b = map(int, input().split())\ndur = s / (sr * c * (b / 8))\nprint(f\"{dur:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double s=sc.nextDouble(), sr=sc.nextDouble(), c=sc.nextDouble(), b=sc.nextDouble();\n        double dur = s / (sr * c * (b / 8.0));\n        System.out.printf(\"%.2f\\n\", dur);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double s, sr, c, b;\n    cin>>s>>sr>>c>>b;\n    double dur = s / (sr * c * (b / 8.0));\n    cout<<fixed<<setprecision(2)<<dur<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "AR Marker Distance",
+        "description": "In an AR application, two physical markers are tracked. Their 3D coordinates in the camera space are provided. Find the physical distance between them.",
+        "difficulty": "Easy",
+        "inputFormat": "Six floats: x1 y1 z1 x2 y2 z2.",
+        "outputFormat": "A float rounded to 2 decimal places.",
+        "note": "Standard Euclidean distance in 3D.",
+        "sampleTestCases": [
+            {
+                "input": "1.5 2.5 3.5 4.5 5.5 6.5",
+                "output": "5.20"
+            },
+            {
+                "input": "0 0 0 10 0 0",
+                "output": "10.00"
+            }
+        ],
+        "starterCode": {
+            "python": "import math\nx1,y1,z1,x2,y2,z2 = map(float, input().split())\nd = math.dist((x1,y1,z1), (x2,y2,z2))\nprint(f\"{d:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double x1=sc.nextDouble(), y1=sc.nextDouble(), z1=sc.nextDouble();\n        double x2=sc.nextDouble(), y2=sc.nextDouble(), z2=sc.nextDouble();\n        double dist = Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2)+Math.pow(z2-z1,2));\n        System.out.printf(\"%.2f\\n\", dist);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <cmath>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double x1,y1,z1,x2,y2,z2;\n    cin>>x1>>y1>>z1>>x2>>y2>>z2;\n    double dist = sqrt(pow(x2-x1,2)+pow(y2-y1,2)+pow(z2-z1,2));\n    cout<<fixed<<setprecision(2)<<dist<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Sphere Collider Intersection",
+        "description": "Check if two spherical colliders in Unity intersect. They are defined by their centers (x,y,z) and radii r.",
+        "difficulty": "Medium",
+        "inputFormat": "Eight floats: x1 y1 z1 r1 x2 y2 z2 r2.",
+        "outputFormat": "Print \"Intersect\" or \"Separate\".",
+        "note": "Check if distance between centers <= r1 + r2.",
+        "sampleTestCases": [
+            {
+                "input": "0 0 0 5 10 0 0 6",
+                "output": "Intersect"
+            },
+            {
+                "input": "0 0 0 2 10 0 0 2",
+                "output": "Separate"
+            }
+        ],
+        "starterCode": {
+            "python": "import math\nx1,y1,z1,r1,x2,y2,z2,r2 = map(float, input().split())\nd = math.dist((x1,y1,z1), (x2,y2,z2))\nif d <= r1 + r2:\n    print(\"Intersect\")\nelse:\n    print(\"Separate\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double x1=sc.nextDouble(), y1=sc.nextDouble(), z1=sc.nextDouble(), r1=sc.nextDouble();\n        double x2=sc.nextDouble(), y2=sc.nextDouble(), z2=sc.nextDouble(), r2=sc.nextDouble();\n        double dist = Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2)+Math.pow(z2-z1,2));\n        if(dist <= r1+r2) System.out.println(\"Intersect\");\n        else System.out.println(\"Separate\");\n    }\n}",
+            "cpp": "#include <iostream>\n#include <cmath>\nusing namespace std;\nint main() {\n    double x1,y1,z1,r1,x2,y2,z2,r2;\n    cin>>x1>>y1>>z1>>r1>>x2>>y2>>z2>>r2;\n    double dist = sqrt(pow(x2-x1,2)+pow(y2-y1,2)+pow(z2-z1,2));\n    if(dist <= r1+r2) cout<<\"Intersect\"<<endl;\n    else cout<<\"Separate\"<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Point Light Attenuation",
+        "description": "The intensity of a point light decreases with the square of the distance. Given the initial intensity I0 at 1 meter, find the intensity at distance D.",
+        "difficulty": "Medium",
+        "inputFormat": "Two floats: I0 and D.",
+        "outputFormat": "A single float rounded to 2 decimal places.",
+        "note": "I = I0 / (D*D).",
+        "sampleTestCases": [
+            {
+                "input": "100 5",
+                "output": "4.00"
+            },
+            {
+                "input": "50 2.5",
+                "output": "8.00"
+            }
+        ],
+        "starterCode": {
+            "python": "i0, d = map(float, input().split())\nprint(f\"{i0 / (d*d):.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double i0=sc.nextDouble(), d=sc.nextDouble();\n        System.out.printf(\"%.2f\\n\", i0 / (d*d));\n    }\n}",
+            "cpp": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double i0, d;\n    cin>>i0>>d;\n    cout<<fixed<<setprecision(2)<<i0/(d*d)<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Terrain Grid Vertices",
+        "description": "When building a terrain in Unity, it is represented as a grid of N by M cells. Each cell is a quad. How many vertices are required in total for the grid?",
+        "difficulty": "Easy",
+        "inputFormat": "Two integers: N and M.",
+        "outputFormat": "A single integer representing the number of vertices.",
+        "note": "Vertices = (N+1) * (M+1).",
+        "sampleTestCases": [
+            {
+                "input": "10 10",
+                "output": "121"
+            },
+            {
+                "input": "5 8",
+                "output": "54"
+            }
+        ],
+        "starterCode": {
+            "python": "n, m = map(int, input().split())\nprint((n+1)*(m+1))",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(), m=sc.nextInt();\n        System.out.println((n+1)*(m+1));\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, m;\n    cin>>n>>m;\n    cout<<(n+1)*(m+1)<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Gravity Simulation",
+        "description": "An object is dropped in a VR environment from a height H with zero initial velocity. Calculate its height after T seconds. Use g = 9.8 m/s^2. If it hits the ground (0), it stops.",
+        "difficulty": "Medium",
+        "inputFormat": "Two floats: H and T.",
+        "outputFormat": "A single float rounded to 2 decimal places.",
+        "note": "Height = H - 0.5 * g * T^2. Max with 0.",
+        "sampleTestCases": [
+            {
+                "input": "100 3",
+                "output": "55.90"
+            },
+            {
+                "input": "20 5",
+                "output": "0.00"
+            }
+        ],
+        "starterCode": {
+            "python": "h, t = map(float, input().split())\nres = h - 0.5 * 9.8 * t**2\nprint(f\"{max(0, res):.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double h=sc.nextDouble(), t=sc.nextDouble();\n        double res = h - 0.5 * 9.8 * t * t;\n        System.out.printf(\"%.2f\\n\", Math.max(0, res));\n    }\n}",
+            "cpp": "#include <iostream>\n#include <iomanip>\n#include <algorithm>\nusing namespace std;\nint main() {\n    double h, t;\n    cin>>h>>t;\n    double res = h - 0.5 * 9.8 * t * t;\n    cout<<fixed<<setprecision(2)<<max(0.0, res)<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Avatar Movement",
+        "description": "A player moves their avatar forward at speed F and sideways at speed S for T seconds. Calculate the total distance covered.",
+        "difficulty": "Medium",
+        "inputFormat": "Three floats: F, S, T.",
+        "outputFormat": "A single float rounded to 2 decimal places.",
+        "note": "Velocity V = sqrt(F^2 + S^2). Distance = V * T.",
+        "sampleTestCases": [
+            {
+                "input": "3 4 5",
+                "output": "25.00"
+            },
+            {
+                "input": "5 12 2",
+                "output": "26.00"
+            }
+        ],
+        "starterCode": {
+            "python": "import math\nf, s, t = map(float, input().split())\nv = math.sqrt(f**2 + s**2)\nprint(f\"{v*t:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double f=sc.nextDouble(), s=sc.nextDouble(), t=sc.nextDouble();\n        double v = Math.sqrt(f*f + s*s);\n        System.out.printf(\"%.2f\\n\", v*t);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <cmath>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double f,s,t;\n    cin>>f>>s>>t;\n    double v = sqrt(f*f + s*s);\n    cout<<fixed<<setprecision(2)<<v*t<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Viewport Clipping",
+        "description": "Check if a 2D screen coordinate (X, Y) is visible on a screen of width W and height H. Origin (0,0) is bottom-left.",
+        "difficulty": "Easy",
+        "inputFormat": "Four integers: X Y W H.",
+        "outputFormat": "Print \"Visible\" or \"Clipped\".",
+        "note": "0 <= X <= W and 0 <= Y <= H.",
+        "sampleTestCases": [
+            {
+                "input": "500 300 1920 1080",
+                "output": "Visible"
+            },
+            {
+                "input": "-10 500 1920 1080",
+                "output": "Clipped"
+            }
+        ],
+        "starterCode": {
+            "python": "x, y, w, h = map(int, input().split())\nif 0 <= x <= w and 0 <= y <= h:\n    print(\"Visible\")\nelse:\n    print(\"Clipped\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int x=sc.nextInt(), y=sc.nextInt(), w=sc.nextInt(), h=sc.nextInt();\n        if(x>=0 && x<=w && y>=0 && y<=h) System.out.println(\"Visible\");\n        else System.out.println(\"Clipped\");\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    int x,y,w,h;\n    cin>>x>>y>>w>>h;\n    if(x>=0 && x<=w && y>=0 && y<=h) cout<<\"Visible\"<<endl;\n    else cout<<\"Clipped\"<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Mesh Triangle Area",
+        "description": "Calculate the area of a triangular face in a 3D mesh given its three vertices A, B, C.",
+        "difficulty": "Medium",
+        "inputFormat": "Nine floats: Ax Ay Az Bx By Bz Cx Cy Cz.",
+        "outputFormat": "A single float rounded to 2 decimal places.",
+        "note": "Area is half the magnitude of the cross product of vectors AB and AC.",
+        "sampleTestCases": [
+            {
+                "input": "0 0 0 2 0 0 0 3 0",
+                "output": "3.00"
+            },
+            {
+                "input": "1 1 1 4 5 6 7 8 9",
+                "output": "3.35"
+            }
+        ],
+        "starterCode": {
+            "python": "import math\nax,ay,az,bx,by,bz,cx,cy,cz = map(float, input().split())\nux,uy,uz = bx-ax, by-ay, bz-az\nvx,vy,vz = cx-ax, cy-ay, cz-az\nnx = uy*vz - uz*vy\nny = uz*vx - ux*vz\nnz = ux*vy - uy*vx\narea = 0.5 * math.sqrt(nx**2 + ny**2 + nz**2)\nprint(f\"{area:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double ax=sc.nextDouble(), ay=sc.nextDouble(), az=sc.nextDouble();\n        double bx=sc.nextDouble(), by=sc.nextDouble(), bz=sc.nextDouble();\n        double cx=sc.nextDouble(), cy=sc.nextDouble(), cz=sc.nextDouble();\n        double ux=bx-ax, uy=by-ay, uz=bz-az;\n        double vx=cx-ax, vy=cy-ay, vz=cz-az;\n        double nx = uy*vz - uz*vy;\n        double ny = uz*vx - ux*vz;\n        double nz = ux*vy - uy*vx;\n        double area = 0.5 * Math.sqrt(nx*nx + ny*ny + nz*nz);\n        System.out.printf(\"%.2f\\n\", area);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <cmath>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double ax,ay,az,bx,by,bz,cx,cy,cz;\n    cin>>ax>>ay>>az>>bx>>by>>bz>>cx>>cy>>cz;\n    double ux=bx-ax, uy=by-ay, uz=bz-az;\n    double vx=cx-ax, vy=cy-ay, vz=cz-az;\n    double nx = uy*vz - uz*vy;\n    double ny = uz*vx - ux*vz;\n    double nz = ux*vy - uy*vx;\n    double area = 0.5 * sqrt(nx*nx + ny*ny + nz*nz);\n    cout<<fixed<<setprecision(2)<<area<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Angle Between 3D Vectors",
+        "description": "Calculate the angle in degrees between two 3D vectors U and V.",
+        "difficulty": "Medium",
+        "inputFormat": "Six floats: Ux Uy Uz Vx Vy Vz.",
+        "outputFormat": "A single float rounded to 2 decimal places.",
+        "note": "Use dot product and arccos. Angle = acos((U dot V) / (|U||V|)) * 180 / PI.",
+        "sampleTestCases": [
+            {
+                "input": "1 0 0 0 1 0",
+                "output": "90.00"
+            },
+            {
+                "input": "1 1 1 2 2 2",
+                "output": "0.00"
+            }
+        ],
+        "starterCode": {
+            "python": "import math\nux,uy,uz,vx,vy,vz = map(float, input().split())\ndot = ux*vx + uy*vy + uz*vz\nmagU = math.sqrt(ux**2 + uy**2 + uz**2)\nmagV = math.sqrt(vx**2 + vy**2 + vz**2)\nang = math.degrees(math.acos(round(dot/(magU*magV), 5)))\nprint(f\"{ang:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double ux=sc.nextDouble(), uy=sc.nextDouble(), uz=sc.nextDouble();\n        double vx=sc.nextDouble(), vy=sc.nextDouble(), vz=sc.nextDouble();\n        double dot = ux*vx + uy*vy + uz*vz;\n        double magU = Math.sqrt(ux*ux + uy*uy + uz*uz);\n        double magV = Math.sqrt(vx*vx + vy*vy + vz*vz);\n        double val = dot/(magU*magV);\n        if(val>1.0) val=1.0; if(val<-1.0) val=-1.0;\n        double ang = Math.toDegrees(Math.acos(val));\n        System.out.printf(\"%.2f\\n\", ang);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <cmath>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double ux,uy,uz,vx,vy,vz;\n    cin>>ux>>uy>>uz>>vx>>vy>>vz;\n    double dot = ux*vx + uy*vy + uz*vz;\n    double magU = sqrt(ux*ux + uy*uy + uz*uz);\n    double magV = sqrt(vx*vx + vy*vy + vz*vz);\n    double val = dot/(magU*magV);\n    if(val>1.0) val=1.0;\n    if(val<-1.0) val=-1.0;\n    double ang = acos(val) * 180.0 / M_PI;\n    cout<<fixed<<setprecision(2)<<ang<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Light Reflection Vector",
+        "description": "Given an incoming light vector I and a surface normal N, compute the reflection vector R = I - 2*(I dot N)*N.",
+        "difficulty": "Hard",
+        "inputFormat": "Six floats: Ix Iy Iz Nx Ny Nz.",
+        "outputFormat": "Three space-separated floats rounded to 2 decimal places.",
+        "note": "Direct formula application.",
+        "sampleTestCases": [
+            {
+                "input": "1 -1 0 0 1 0",
+                "output": "1.00 1.00 0.00"
+            },
+            {
+                "input": "0 -1 0 0 1 0",
+                "output": "0.00 1.00 0.00"
+            }
+        ],
+        "starterCode": {
+            "python": "ix,iy,iz,nx,ny,nz = map(float, input().split())\ndot = ix*nx + iy*ny + iz*nz\nrx = ix - 2*dot*nx\nry = iy - 2*dot*ny\nrz = iz - 2*dot*nz\nprint(f\"{rx:.2f} {ry:.2f} {rz:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double ix=sc.nextDouble(), iy=sc.nextDouble(), iz=sc.nextDouble();\n        double nx=sc.nextDouble(), ny=sc.nextDouble(), nz=sc.nextDouble();\n        double dot = ix*nx + iy*ny + iz*nz;\n        double rx = ix - 2*dot*nx;\n        double ry = iy - 2*dot*ny;\n        double rz = iz - 2*dot*nz;\n        System.out.printf(\"%.2f %.2f %.2f\\n\", rx, ry, rz);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double ix,iy,iz,nx,ny,nz;\n    cin>>ix>>iy>>iz>>nx>>ny>>nz;\n    double dot = ix*nx + iy*ny + iz*nz;\n    double rx = ix - 2*dot*nx;\n    double ry = iy - 2*dot*ny;\n    double rz = iz - 2*dot*nz;\n    cout<<fixed<<setprecision(2)<<rx<<\" \"<<ry<<\" \"<<rz<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "AR Perspective Scaling",
+        "description": "To maintain perspective, an AR object must be scaled down as it moves further away. Given base distance D0, base scale S0, and new distance D1, compute the new scale S1 = S0 * (D0 / D1).",
+        "difficulty": "Medium",
+        "inputFormat": "Three floats: D0 S0 D1.",
+        "outputFormat": "A single float rounded to 2 decimal places.",
+        "note": "Direct formula application.",
+        "sampleTestCases": [
+            {
+                "input": "1.0 1.0 2.0",
+                "output": "0.50"
+            },
+            {
+                "input": "5.0 2.5 1.0",
+                "output": "12.50"
+            }
+        ],
+        "starterCode": {
+            "python": "d0, s0, d1 = map(float, input().split())\nprint(f\"{s0 * (d0 / d1):.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double d0=sc.nextDouble(), s0=sc.nextDouble(), d1=sc.nextDouble();\n        System.out.printf(\"%.2f\\n\", s0 * (d0 / d1));\n    }\n}",
+            "cpp": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double d0,s0,d1;\n    cin>>d0>>s0>>d1;\n    cout<<fixed<<setprecision(2)<<s0 * (d0 / d1)<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "3D Midpoint Calculation",
+        "description": "Find the exact midpoint between two 3D positions in an AR scene.",
+        "difficulty": "Easy",
+        "inputFormat": "Six floats: x1 y1 z1 x2 y2 z2.",
+        "outputFormat": "Three space-separated floats rounded to 2 decimal places.",
+        "note": "Average of the coordinates.",
+        "sampleTestCases": [
+            {
+                "input": "0 0 0 10 10 10",
+                "output": "5.00 5.00 5.00"
+            },
+            {
+                "input": "1 2 3 -1 -2 -3",
+                "output": "0.00 0.00 0.00"
+            }
+        ],
+        "starterCode": {
+            "python": "x1,y1,z1,x2,y2,z2 = map(float, input().split())\nprint(f\"{(x1+x2)/2:.2f} {(y1+y2)/2:.2f} {(z1+z2)/2:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double x1=sc.nextDouble(), y1=sc.nextDouble(), z1=sc.nextDouble();\n        double x2=sc.nextDouble(), y2=sc.nextDouble(), z2=sc.nextDouble();\n        System.out.printf(\"%.2f %.2f %.2f\\n\", (x1+x2)/2, (y1+y2)/2, (z1+z2)/2);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double x1,y1,z1,x2,y2,z2;\n    cin>>x1>>y1>>z1>>x2>>y2>>z2;\n    cout<<fixed<<setprecision(2)<<(x1+x2)/2<<\" \"<<(y1+y2)/2<<\" \"<<(z1+z2)/2<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Normalize a 3D Vector",
+        "description": "Convert a 3D vector into a unit vector (magnitude of 1) in the same direction.",
+        "difficulty": "Medium",
+        "inputFormat": "Three floats: x, y, z.",
+        "outputFormat": "Three space-separated floats rounded to 2 decimal places.",
+        "note": "Divide each component by the magnitude.",
+        "sampleTestCases": [
+            {
+                "input": "3 4 0",
+                "output": "0.60 0.80 0.00"
+            },
+            {
+                "input": "1 1 1",
+                "output": "0.58 0.58 0.58"
+            }
+        ],
+        "starterCode": {
+            "python": "import math\nx,y,z = map(float, input().split())\nmag = math.sqrt(x*x + y*y + z*z)\nprint(f\"{x/mag:.2f} {y/mag:.2f} {z/mag:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double x=sc.nextDouble(), y=sc.nextDouble(), z=sc.nextDouble();\n        double mag = Math.sqrt(x*x + y*y + z*z);\n        System.out.printf(\"%.2f %.2f %.2f\\n\", x/mag, y/mag, z/mag);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <cmath>\n#include <iomanip>\nusing namespace std;\nint main() {\n    double x,y,z;\n    cin>>x>>y>>z;\n    double mag = sqrt(x*x + y*y + z*z);\n    cout<<fixed<<setprecision(2)<<x/mag<<\" \"<<y/mag<<\" \"<<z/mag<<endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Animation Frame Interpolation",
+        "description": "Given the value of a property at frame F1 is V1, and at frame F2 is V2, find the linearly interpolated value at frame F (where F1 <= F <= F2).",
+        "difficulty": "Medium",
+        "inputFormat": "Five numbers: F1 (int), V1 (float), F2 (int), V2 (float), F (int).",
+        "outputFormat": "A single float rounded to 2 decimal places.",
+        "note": "V = V1 + (V2 - V1) * (F - F1) / (F2 - F1).",
+        "sampleTestCases": [
+            {
+                "input": "0 0.0 10 100.0 5",
+                "output": "50.00"
+            },
+            {
+                "input": "10 50.0 20 200.0 12",
+                "output": "80.00"
+            }
+        ],
+        "starterCode": {
+            "python": "f1,v1,f2,v2,f = input().split()\nf1, f2, f = int(f1), int(f2), int(f)\nv1, v2 = float(v1), float(v2)\nres = v1 + (v2 - v1) * (f - f1) / (f2 - f1)\nprint(f\"{res:.2f}\")",
+            "java": "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int f1=sc.nextInt(); double v1=sc.nextDouble();\n        int f2=sc.nextInt(); double v2=sc.nextDouble();\n        int f=sc.nextInt();\n        double res = v1 + (v2 - v1) * (f - f1) / (f2 - f1);\n        System.out.printf(\"%.2f\\n\", res);\n    }\n}",
+            "cpp": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main() {\n    int f1, f2, f;\n    double v1, v2;\n    cin>>f1>>v1>>f2>>v2>>f;\n    double res = v1 + (v2 - v1) * (f - f1) / (f2 - f1);\n    cout<<fixed<<setprecision(2)<<res<<endl;\n    return 0;\n}"
+        }
+    }
+]
