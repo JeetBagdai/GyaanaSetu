@@ -12,17 +12,7 @@ import {
 } from 'lucide-react'
 import './Dashboard.css'
 
-// 📚 AIML subjects across all semesters ──────────────────────────────────────────────────────────
-const SUBJECTS_BY_SEM = {
-  3: ['Fourier Transform, Mathematical Logic & Advanced Linear Algebra','Computer Organization and Architecture','Artificial Intelligence','Data Structures & Applications','Microcontroller and Embedded Systems','Object Oriented Programming using Java (Lab)'],
-  4: ['Statistics, Probability and Graph Theory','Operating System','Database Management System','Design and Analysis of Algorithms','Machine Learning','Cloud Computing & Applications (Lab)'],
-  5: ['Software Engineering, Project Management & Finance','Automata Theory & Computations','Computer Networks & Security','Advanced Machine Learning','Virtual Reality & Augmented Reality (Lab)','Open Elective - I'],
-  6: ['Deep Learning','Natural Language Processing','Generative Artificial Intelligence','Image Processing & Computer Vision (Lab)','Professional Elective - I','Professional Elective - II (MOOC)'],
-  7: ['Agentic Artificial Intelligence','Professional Elective - III','Professional Elective - IV (MOOC)','Research Methodology & Intellectual Property Rights'],
-  8: ['Professional Elective - V (MOOC)'],
-}
-
-
+import { SUBJECTS_DATA } from '../data/learningContent'
 
 // Group subjects by semester → { 1: [...], 2: [...], ... }
 function groupBySem(subjects) {
@@ -94,11 +84,11 @@ export default function Dashboard() {
 
   // Dynamically get student subjects based on their profile semester
   const studentSemNum = parseInt(profile?.semester || profile?.classId?.replace('AIML-SEM', '') || '5')
-  const studentSubjectsList = SUBJECTS_BY_SEM[studentSemNum] || SUBJECTS_BY_SEM[5]
+  const studentSubjectsList = SUBJECTS_DATA.filter(s => s.sem === studentSemNum)
   
-  const STUDENT_SUBJECTS = studentSubjectsList.map((name, i) => ({
-    code: `SUB${studentSemNum}0${i+1}`,
-    name: name,
+  const STUDENT_SUBJECTS = studentSubjectsList.map(subj => ({
+    code: subj.code,
+    name: subj.title,
     sem: studentSemNum,
     icon: BookOpen,
     color: 'var(--color-orange)',

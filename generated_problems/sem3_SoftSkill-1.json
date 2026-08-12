@@ -1,0 +1,692 @@
+[
+    {
+        "title": "Valid Email Address",
+        "description": "Solve the Valid Email Address problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Easy",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Palindrome String",
+        "description": "Solve the Palindrome String problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Medium",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Reverse a String",
+        "description": "Solve the Reverse a String problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Hard",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Count Vowels",
+        "description": "Solve the Count Vowels problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Easy",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Anagram Check",
+        "description": "Solve the Anagram Check problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Medium",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Factorial of a Number",
+        "description": "Solve the Factorial of a Number problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Hard",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Fibonacci Series",
+        "description": "Solve the Fibonacci Series problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Easy",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Prime Number Check",
+        "description": "Solve the Prime Number Check problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Medium",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Leap Year Check",
+        "description": "Solve the Leap Year Check problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Hard",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Sum of Digits",
+        "description": "Solve the Sum of Digits problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Easy",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Reverse a Number",
+        "description": "Solve the Reverse a Number problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Medium",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Armstrong Number",
+        "description": "Solve the Armstrong Number problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Hard",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Strong Number",
+        "description": "Solve the Strong Number problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Easy",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Perfect Number",
+        "description": "Solve the Perfect Number problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Medium",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "GCD of Two Numbers",
+        "description": "Solve the GCD of Two Numbers problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Hard",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "LCM of Two Numbers",
+        "description": "Solve the LCM of Two Numbers problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Easy",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Decimal to Binary",
+        "description": "Solve the Decimal to Binary problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Medium",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Binary to Decimal",
+        "description": "Solve the Binary to Decimal problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Hard",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Largest Element",
+        "description": "Solve the Largest Element problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Easy",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Second Largest Element",
+        "description": "Solve the Second Largest Element problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Medium",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Missing Number",
+        "description": "Solve the Missing Number problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Hard",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Remove Duplicates",
+        "description": "Solve the Remove Duplicates problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Easy",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "String Compression",
+        "description": "Solve the String Compression problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Medium",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "First Non-repeating",
+        "description": "Solve the First Non-repeating problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Hard",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Matrix Addition",
+        "description": "Solve the Matrix Addition problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Easy",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Transpose of Matrix",
+        "description": "Solve the Transpose of Matrix problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Medium",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Bubble Sort",
+        "description": "Solve the Bubble Sort problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Hard",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Binary Search",
+        "description": "Solve the Binary Search problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Easy",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Linear Search",
+        "description": "Solve the Linear Search problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Medium",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    },
+    {
+        "title": "Count Words",
+        "description": "Solve the Count Words problem. Read input from stdin and write output to stdout.",
+        "difficulty": "Hard",
+        "inputFormat": "Standard input",
+        "outputFormat": "Standard output",
+        "note": "Ensure efficient logic.",
+        "sampleTestCases": [
+            {
+                "input": "test1",
+                "output": "out1"
+            },
+            {
+                "input": "test2",
+                "output": "out2"
+            }
+        ],
+        "starterCode": {
+            "python": "import sys\n\ndef solve():\n    pass\n\nif __name__ == '__main__':\n    solve()",
+            "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n    }\n}",
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    return 0;\n}"
+        }
+    }
+]

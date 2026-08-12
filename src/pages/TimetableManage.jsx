@@ -11,66 +11,28 @@ import './Timetable.css'
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 const PROJECT = import.meta.env.VITE_FIREBASE_PROJECT_ID
 
-const AIML_SEMESTERS = [
-  { id: 'AIML-SEM3', label: 'Sem 3' }, { id: 'AIML-SEM4', label: 'Sem 4' },
-  { id: 'AIML-SEM5', label: 'Sem 5' }, { id: 'AIML-SEM6', label: 'Sem 6' },
-  { id: 'AIML-SEM7', label: 'Sem 7' }, { id: 'AIML-SEM8', label: 'Sem 8' },
-]
+import { SUBJECTS_DATA, SEMESTERS } from '../data/learningContent'
 
-// ── BNMIT 2024 Scheme Subjects per Semester (parsed from PDF) ─────────────────
-// L = Lecture hrs/wk, P = Lab/Practical hrs/wk (scheduled as 2-hr block), T = Tutorial
-// Subjects with only J (project) or internship hrs are excluded (not classroom scheduled)
-const PER_SEMESTER_SUBJECTS = {
-  'AIML-SEM3': [
-    { name: 'Fourier Transform, Mathematical Logic & Advanced Linear Algebra', lectureHrs: 2, labHrs: 0 },
-    { name: 'Computer Organization and Architecture',                           lectureHrs: 3, labHrs: 0 },
-    { name: 'Artificial Intelligence',                                           lectureHrs: 3, labHrs: 2 },
-    { name: 'Data Structures & Applications',                                    lectureHrs: 3, labHrs: 2 },
-    { name: 'Microcontroller and Embedded Systems',                              lectureHrs: 1, labHrs: 2 },
-    { name: 'Object Oriented Programming using Java (Lab)',                      lectureHrs: 0, labHrs: 2 },
-    { name: 'Soft Skill - I',                                                    lectureHrs: 0, labHrs: 2 },
-  ],
-  'AIML-SEM4': [
-    { name: 'Statistics, Probability and Graph Theory',                          lectureHrs: 2, labHrs: 0 },
-    { name: 'Operating System',                                                  lectureHrs: 3, labHrs: 0 },
-    { name: 'Database Management System',                                        lectureHrs: 2, labHrs: 2 },
-    { name: 'Design and Analysis of Algorithms',                                 lectureHrs: 3, labHrs: 2 },
-    { name: 'Machine Learning',                                                  lectureHrs: 1, labHrs: 2 },
-    { name: 'Cloud Computing & Applications (Lab)',                              lectureHrs: 0, labHrs: 2 },
-    { name: 'Soft Skill - II',                                                   lectureHrs: 0, labHrs: 2 },
-  ],
-  'AIML-SEM5': [
-    { name: 'Software Engineering, Project Management & Finance',                lectureHrs: 3, labHrs: 0 },
-    { name: 'Automata Theory & Computations',                                    lectureHrs: 2, labHrs: 2 },
-    { name: 'Computer Networks & Security',                                      lectureHrs: 3, labHrs: 2 },
-    { name: 'Advanced Machine Learning',                                         lectureHrs: 3, labHrs: 2 },
-    { name: 'Virtual Reality & Augmented Reality (Lab)',                         lectureHrs: 0, labHrs: 2 },
-    { name: 'Open Elective - I',                                                 lectureHrs: 3, labHrs: 0 },
-    { name: 'Employability Skills - I',                                          lectureHrs: 0, labHrs: 2 },
-  ],
-  'AIML-SEM6': [
-    { name: 'Deep Learning',                                                     lectureHrs: 2, labHrs: 2 },
-    { name: 'Natural Language Processing',                                       lectureHrs: 2, labHrs: 2 },
-    { name: 'Generative Artificial Intelligence',                                lectureHrs: 3, labHrs: 2 },
-    { name: 'Image Processing & Computer Vision (Lab)',                         lectureHrs: 0, labHrs: 2 },
-    { name: 'Professional Elective - I',                                         lectureHrs: 3, labHrs: 0 },
-    { name: 'Professional Elective - II (MOOC)',                                 lectureHrs: 3, labHrs: 0 },
-    { name: 'Open Elective - II',                                                lectureHrs: 3, labHrs: 0 },
-    { name: 'Employability Skills - II',                                         lectureHrs: 0, labHrs: 2 },
-  ],
-  'AIML-SEM7': [
-    { name: 'Agentic Artificial Intelligence',                                   lectureHrs: 2, labHrs: 2 },
-    { name: 'Professional Elective - III',                                       lectureHrs: 3, labHrs: 0 },
-    { name: 'Professional Elective - IV (MOOC)',                                 lectureHrs: 3, labHrs: 0 },
-    { name: 'Research Methodology & Intellectual Property Rights',               lectureHrs: 2, labHrs: 0 },
-  ],
-  'AIML-SEM8': [
-    { name: 'Professional Elective - V (MOOC)',                                  lectureHrs: 3, labHrs: 0 },
-  ],
-}
+const AIML_SEMESTERS = SEMESTERS.map(s => ({ id: `AIML-SEM${s.id}`, label: s.label }))
+
+// Derive PER_SEMESTER_SUBJECTS from centralized SUBJECTS_DATA
+const PER_SEMESTER_SUBJECTS = {}
+SUBJECTS_DATA.forEach(s => {
+  const semKey = `AIML-SEM${s.sem}`
+  if (!PER_SEMESTER_SUBJECTS[semKey]) PER_SEMESTER_SUBJECTS[semKey] = []
+  
+  // Exclude pure project/internship subjects without classroom hours
+  if (s.L > 0 || s.T > 0 || s.P > 0) {
+    PER_SEMESTER_SUBJECTS[semKey].push({
+      name: s.title,
+      lectureHrs: s.L + s.T, // Combining lecture + tutorial for timetable scheduling simplicity
+      labHrs: s.P
+    })
+  }
+})
 
 // Fallback default list (used if a semester is not found in PER_SEMESTER_SUBJECTS)
-const AIML_SUBJECTS = PER_SEMESTER_SUBJECTS['AIML-SEM5']
+const AIML_SUBJECTS = PER_SEMESTER_SUBJECTS['AIML-SEM5'] || []
 
 const SUBJECT_COLORS = {
   'Machine Learning':            { bg: 'var(--color-orange-soft)', text: 'var(--color-orange)' },
