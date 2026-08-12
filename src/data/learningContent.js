@@ -70,7 +70,12 @@ export const SUBJECTS_BY_SEM = SEMESTERS.reduce((acc, sem) => {
 }, {});
 
 export function getPracticalSubjects(sem) {
-  return SUBJECTS_DATA.filter(s => s.sem == sem && s.P > 0).map(s => s.title);
+  return SUBJECTS_DATA.filter(s => 
+    s.sem == sem && 
+    s.P > 0 && 
+    !s.title.toLowerCase().includes('soft skill') &&
+    !s.title.toLowerCase().includes('employability')
+  ).map(s => s.title);
 }
 
 export function getProjectSubjects(sem) {

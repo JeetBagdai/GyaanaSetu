@@ -115,7 +115,7 @@ export default function CodeITList() {
                     {subjectTitle}
                   </h3>
                   <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0 }}>
-                    {total} / {expectedTotal} Challenges Available
+                    {total === expectedTotal ? `${total} Challenges Available` : `${total} / ${expectedTotal} Challenges Available`}
                   </p>
                 </div>
                 
