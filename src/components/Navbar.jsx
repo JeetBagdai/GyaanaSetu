@@ -102,13 +102,13 @@ export default function Navbar({ onMenuClick }) {
               }}
               onMouseEnter={e => {
                 e.currentTarget.style.boxShadow = '0 0 0 3px rgba(247,127,50,0.3)'
-                e.currentTarget.style.background = 'linear-gradient(135deg, var(--primary), var(--primary-hover))'
+                e.currentTarget.style.background = 'linear-gradient(135deg, var(--primary-hover), var(--primary))'
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.boxShadow = onProfile ? '0 0 0 3px rgba(247,127,50,0.3)' : 'none'
                 e.currentTarget.style.background = onProfile
-                  ? 'linear-gradient(135deg, var(--primary), var(--primary-hover))'
-                  : 'linear-gradient(135deg, var(--primary)55, var(--primary-hover)55)'
+                  ? 'linear-gradient(135deg, var(--primary-hover), var(--primary))'
+                  : 'linear-gradient(135deg, var(--primary), var(--primary-hover))'
               }}
             >
               {getInitials(profile?.name) || <UserCircle size={18} />}
