@@ -1,5 +1,5 @@
 // src/pages/Profile.jsx
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   User, Mail, Lock, Save, CheckCircle2, AlertCircle,
@@ -15,6 +15,7 @@ import {
 import { doc, updateDoc } from 'firebase/firestore'
 import { auth, db } from '../firebase'
 import { useAuth } from '../context/AuthContext'
+import * as faceapi from '@vladmandic/face-api'
 
 // ── small reusable field ──────────────────────────────────────────────────────
 function Field({ label, icon: Icon, type = 'text', value, onChange, placeholder, hint }) {
@@ -80,9 +81,83 @@ export default function Profile() {
   const [saving,  setSaving]  = useState(false)
   const [alert,   setAlert]   = useState({ type: '', message: '' })
 
+  const [isFaceRegistering, setIsFaceRegistering] = useState(false)
+  const [faceModelLoading, setFaceModelLoading] = useState(false)
+  const [faceStatus, setFaceStatus] = useState('')
+  const videoRef = useRef(null)
+
   const showAlert = (type, message) => {
     setAlert({ type, message })
     setTimeout(() => setAlert({ type: '', message: '' }), 5000)
+  }
+
+  // ── face registration handler ────────────────────────────────────────────────
+  const handleStartFaceRegistration = async () => {
+    setIsFaceRegistering(true)
+    setFaceModelLoading(true)
+    setFaceStatus('Loading face models...')
+    
+    try {
+      await faceapi.nets.ssdMobilenetv1.loadFromUri('/models')
+      await faceapi.nets.faceLandmark68Net.loadFromUri('/models')
+      await faceapi.nets.faceRecognitionNet.loadFromUri('/models')
+      
+      setFaceStatus('Starting webcam...')
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true })
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream
+      }
+      setFaceModelLoading(false)
+      setFaceStatus('Looking for your face...')
+    } catch (err) {
+      setFaceStatus('Error accessing webcam or loading models.')
+      setFaceModelLoading(false)
+      console.error(err)
+    }
+  }
+
+  const captureFace = async () => {
+    if (!videoRef.current) return
+    setFaceStatus('Analyzing face...')
+    try {
+      const detection = await faceapi.detectSingleFace(videoRef.current).withFaceLandmarks().withFaceDescriptor()
+      if (!detection) {
+        setFaceStatus('No face detected! Please look at the camera.')
+        return
+      }
+      setFaceStatus('Face registered successfully!')
+      const descriptorArray = Array.from(detection.descriptor)
+      
+      // Stop webcam
+      const stream = videoRef.current.srcObject
+      if (stream) stream.getTracks().forEach(t => t.stop())
+      videoRef.current.srcObject = null
+      
+      // Save to Firestore
+      const firebaseUser = auth.currentUser
+      await updateDoc(doc(db, 'users', firebaseUser.uid), {
+        faceDescriptor: descriptorArray,
+        faceRegistered: true
+      })
+      
+      setProfile(prev => ({ ...prev, faceRegistered: true }))
+      setTimeout(() => {
+        setIsFaceRegistering(false)
+        setFaceStatus('')
+      }, 2000)
+    } catch (err) {
+      setFaceStatus('Failed to extract face features.')
+      console.error(err)
+    }
+  }
+
+  const cancelFaceRegistration = () => {
+    setIsFaceRegistering(false)
+    setFaceStatus('')
+    if (videoRef.current?.srcObject) {
+      videoRef.current.srcObject.getTracks().forEach(t => t.stop())
+      videoRef.current.srcObject = null
+    }
   }
 
   // ── save handler ────────────────────────────────────────────────────────────
@@ -207,6 +282,37 @@ export default function Profile() {
               </div>
             ) : null)}
           </div>
+          
+          {/* Face Registration Section for Students */}
+          {profile?.role === 'student' && (
+            <div style={{ marginTop: '1rem', width: '100%', padding: '1rem', background: 'var(--bg-card)', borderRadius: '8px', border: '1px solid var(--border)', textAlign: 'left' }}>
+              <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>Face ID Attendance</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+                {profile?.faceRegistered ? (
+                  <><CheckCircle2 size={16} color="#10b981" /> <span style={{ fontSize: '0.8rem', color: '#10b981' }}>Face Registered</span></>
+                ) : (
+                  <><AlertCircle size={16} color="#f59e0b" /> <span style={{ fontSize: '0.8rem', color: '#f59e0b' }}>Face Not Registered</span></>
+                )}
+              </div>
+              {!isFaceRegistering ? (
+                <button type="button" onClick={handleStartFaceRegistration} className="btn btn-primary" style={{ width: '100%', fontSize: '0.8rem', padding: '0.5rem' }}>
+                  {profile?.faceRegistered ? 'Re-register Face' : 'Register Face'}
+                </button>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', backgroundColor: '#000', aspectRatio: '4/3' }}>
+                    <video ref={videoRef} autoPlay muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    {faceModelLoading && <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '0.8rem' }}><Loader className="spin-anim" /></div>}
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textAlign: 'center' }}>{faceStatus}</div>
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <button type="button" onClick={captureFace} className="btn btn-primary" disabled={faceModelLoading} style={{ flex: 1, fontSize: '0.8rem', padding: '0.4rem' }}>Capture</button>
+                    <button type="button" onClick={cancelFaceRegistration} className="btn btn-secondary" style={{ flex: 1, fontSize: '0.8rem', padding: '0.4rem' }}>Cancel</button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </motion.div>
 
         {/* ── Right: edit form ───────────────────────────────────────────── */}
