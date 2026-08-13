@@ -35,7 +35,16 @@ export default function Login() {
       if (res?.profileData?.role) userRole = res.profileData.role
       navigate(userRole === 'admin' ? '/admin' : '/dashboard')
     } catch (err) {
-      setError(err.message.replace('Firebase: ', '').replace(/\(auth.*\)\.?/, ''))
+      console.error('Login error:', err)
+      let msg = err.code || err.message
+      if (msg.includes('auth/invalid-credential') || msg.includes('auth/user-not-found') || msg.includes('auth/wrong-password')) {
+        msg = 'Invalid email or password. If you signed up with Google, please use the Google button.'
+      } else if (msg.includes('auth/too-many-requests')) {
+        msg = 'Too many failed attempts. Please try again later.'
+      } else {
+        msg = err.message.replace('Firebase: ', '').replace(/\(auth.*\)\.?/, '').trim() || 'An error occurred.'
+      }
+      setError(msg)
     } finally {
       setLoading(false)
     }
@@ -49,7 +58,8 @@ export default function Login() {
       const userRole = res?.profileData?.role || profile?.role
       navigate(userRole === 'admin' ? '/admin' : '/dashboard')
     } catch (err) {
-      setError(err.message.replace('Firebase: ', '').replace(/\(auth.*\)\.?/, ''))
+      console.error('Google Login error:', err)
+      setError(err.message.replace('Firebase: ', '').replace(/\(auth.*\)\.?/, '').trim() || 'An error occurred during Google sign-in.')
     } finally {
       setLoading(false)
     }
