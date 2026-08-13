@@ -473,7 +473,7 @@ function UserManager() {
         docId = localId
         profile.uid = localId
       } catch (authErr) {
-        if (authErr.code === 'EMAIL_EXISTS') {
+        if (authErr.message === 'EMAIL_EXISTS' || authErr.code === 'EMAIL_EXISTS') {
           // Firebase Auth already has this email (e.g. prior Google sign-in)
           // Check if there's already an admin-created Firestore profile for it
           const alreadyExists = await findProfileByEmail(form.email)
