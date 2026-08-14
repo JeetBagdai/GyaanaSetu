@@ -378,7 +378,7 @@ export default function Dashboard() {
 
       {/* ── Student Announcements Feed ── */}
       {!isTeacher && (
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} style={{ marginTop: '1.5rem', marginBottom: '2rem' }}>
+        <motion.div id="announcements-section" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} style={{ marginTop: '1.5rem', marginBottom: '2rem' }}>
           <h2 className="section-title">Recent Announcements</h2>
           <div className="card" style={{ padding: '1.5rem' }}>
             {announcements.length === 0 ? (

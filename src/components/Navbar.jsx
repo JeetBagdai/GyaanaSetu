@@ -21,8 +21,6 @@ export default function Navbar({ onMenuClick }) {
   const location  = useLocation()
 
   const [announcements, setAnnouncements] = useState([])
-  const [showAnnouncements, setShowAnnouncements] = useState(false)
-  const bellRef = useRef(null)
 
   useEffect(() => {
     async function fetchAnnouncements() {
@@ -46,16 +44,7 @@ export default function Navbar({ onMenuClick }) {
     fetchAnnouncements()
   }, [profile])
 
-  // Close dropdown on click outside
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (bellRef.current && !bellRef.current.contains(event.target)) {
-        setShowAnnouncements(false)
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
-  }, [bellRef])
+
 
   const getGreeting = () => {
     const h = new Date().getHours()
@@ -92,10 +81,18 @@ export default function Navbar({ onMenuClick }) {
         <ThemeToggle />
 
         {/* Notifications Bell */}
-        <div style={{ position: 'relative' }} ref={bellRef}>
+        <div style={{ position: 'relative' }}>
           <button
-            onClick={() => setShowAnnouncements(!showAnnouncements)}
-            title="Announcements"
+            onClick={() => {
+              if (location.pathname !== '/') {
+                navigate('/')
+              }
+              setTimeout(() => {
+                const el = document.getElementById('announcements-section')
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }, 100)
+            }}
+            title="View Announcements"
             style={{
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               width: 36, height: 36, borderRadius: '50%',
@@ -114,43 +111,6 @@ export default function Navbar({ onMenuClick }) {
               }} />
             )}
           </button>
-
-          {showAnnouncements && (
-            <div style={{
-              position: 'absolute', top: '100%', right: -10, marginTop: '0.5rem',
-              width: '320px', maxWidth: 'calc(100vw - 2rem)', background: 'var(--bg-card)', border: '1px solid var(--border)',
-              borderRadius: '12px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-              zIndex: 1000, overflow: 'hidden', display: 'flex', flexDirection: 'column'
-            }}>
-              <div style={{ padding: '1rem', borderBottom: '1px solid var(--border)', background: 'var(--surface)' }}>
-                <h3 style={{ margin: 0, fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)' }}>Announcements</h3>
-              </div>
-              <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
-                {announcements.length === 0 ? (
-                  <div style={{ padding: '2rem 1rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-                    No new announcements.
-                  </div>
-                ) : (
-                  announcements.map(ann => (
-                    <div key={ann.id} style={{ padding: '1rem', borderBottom: '1px solid var(--border)' }}>
-                      <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
-                        {ann.title}
-                      </div>
-                      <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.4, marginBottom: '0.5rem' }}>
-                        {ann.message}
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ fontSize: '0.7rem', color: 'var(--primary)', fontWeight: 600 }}>{ann.authorName}</span>
-                        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-                          {ann.timestamp?.seconds ? new Date(ann.timestamp.seconds * 1000).toLocaleDateString() : 'Just now'}
-                        </span>
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Logout button */}
