@@ -27,7 +27,7 @@ function groupBySem(subjects) {
 const STUDENT_QUICK_ACTIONS = [
   { to: '/learning',   label: 'Learning Resources', icon: BookOpen,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
   { to: '/attendance', label: 'Attendance',          icon: ClipboardCheck, color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/timetable',  label: 'Timetable',           icon: Calendar,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/codeit',     label: 'CodeIT',              icon: Code2,          color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
   { to: '/chatbot',    label: 'AI Tutor',             icon: Brain,          color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
 ]
 
