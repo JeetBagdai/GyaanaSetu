@@ -128,57 +128,6 @@ export default function Dashboard() {
         </div>
       </motion.div>
 
-      {/* ── Profile Banner ── */}
-      <motion.div
-        className="card"
-        style={{ padding: '1.25rem 1.5rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem', background: 'linear-gradient(135deg, rgba(247,127,50,0.12) 0%, rgba(232, 93, 4,0.08) 100%)', border: '1px solid rgba(247,127,50,0.2)' }}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-      >
-        <div style={{ width: 52, height: 52, borderRadius: 0, background: 'linear-gradient(135deg, #ea580c, #e85d04)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '1.4rem', fontWeight: 700, flexShrink: 0 }}>
-          {profile?.name?.[0] || '?'}
-        </div>
-        <div style={{ flex: 1 }}>
-          <div style={{ fontWeight: 700, fontSize: '1.05rem' }}>
-            {profile?.name || 'Welcome'}
-          </div>
-            <div className="text-muted text-sm" style={{ marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-              <MapPin size={14} /> 
-              {isTeacher 
-              ? `${profile?.department || 'AIML'} Department · BNMIT` 
-              : `${profile?.department || 'AIML'} · ${(() => {
-                  const classMatch = profile?.classId?.match(/SEM(\d+)(?:-([A-Z]))?/);
-                  if (classMatch) {
-                    return `Sem ${classMatch[1]}${classMatch[2] ? ` Sec ${classMatch[2]}` : ''}`;
-                  }
-                  return `Sem ${profile?.semester || 5}`;
-                })()} · BNMIT`}
-            </div>
-          {!isTeacher && profile?.usn && (
-            <div style={{ marginTop: '0.35rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{
-                display: 'inline-block', padding: '0.15rem 0.6rem',
-                borderRadius: 0, fontSize: '0.78rem', fontWeight: 700,
-                background: 'rgba(247,127,50,0.12)', color: '#ea580c',
-                letterSpacing: '0.04em', fontFamily: 'monospace',
-              }}>
-                {profile.usn}
-              </span>
-              <span className="text-muted" style={{ fontSize: '0.72rem' }}>University Seat Number</span>
-            </div>
-          )}
-        </div>
-        {isTeacher && (
-          <div style={{ textAlign: 'right' }}>
-            <div className="text-muted text-xs">Department</div>
-            <code style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--primary)' }}>AIML · BNMIT</code>
-          </div>
-        )}
-      </motion.div>
-
-
-
       {/* ── Teacher Quick Actions (full width) ── */}
       {isTeacher && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} style={{ marginBottom: '1.75rem' }}>
