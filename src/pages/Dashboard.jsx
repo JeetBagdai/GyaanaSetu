@@ -84,8 +84,14 @@ export default function Dashboard() {
         try {
           const classId = profile.classId || 'default'
           const data = await getAnnouncements(classId)
-          const studentSem = profile.semester || classId.replace('AIML-SEM', '') || '5'
-          const filtered = data.filter(a => a.classId === classId || a.classId === 'All' || a.semester === parseInt(studentSem))
+          const studentSem = profile.semester || classId.replace('AIML-SEM', '').split('-')[0] || '5'
+          const filtered = data.filter(a => 
+            a.classId === classId || 
+            a.classId === `SEM${studentSem}` || 
+            a.classId === 'College' || 
+            a.classId === 'All' || 
+            (a.semester === parseInt(studentSem) && a.classId === 'All')
+          )
           setAnnouncements(filtered)
         } catch (err) {
           console.error(err)
@@ -135,6 +141,8 @@ export default function Dashboard() {
       bg: 'var(--color-orange-soft)'
     }
   }).filter(subj => subj.sem === 0 || subj.sem >= 3).sort((a, b) => a.sem - b.sem) : []
+
+  const uniqueTeacherSems = [...new Set(TEACHER_SUBJECTS.map(s => s.sem))].filter(s => s > 0).sort()
 
   return (
     <div className="page-inner">
@@ -265,52 +273,107 @@ export default function Dashboard() {
       {/* ── Teacher Quick Announcement Board (MOVED OUTSIDE GRID) ── */}
       {isTeacher && TEACHER_SUBJECTS.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} style={{ marginTop: '1.5rem' }}>
-          <div className="card" style={{ padding: '1.5rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
-              <Megaphone size={18} color="var(--color-orange)" />
-              <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)' }}>Quick Announcement</h3>
+          <div className="card" style={{ padding: '2rem', border: 'none', background: 'var(--surface)', boxShadow: 'var(--shadow-md)', position: 'relative', overflow: 'hidden' }}>
+            {/* Left accent border */}
+            <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: '4px', background: 'var(--color-orange)' }} />
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+              <div style={{ width: 42, height: 42, borderRadius: '12px', background: 'var(--color-orange-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Megaphone size={20} color="var(--primary)" />
+              </div>
+              <div>
+                <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>Quick Announcement</h3>
+                <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Broadcast an update to your students directly to their dashboard.</p>
+              </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <input 
                 type="text" 
-                placeholder="Announcement Title" 
-                className="input-field" 
+                placeholder="Announcement Title (e.g. Tomorrow's class cancelled)" 
+                className="input" 
+                style={{ 
+                  fontSize: '1rem', 
+                  fontWeight: 600,
+                  padding: '1rem 1.25rem',
+                  borderRadius: '12px',
+                  border: '1px solid var(--border-color)',
+                  backgroundColor: 'var(--bg-input)',
+                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)',
+                  outline: 'none',
+                  color: 'var(--text-primary)'
+                }}
                 value={annForm.title} 
                 onChange={e => setAnnForm({...annForm, title: e.target.value})}
               />
               <textarea 
-                placeholder="What do you want to announce to your students?" 
-                className="input-field" 
-                rows={3} 
-                style={{ resize: 'vertical' }}
+                placeholder="What do you want to announce? Provide any details or links here..." 
+                className="input" 
+                rows={4} 
+                style={{ 
+                  resize: 'vertical', 
+                  lineHeight: '1.5',
+                  fontSize: '0.95rem',
+                  padding: '1rem 1.25rem',
+                  borderRadius: '12px',
+                  border: '1px solid var(--border-color)',
+                  backgroundColor: 'var(--bg-input)',
+                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)',
+                  outline: 'none',
+                  color: 'var(--text-primary)'
+                }}
                 value={annForm.message}
                 onChange={e => setAnnForm({...annForm, message: e.target.value})}
               />
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
-                <select 
-                  className="input-field" 
-                  style={{ flex: 1, padding: '0.6rem' }}
-                  value={annForm.target}
-                  onChange={e => setAnnForm({...annForm, target: e.target.value})}
-                >
-                  <option value="All">All My Classes</option>
-                  {TEACHER_SUBJECTS.map(s => (
-                    <option key={s.code} value={s.sem}>Semester {s.sem}</option>
-                  ))}
-                </select>
+              
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', marginTop: '0.5rem' }}>
+                <div style={{ flex: 1, minWidth: '220px' }}>
+                  <select 
+                    className="select" 
+                    style={{ fontWeight: 600, cursor: 'pointer' }}
+                    value={annForm.target}
+                    onChange={e => setAnnForm({...annForm, target: e.target.value})}
+                  >
+                    <option value="College">🏛️ Entire College (All Students)</option>
+                    <option value="All">📢 All My Classes</option>
+                    {uniqueTeacherSems.map(sem => (
+                      <optgroup key={`group-${sem}`} label={`Semester ${sem}`}>
+                        <option value={`SEM${sem}`}>Entire Semester {sem}</option>
+                        <option value={`AIML-SEM${sem}-A`}>Semester {sem} - Section A</option>
+                        <option value={`AIML-SEM${sem}-B`}>Semester {sem} - Section B</option>
+                      </optgroup>
+                    ))}
+                  </select>
+                </div>
+                
                 <button 
                   className="btn-primary" 
-                  style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.5rem', borderRadius: '8px' }}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', padding: '0.875rem 2rem', fontSize: '1rem', borderRadius: '12px', minWidth: '160px' }}
                   disabled={postingAnn || !annForm.title || !annForm.message}
                   onClick={async () => {
                     setPostingAnn(true)
                     try {
+                      let finalClassId = 'All'
+                      let finalSemester = null
+                      
+                      if (annForm.target === 'College') {
+                        finalClassId = 'College'
+                      } else if (annForm.target === 'All') {
+                        finalClassId = 'All'
+                      } else if (annForm.target.startsWith('AIML-')) {
+                        finalClassId = annForm.target
+                        finalSemester = parseInt(annForm.target.replace('AIML-SEM', '').split('-')[0])
+                      } else if (annForm.target.startsWith('SEM')) {
+                        finalClassId = annForm.target
+                        finalSemester = parseInt(annForm.target.replace('SEM', ''))
+                      }
+
                       await postAnnouncement({
                         title: annForm.title,
                         message: annForm.message,
                         authorName: profile.name,
-                        classId: annForm.target === 'All' ? 'All' : `AIML-SEM${annForm.target}`,
-                        semester: annForm.target === 'All' ? null : parseInt(annForm.target)
+                        classId: finalClassId,
+                        semester: finalSemester
                       })
                       setAnnForm({ title: '', message: '', target: 'All' })
                       alert('Announcement posted successfully!')
@@ -320,8 +383,8 @@ export default function Dashboard() {
                     setPostingAnn(false)
                   }}
                 >
-                  <Send size={16} />
-                  {postingAnn ? 'Posting...' : 'Post'}
+                  <Send size={18} />
+                  {postingAnn ? 'Posting...' : 'Post Announcement'}
                 </button>
               </div>
             </div>
@@ -390,18 +453,17 @@ export default function Dashboard() {
                 {announcements.map(ann => (
                   <div key={ann.id} style={{ padding: '1rem', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '8px', borderLeft: '4px solid var(--color-orange)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                      <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>{ann.title}</h3>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                        <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>{ann.title}</h3>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                          Posted by <strong style={{ color: 'var(--text-primary)', fontWeight: 700 }}>{ann.authorName}</strong>
+                        </span>
+                      </div>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
                         {ann.timestamp?.seconds ? new Date(ann.timestamp.seconds * 1000).toLocaleDateString() : 'Just now'}
                       </span>
                     </div>
-                    <p style={{ margin: '0 0 0.75rem 0', fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                      {ann.message}
-                    </p>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                      <Megaphone size={14} color="var(--primary)" />
-                      <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--primary)' }}>{ann.authorName}</span>
-                    </div>
+                    <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>{ann.message}</p>
                   </div>
                 ))}
               </div>

@@ -29,11 +29,16 @@ export default function Navbar({ onMenuClick }) {
           const classId = profile.classId || 'default'
           const data = await getAnnouncements(classId)
           // Filter out announcements that don't match this student's class or semester, unless they are admin/teacher.
-          // For simplicity, if role is student, filter them:
           let filtered = data
           if (profile.role === 'student') {
-            const studentSem = profile.semester || classId.replace('AIML-SEM', '') || '5'
-            filtered = data.filter(a => a.classId === classId || a.classId === 'All' || a.semester === parseInt(studentSem))
+            const studentSem = profile.semester || classId.replace('AIML-SEM', '').split('-')[0] || '5'
+            filtered = data.filter(a => 
+              a.classId === classId || 
+              a.classId === `SEM${studentSem}` || 
+              a.classId === 'College' || 
+              a.classId === 'All' || 
+              (a.semester === parseInt(studentSem) && a.classId === 'All')
+            )
           }
           setAnnouncements(filtered)
         } catch (err) {
