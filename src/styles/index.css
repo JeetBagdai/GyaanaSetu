@@ -559,8 +559,16 @@ select option {
     width: 100%;
   }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-  .page-inner { padding: 1rem; }
+  .page-inner { padding: 0.75rem; }
   
+  .page-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .page-subtitle {
+    font-size: var(--font-size-sm);
+  }
+
   .mobile-backdrop {
     display: none;
     position: fixed;

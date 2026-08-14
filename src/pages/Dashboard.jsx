@@ -208,7 +208,7 @@ export default function Dashboard() {
               /* ── Teacher: flat grid + Announcements ── */
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <div className="card" style={{ padding: '1rem' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.75rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem' }}>
                     {parsedSubjects.map(subj => {
                       const Icon = subj.icon
                       return (
@@ -261,7 +261,7 @@ export default function Dashboard() {
                       value={annForm.message}
                       onChange={e => setAnnForm({...annForm, message: e.target.value})}
                     />
-                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
                       <select 
                         className="input-field" 
                         style={{ flex: 1, padding: '0.6rem' }}
@@ -306,7 +306,7 @@ export default function Dashboard() {
           })() : (
             /* ── Student: flat Sem 5 grid ── */
             <div className="card" style={{ padding: '1rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.75rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem' }}>
                 {STUDENT_SUBJECTS.map(subj => {
                   const Icon = subj.icon
                   return (

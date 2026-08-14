@@ -117,8 +117,8 @@ export default function Navbar({ onMenuClick }) {
 
           {showAnnouncements && (
             <div style={{
-              position: 'absolute', top: '100%', right: 0, marginTop: '0.5rem',
-              width: '320px', background: 'var(--bg-card)', border: '1px solid var(--border)',
+              position: 'absolute', top: '100%', right: -10, marginTop: '0.5rem',
+              width: '320px', maxWidth: 'calc(100vw - 2rem)', background: 'var(--bg-card)', border: '1px solid var(--border)',
               borderRadius: '12px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
               zIndex: 1000, overflow: 'hidden', display: 'flex', flexDirection: 'column'
             }}>
