@@ -334,8 +334,8 @@ export default function Dashboard() {
                     value={annForm.target}
                     onChange={e => setAnnForm({...annForm, target: e.target.value})}
                   >
-                    <option value="College">🏛️ Entire College (All Students)</option>
-                    <option value="All">📢 All My Classes</option>
+                    <option value="College">Entire College (All Students)</option>
+                    <option value="All">All My Classes</option>
                     {uniqueTeacherSems.map(sem => (
                       <optgroup key={`group-${sem}`} label={`Semester ${sem}`}>
                         <option value={`SEM${sem}`}>Entire Semester {sem}</option>
