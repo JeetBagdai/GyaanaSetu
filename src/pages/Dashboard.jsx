@@ -129,12 +129,13 @@ export default function Dashboard() {
         </div>
       </motion.div>
 
-      {/* ── Teacher Quick Actions (full width) ── */}
-      {isTeacher && (
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} style={{ marginBottom: '1.75rem' }}>
+      {/* ── Main content grid ── */}
+      <div className="dashboard-grid">
+        {/* ── Quick Actions ── */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
           <h2 className="section-title">Quick Actions</h2>
-          <motion.div className={`teacher-actions-grid cols-${teacherActions.length}`} variants={container} initial="hidden" animate="show">
-            {teacherActions.map(({ to, label, icon: Icon, color, bg }) => (
+          <motion.div className="actions-grid" variants={container} initial="hidden" animate="show">
+            {(isTeacher ? teacherActions : STUDENT_QUICK_ACTIONS).map(({ to, label, icon: Icon, color, bg }) => (
               <motion.button
                 key={to}
                 className="action-card"
@@ -144,40 +145,13 @@ export default function Dashboard() {
                 whileTap={{ scale: 0.97 }}
               >
                 <div className="action-icon" style={{ background: bg, color }}>
-                  <Icon size={24} />
+                  <Icon size={22} />
                 </div>
                 <span className="action-label">{label}</span>
               </motion.button>
             ))}
           </motion.div>
         </motion.div>
-      )}
-
-      {/* ── Main content grid ── */}
-      <div className={isTeacher ? 'dashboard-single' : 'dashboard-grid'}>
-        {/* ── Student Quick Actions ── */}
-        {!isTeacher && (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-            <h2 className="section-title">Quick Actions</h2>
-            <motion.div className="actions-grid" variants={container} initial="hidden" animate="show">
-              {STUDENT_QUICK_ACTIONS.map(({ to, label, icon: Icon, color, bg }) => (
-                <motion.button
-                  key={to}
-                  className="action-card"
-                  variants={item}
-                  onClick={() => navigate(to)}
-                  whileHover={{ y: -4, scale: 1.02 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  <div className="action-icon" style={{ background: bg, color }}>
-                    <Icon size={22} />
-                  </div>
-                  <span className="action-label">{label}</span>
-                </motion.button>
-              ))}
-            </motion.div>
-          </motion.div>
-        )}
 
         {/* ── Subjects ── */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
