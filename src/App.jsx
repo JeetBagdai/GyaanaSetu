@@ -21,6 +21,7 @@ import CodeITList from './pages/CodeITList'
 import CodeITEditor from './pages/CodeITEditor'
 import Projects from './pages/Projects'
 import TeacherProjects from './pages/TeacherProjects'
+import Certificates from './pages/Certificates'
 
 function RootRedirect() {
   const { profile } = useAuth()
@@ -139,6 +140,11 @@ export default function App() {
             <Route path="/teacher-projects" element={
               <ProtectedRoute>
                 <AppLayout><TeacherProjects /></AppLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/certificates" element={
+              <ProtectedRoute>
+                <AppLayout><Certificates /></AppLayout>
               </ProtectedRoute>
             } />
 

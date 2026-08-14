@@ -5,10 +5,11 @@
 import { initializeApp }  from 'firebase/app'
 import { getAuth, GoogleAuthProvider } from 'firebase/auth'
 import { getFirestore }   from 'firebase/firestore'
+import { getStorage }     from 'firebase/storage'
 
 const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === 'true'
 
-let app, auth, db
+let app, auth, db, storage
 
 if (!DEMO_MODE) {
   const firebaseConfig = {
@@ -22,14 +23,16 @@ if (!DEMO_MODE) {
   app  = initializeApp(firebaseConfig)
   auth = getAuth(app)
   db   = getFirestore(app)
+  storage = getStorage(app)
 } else {
   // Demo stubs — nothing calls these in demo mode
   app  = null
   auth = null
   db   = null
+  storage = null
 }
 
 export const googleProvider = new GoogleAuthProvider()
-export { auth, db }
+export { auth, db, storage }
 export default app
 
