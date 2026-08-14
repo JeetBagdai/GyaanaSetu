@@ -114,6 +114,28 @@ export default function Dashboard() {
     bg: 'var(--color-orange-soft)'
   }))
 
+  const TEACHER_SUBJECTS = isTeacher ? (profile?.subjects || '').split(',').filter(Boolean).map((s, i) => {
+    const match = s.trim().match(/(.+)\s*\(Sem\s*(\d+)\)/i)
+    if (match) {
+      return {
+        code: `S${match[2]}-${i+1}`,
+        name: match[1].trim(),
+        sem: Number(match[2]),
+        icon: BookOpen,
+        color: 'var(--color-orange)',
+        bg: 'var(--color-orange-soft)'
+      }
+    }
+    return {
+      code: `Subj-${i+1}`,
+      name: s.trim(),
+      sem: 0,
+      icon: BookOpen,
+      color: 'var(--color-orange)',
+      bg: 'var(--color-orange-soft)'
+    }
+  }).filter(subj => subj.sem === 0 || subj.sem >= 3).sort((a, b) => a.sem - b.sem) : []
+
   return (
     <div className="page-inner">
       {/* ── Header ── */}
@@ -177,133 +199,43 @@ export default function Dashboard() {
             {isTeacher ? 'Subjects You Teach' : `Semester ${studentSemNum} Subjects`}
           </h2>
 
-          {isTeacher ? (() => {
-            const parsedSubjects = (profile?.subjects || '').split(',').filter(Boolean).map((s, i) => {
-              const match = s.trim().match(/(.+)\s*\(Sem\s*(\d+)\)/i)
-              if (match) {
-                return {
-                  code: `S${match[2]}-${i+1}`,
-                  name: match[1].trim(),
-                  sem: Number(match[2]),
-                  icon: BookOpen,
-                  color: 'var(--color-orange)',
-                  bg: 'var(--color-orange-soft)'
-                }
-              }
-              return {
-                code: `Subj-${i+1}`,
-                name: s.trim(),
-                sem: 0,
-                icon: BookOpen,
-                color: 'var(--color-orange)',
-                bg: 'var(--color-orange-soft)'
-              }
-            }).filter(subj => subj.sem === 0 || subj.sem >= 3).sort((a, b) => a.sem - b.sem)
-
-            if (parsedSubjects.length === 0) {
-              return <div className="text-muted" style={{ padding: '2rem', textAlign: 'center', background: 'var(--bg-card)' }}>No subjects assigned yet.</div>
-            }
-
-            return (
-              /* ── Teacher: flat grid + Announcements ── */
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <div className="card" style={{ padding: '1rem' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem' }}>
-                    {parsedSubjects.map(subj => {
-                      const Icon = subj.icon
-                      return (
-                        <div
-                          key={subj.code}
-                          style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', padding: '0.75rem', borderRadius: 0, background: subj.bg, border: `1px solid ${subj.color}22` }}
-                        >
-                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                              <Icon size={16} color={subj.color} />
-                              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: subj.color, background: `${subj.color}15`, padding: '0.15rem 0.4rem', borderRadius: '4px' }}>
-                                {(() => {
-                                  const classMatch = profile?.classId?.match(/SEM(\d+)(?:-([A-Z]))?/);
-                                  if (classMatch) {
-                                    return `Sem ${classMatch[1]}${classMatch[2] ? ` - ${classMatch[2]}` : ''}`;
-                                  }
-                                  return `Sem ${subj.sem}`;
-                                })()}
-                              </span>
-                            </div>
-                          </div>
-                          <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.3 }}>
-                            {subj.name}
+          {isTeacher ? (
+            TEACHER_SUBJECTS.length === 0 ? (
+              <div className="text-muted" style={{ padding: '2rem', textAlign: 'center', background: 'var(--bg-card)' }}>No subjects assigned yet.</div>
+            ) : (
+              <div className="card" style={{ padding: '1rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem' }}>
+                  {TEACHER_SUBJECTS.map(subj => {
+                    const Icon = subj.icon
+                    return (
+                      <div
+                        key={subj.code}
+                        style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', padding: '0.75rem', borderRadius: 0, background: subj.bg, border: `1px solid ${subj.color}22` }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                            <Icon size={16} color={subj.color} />
+                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: subj.color, background: `${subj.color}15`, padding: '0.15rem 0.4rem', borderRadius: '4px' }}>
+                              {(() => {
+                                const classMatch = profile?.classId?.match(/SEM(\d+)(?:-([A-Z]))?/);
+                                if (classMatch) {
+                                  return `Sem ${classMatch[1]}${classMatch[2] ? ` - ${classMatch[2]}` : ''}`;
+                                }
+                                return `Sem ${subj.sem}`;
+                              })()}
+                            </span>
                           </div>
                         </div>
-                      )
-                    })}
-                  </div>
-                </div>
-                
-                {/* ── Teacher Quick Announcement Board ── */}
-                <div className="card" style={{ padding: '1.5rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
-                    <Megaphone size={18} color="var(--color-orange)" />
-                    <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)' }}>Quick Announcement</h3>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                    <input 
-                      type="text" 
-                      placeholder="Announcement Title" 
-                      className="input-field" 
-                      value={annForm.title} 
-                      onChange={e => setAnnForm({...annForm, title: e.target.value})}
-                    />
-                    <textarea 
-                      placeholder="What do you want to announce to your students?" 
-                      className="input-field" 
-                      rows={3} 
-                      style={{ resize: 'vertical' }}
-                      value={annForm.message}
-                      onChange={e => setAnnForm({...annForm, message: e.target.value})}
-                    />
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
-                      <select 
-                        className="input-field" 
-                        style={{ flex: 1, padding: '0.6rem' }}
-                        value={annForm.target}
-                        onChange={e => setAnnForm({...annForm, target: e.target.value})}
-                      >
-                        <option value="All">All My Classes</option>
-                        {parsedSubjects.map(s => (
-                          <option key={s.code} value={s.sem}>Semester {s.sem}</option>
-                        ))}
-                      </select>
-                      <button 
-                        className="btn-primary" 
-                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.5rem', borderRadius: '8px' }}
-                        disabled={postingAnn || !annForm.title || !annForm.message}
-                        onClick={async () => {
-                          setPostingAnn(true)
-                          try {
-                            await postAnnouncement({
-                              title: annForm.title,
-                              message: annForm.message,
-                              authorName: profile.name,
-                              classId: annForm.target === 'All' ? 'All' : `AIML-SEM${annForm.target}`,
-                              semester: annForm.target === 'All' ? null : parseInt(annForm.target)
-                            })
-                            setAnnForm({ title: '', message: '', target: 'All' })
-                            alert('Announcement posted successfully!')
-                          } catch (err) {
-                            alert('Failed to post: ' + err.message)
-                          }
-                          setPostingAnn(false)
-                        }}
-                      >
-                        <Send size={16} />
-                        {postingAnn ? 'Posting...' : 'Post'}
-                      </button>
-                    </div>
-                  </div>
+                        <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.3 }}>
+                          {subj.name}
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             )
-          })() : (
+          ) : (
             /* ── Student: flat Sem 5 grid ── */
             <div className="card" style={{ padding: '1rem' }}>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem' }}>
@@ -329,6 +261,73 @@ export default function Dashboard() {
           )}
         </motion.div>
       </div>
+
+      {/* ── Teacher Quick Announcement Board (MOVED OUTSIDE GRID) ── */}
+      {isTeacher && TEACHER_SUBJECTS.length > 0 && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} style={{ marginTop: '1.5rem' }}>
+          <div className="card" style={{ padding: '1.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+              <Megaphone size={18} color="var(--color-orange)" />
+              <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)' }}>Quick Announcement</h3>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <input 
+                type="text" 
+                placeholder="Announcement Title" 
+                className="input-field" 
+                value={annForm.title} 
+                onChange={e => setAnnForm({...annForm, title: e.target.value})}
+              />
+              <textarea 
+                placeholder="What do you want to announce to your students?" 
+                className="input-field" 
+                rows={3} 
+                style={{ resize: 'vertical' }}
+                value={annForm.message}
+                onChange={e => setAnnForm({...annForm, message: e.target.value})}
+              />
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+                <select 
+                  className="input-field" 
+                  style={{ flex: 1, padding: '0.6rem' }}
+                  value={annForm.target}
+                  onChange={e => setAnnForm({...annForm, target: e.target.value})}
+                >
+                  <option value="All">All My Classes</option>
+                  {TEACHER_SUBJECTS.map(s => (
+                    <option key={s.code} value={s.sem}>Semester {s.sem}</option>
+                  ))}
+                </select>
+                <button 
+                  className="btn-primary" 
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.5rem', borderRadius: '8px' }}
+                  disabled={postingAnn || !annForm.title || !annForm.message}
+                  onClick={async () => {
+                    setPostingAnn(true)
+                    try {
+                      await postAnnouncement({
+                        title: annForm.title,
+                        message: annForm.message,
+                        authorName: profile.name,
+                        classId: annForm.target === 'All' ? 'All' : `AIML-SEM${annForm.target}`,
+                        semester: annForm.target === 'All' ? null : parseInt(annForm.target)
+                      })
+                      setAnnForm({ title: '', message: '', target: 'All' })
+                      alert('Announcement posted successfully!')
+                    } catch (err) {
+                      alert('Failed to post: ' + err.message)
+                    }
+                    setPostingAnn(false)
+                  }}
+                >
+                  <Send size={16} />
+                  {postingAnn ? 'Posting...' : 'Post'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
 
       {/* ── Performance Analytics ── */}
       {!isTeacher && (
