@@ -8,7 +8,8 @@ import {
   Network, FlaskConical, Sigma, Layers,
   BookOpen, ClipboardCheck, Calendar,
   MessageCircle, Brain,
-  Cpu, Eye, Database, Cloud, Code2, BarChart3, MapPin
+  Cpu, Eye, Database, Cloud, Code2, BarChart3, MapPin,
+  FolderGit2, Award, LayoutGrid
 } from 'lucide-react'
 import './Dashboard.css'
 
@@ -24,23 +25,27 @@ function groupBySem(subjects) {
 }
 
 const STUDENT_QUICK_ACTIONS = [
-  { to: '/learning',   label: 'Learning Resources', icon: BookOpen,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/attendance', label: 'Attendance',          icon: ClipboardCheck, color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/timetable',  label: 'Timetable',           icon: Calendar,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/chatbot',    label: 'AI Tutor',             icon: Brain,          color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/learning',     label: 'Learning Resources', icon: BookOpen,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/attendance',   label: 'Attendance',         icon: ClipboardCheck, color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/chatbot',      label: 'AI Tutor',           icon: Brain,          color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/codeit',       label: 'CodeIT',             icon: Code2,          color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/projects',     label: 'Projects',           icon: FolderGit2,     color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/certificates', label: 'Certificates',       icon: Award,          color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
 ]
 
 // Base actions every teacher sees
 const TEACHER_ACTIONS_NO_MANAGE = [
-  { to: '/attendance', label: 'Attendance report', icon: ClipboardCheck, color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/timetable',  label: 'My Schedule',              icon: Calendar,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/teacher-projects', label: 'Projects',         icon: FolderGit2,     color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/certificates',     label: 'Certificates',     icon: Award,          color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/attendance',       label: 'Attendance',       icon: ClipboardCheck, color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/performance',      label: 'Performance',      icon: BarChart3,      color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/timetable',        label: 'My Schedule',      icon: Calendar,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
 ]
 
-// Actions for teachers with timetable manager access
+// Actions for teachers with timetable manager access (Totally 6)
 const TEACHER_ACTIONS_WITH_MANAGE = [
-  { to: '/attendance',       label: 'Attendance report', icon: ClipboardCheck, color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/timetable-manage', label: 'Manage Timetable',         icon: Calendar,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/timetable',        label: 'My Schedule',              icon: Calendar,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  ...TEACHER_ACTIONS_NO_MANAGE,
+  { to: '/timetable-manage', label: 'Manage Timetable', icon: LayoutGrid,     color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
 ]
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.07 } } }
@@ -153,7 +158,7 @@ export default function Dashboard() {
       )}
 
       {/* ── Main content grid ── */}
-      <div className={isTeacher ? 'dashboard-single' : 'dashboard-grid'}>
+      <div className="dashboard-single">
         {/* ── Student Quick Actions ── */}
         {!isTeacher && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>

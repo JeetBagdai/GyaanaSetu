@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext'
 import { db, storage } from '../firebase'
 import { collection, query, where, getDocs, addDoc, serverTimestamp, orderBy } from 'firebase/firestore'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { ExternalLink, Loader2, Search } from 'lucide-react'
+import { ExternalLink, Loader2, Search, Download } from 'lucide-react'
 import './Certificates.css'
 
 export default function Certificates() {
@@ -23,6 +23,8 @@ export default function Certificates() {
 
   // Teacher filter state
   const [searchTerm, setSearchTerm] = useState('')
+  const [filterSemester, setFilterSemester] = useState('all')
+  const [filterClass, setFilterClass] = useState('all')
 
   const fetchCertificates = async () => {
     setLoading(true)
@@ -94,6 +96,8 @@ export default function Certificates() {
         uid: profile.uid,
         studentName: profile.name,
         studentUsn: profile.usn || '',
+        semester: profile.semester || 5,
+        classId: profile.classId || '',
         title,
         type,
         date,
@@ -120,6 +124,16 @@ export default function Certificates() {
 
   const filteredCertificates = certificates.filter(c => {
     if (!isTeacher) return true
+    
+    // Semester filter
+    if (filterSemester !== 'all' && String(c.semester) !== String(filterSemester)) return false
+    
+    // Class filter
+    if (filterClass !== 'all') {
+      // Assuming classId formats like 'AIML-SEM5-A' or 'A'
+      if (!c.classId?.endsWith(`-${filterClass}`) && c.classId !== filterClass) return false
+    }
+
     const term = searchTerm.toLowerCase()
     return (
       c.studentName?.toLowerCase().includes(term) ||
@@ -127,6 +141,32 @@ export default function Certificates() {
       c.title?.toLowerCase().includes(term)
     )
   })
+
+  const handleDownloadCSV = () => {
+    if (filteredCertificates.length === 0) return
+    
+    const headers = ['Student Name', 'USN', 'Semester', 'Class/Section', 'Title', 'Type', 'Date', 'File URL']
+    const rows = filteredCertificates.map(c => [
+      `"${c.studentName || ''}"`,
+      `"${c.studentUsn || ''}"`,
+      `"${c.semester || ''}"`,
+      `"${c.classId || ''}"`,
+      `"${c.title || ''}"`,
+      `"${c.type === 'participation' ? 'Participation' : 'Achievement'}"`,
+      `"${new Date(c.date).toLocaleDateString()}"`,
+      `"${c.fileUrl || ''}"`
+    ])
+    
+    const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n')
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', `certificates_export_${Date.now()}.csv`)
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
 
   return (
     <div className="page-inner">
@@ -203,17 +243,44 @@ export default function Certificates() {
         </div>
 
         {isTeacher && (
-          <div className="teacher-filters">
-            <div style={{ position: 'relative', flex: 1, maxWidth: '400px' }}>
+          <div className="teacher-filters" style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
+            <div style={{ position: 'relative', flex: '1 1 300px', maxWidth: '400px' }}>
               <Search size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
               <input 
                 type="text" 
                 placeholder="Search by student name, USN, or title..." 
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
-                style={{ paddingLeft: '2.5rem', width: '100%' }}
+                style={{ paddingLeft: '2.5rem', width: '100%', padding: '0.65rem 0.65rem 0.65rem 2.5rem', border: '1px solid var(--border)', borderRadius: '4px' }}
               />
             </div>
+            
+            <select 
+              value={filterSemester} 
+              onChange={e => setFilterSemester(e.target.value)}
+              style={{ padding: '0.65rem', border: '1px solid var(--border)', borderRadius: '4px', background: 'var(--bg-card)' }}
+            >
+              <option value="all">All Semesters</option>
+              {[1,2,3,4,5,6,7,8].map(s => <option key={s} value={s}>Semester {s}</option>)}
+            </select>
+
+            <select 
+              value={filterClass} 
+              onChange={e => setFilterClass(e.target.value)}
+              style={{ padding: '0.65rem', border: '1px solid var(--border)', borderRadius: '4px', background: 'var(--bg-card)' }}
+            >
+              <option value="all">All Sections</option>
+              {['A', 'B', 'C'].map(s => <option key={s} value={s}>Section {s}</option>)}
+            </select>
+
+            <button 
+              onClick={handleDownloadCSV} 
+              className="btn btn-secondary"
+              disabled={filteredCertificates.length === 0}
+              style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+            >
+              <Download size={16} /> Download CSV
+            </button>
           </div>
         )}
 
