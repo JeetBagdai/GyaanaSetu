@@ -53,34 +53,32 @@ export default function Navbar({ onMenuClick }) {
       <div className="navbar-right">
         <ThemeToggle />
 
-        {/* Logout for admin */}
-        {isAdmin && (
-          <button
-            onClick={handleLogout}
-            title="Logout"
-            style={{
-              display: 'flex', alignItems: 'center', gap: '0.4rem',
-              padding: '0.35rem 0.85rem', borderRadius: 0,
-              border: '1px solid var(--border)', background: 'var(--bg-input)',
-              color: 'var(--text-secondary)', fontSize: '0.82rem',
-              fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-body)',
-              transition: 'all 0.15s',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.background = '#fee2e2'
-              e.currentTarget.style.color = '#ef4444'
-              e.currentTarget.style.borderColor = '#ef444444'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.background = 'var(--bg-input)'
-              e.currentTarget.style.color = 'var(--text-secondary)'
-              e.currentTarget.style.borderColor = 'var(--border)'
-            }}
-          >
-            <LogOut size={14} />
-            Logout
-          </button>
-        )}
+        {/* Logout button */}
+        <button
+          onClick={handleLogout}
+          title="Logout"
+          style={{
+            display: 'flex', alignItems: 'center', gap: '0.4rem',
+            padding: '0.35rem 0.85rem', borderRadius: '20px',
+            border: '1px solid var(--border)', background: 'var(--bg-input)',
+            color: 'var(--text-secondary)', fontSize: '0.82rem',
+            fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-body)',
+            transition: 'all 0.15s',
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.background = '#fee2e2'
+            e.currentTarget.style.color = '#ef4444'
+            e.currentTarget.style.borderColor = '#ef444444'
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.background = 'var(--bg-input)'
+            e.currentTarget.style.color = 'var(--text-secondary)'
+            e.currentTarget.style.borderColor = 'var(--border)'
+          }}
+        >
+          <LogOut size={14} />
+          <span className="logout-text" style={{ display: 'inline-block' }}>Logout</span>
+        </button>
 
         {/* Avatar / profile button for teachers & students */}
         {showAvatar && (
