@@ -204,7 +204,7 @@ export default function Dashboard() {
               <div className="text-muted" style={{ padding: '2rem', textAlign: 'center', background: 'var(--bg-card)' }}>No subjects assigned yet.</div>
             ) : (
               <div className="card" style={{ padding: '1rem' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.75rem' }}>
                   {TEACHER_SUBJECTS.map(subj => {
                     const Icon = subj.icon
                     return (
@@ -238,7 +238,7 @@ export default function Dashboard() {
           ) : (
             /* ── Student: flat Sem 5 grid ── */
             <div className="card" style={{ padding: '1rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.75rem' }}>
                 {STUDENT_SUBJECTS.map(subj => {
                   const Icon = subj.icon
                   return (
