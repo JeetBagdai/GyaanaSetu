@@ -25,12 +25,10 @@ function groupBySem(subjects) {
 }
 
 const STUDENT_QUICK_ACTIONS = [
-  { to: '/learning',     label: 'Learning Resources', icon: BookOpen,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/attendance',   label: 'Attendance',         icon: ClipboardCheck, color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/chatbot',      label: 'AI Tutor',           icon: Brain,          color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/codeit',       label: 'CodeIT',             icon: Code2,          color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/projects',     label: 'Projects',           icon: FolderGit2,     color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/certificates', label: 'Certificates',       icon: Award,          color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/learning',   label: 'Learning Resources', icon: BookOpen,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/attendance', label: 'Attendance',          icon: ClipboardCheck, color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/timetable',  label: 'Timetable',           icon: Calendar,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/chatbot',    label: 'AI Tutor',             icon: Brain,          color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
 ]
 
 // Base actions every teacher sees
@@ -158,7 +156,7 @@ export default function Dashboard() {
       )}
 
       {/* ── Main content grid ── */}
-      <div className="dashboard-single">
+      <div className={isTeacher ? 'dashboard-single' : 'dashboard-grid'}>
         {/* ── Student Quick Actions ── */}
         {!isTeacher && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
