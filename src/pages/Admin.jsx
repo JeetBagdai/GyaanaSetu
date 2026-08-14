@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   Users, UserPlus, Calendar, Plus, Trash2, Edit,
   Wand2, Save, CheckCircle, AlertCircle, Loader, X,
-  ShieldCheck, ToggleLeft, ToggleRight, RefreshCw, Users2, ChevronDown, GraduationCap, BookOpen
+  ShieldCheck, ToggleLeft, ToggleRight, RefreshCw, Users2, ChevronDown, GraduationCap, BookOpen, HardDrive
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { getToken } from '../services/auth'
@@ -363,6 +363,8 @@ export default function Admin() {
           Admin Only
         </span>
       </div>
+      
+      <StorageMeter />
 
       {/* Tab switcher */}
       <div className="admin-tabs">
@@ -1042,7 +1044,62 @@ function UserManager() {
   )
 }
 
+function StorageMeter() {
+  const [totalBytes, setTotalBytes] = useState(0)
+  const [loading, setLoading] = useState(true)
 
+  useEffect(() => {
+    async function fetchStats() {
+      try {
+        const token = await getToken()
+        const res = await fetch('/api/admin/storage-stats', {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        if (res.ok) {
+          const data = await res.json()
+          setTotalBytes(data.totalBytes || 0)
+        }
+      } catch (err) {
+        console.error('Failed to fetch storage stats:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchStats()
+  }, [])
+
+  const MAX_BYTES = 5 * 1024 * 1024 * 1024 // 5 GB
+  const percentage = Math.min((totalBytes / MAX_BYTES) * 100, 100)
+  const usedMB = (totalBytes / (1024 * 1024)).toFixed(1)
+
+  return (
+    <div className="card admin-card" style={{ marginBottom: '1.5rem', padding: '1.25rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+        <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(247, 127, 50, 0.1)', color: '#ea580c', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <HardDrive size={18} />
+        </div>
+        <div>
+          <h3 style={{ margin: 0, fontSize: '1rem', color: 'var(--text-primary)' }}>Storage Utilization</h3>
+          <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted)' }}>Firebase Storage (Free Tier: 5 GB)</p>
+        </div>
+      </div>
+
+      <div style={{ background: 'var(--bg-input)', height: 8, borderRadius: 4, overflow: 'hidden', margin: '1rem 0' }}>
+        <motion.div
+          initial={{ width: 0 }}
+          animate={{ width: `${percentage}%` }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+          style={{ height: '100%', background: percentage > 90 ? '#ef4444' : '#ea580c', borderRadius: 4 }}
+        />
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
+        <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{loading ? '...' : `${usedMB} MB`} used</span>
+        <span style={{ color: 'var(--text-muted)' }}>5,000 MB total</span>
+      </div>
+    </div>
+  )
+}
 // ══════════════════════════════════════════════════════════════════════════
 // TIMETABLE ACCESS MANAGER
 // ══════════════════════════════════════════════════════════════════════════

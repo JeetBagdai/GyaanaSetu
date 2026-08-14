@@ -6,6 +6,8 @@ const timetable  = require('./src/timetable')
 const chatbot    = require('./src/chatbot')
 const auth       = require('./src/auth')
 const dashboard  = require('./src/dashboard')
+const adminRoutes = require('./src/admin')
+
 const app = express()
 app.use(cors({
   origin: [
@@ -37,6 +39,7 @@ router.post('/chatbot/message', chatbot.message)
 router.post('/auth/setRole',  auth.setRole)
 router.get('/auth/profile',   auth.getProfile)
 router.get('/dashboard/stats', dashboard.getStats)
+router.get('/admin/storage-stats', adminRoutes.getStorageStats)
 router.get('/health', (_, res) => res.json({ status: 'ok', service: 'gyanasetu-api' }))
 
 app.use('/api', router)
