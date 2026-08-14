@@ -434,13 +434,51 @@ export const sendChatMessage = (messages, userRole, semester, token) =>
   }, token)
 
 // ── DASHBOARD ──────────────────────────────────────
-export const getDashboardStats = async (role, classId, token) => {
-  // Mocking stats for now since backend is not implemented
-  return {
-    chaptersRead: 12,
-    attendanceDays: 14,
-    avgQuizScore: 85,
-    streakDays: 5
+export const getDashboardStats = async (role, classId, uid) => {
+  if (!uid) return { chaptersRead: 0, attendanceDays: 0, avgQuizScore: 0, streakDays: 0 };
+
+  let chaptersRead = 0;
+  let avgQuizScore = 0;
+  let streakDays = 0;
+
+  try {
+    // 1. Get average quiz score
+    const quizQ = query(collection(db, 'quizResults'), where('userId', '==', uid));
+    const quizSnap = await getDocs(quizQ);
+    let totalScore = 0;
+    let quizCount = 0;
+    quizSnap.forEach(d => {
+      const data = d.data();
+      if (data.scorePercent !== undefined) {
+        totalScore += data.scorePercent;
+        quizCount++;
+      }
+    });
+    if (quizCount > 0) {
+      avgQuizScore = Math.round(totalScore / quizCount);
+    }
+
+    // 2. Get chapters read
+    const progQ = query(collection(db, 'progress'), where('userId', '==', uid));
+    const progSnap = await getDocs(progQ);
+    chaptersRead = progSnap.size || 0;
+
+    // 3. Get attendance / streak
+    const userSnap = await getDoc(doc(db, 'users', uid));
+    if (userSnap.exists()) {
+      const userData = userSnap.data();
+      streakDays = userData.attendanceDays || userData.streakDays || 0;
+    }
+
+    return {
+      chaptersRead,
+      attendanceDays: streakDays, // for backwards compatibility with existing UI proxying
+      avgQuizScore,
+      streakDays
+    }
+  } catch (err) {
+    console.error('Error fetching dashboard stats:', err);
+    return { chaptersRead: 0, attendanceDays: 0, avgQuizScore: 0, streakDays: 0 };
   }
 }
 

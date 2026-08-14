@@ -60,7 +60,7 @@ export default function Dashboard() {
         const token = await getToken()
         if (!token) return
         const classId = profile?.classId || 'default'
-        const data = await getDashboardStats(profile?.role || 'student', classId, token)
+        const data = await getDashboardStats(profile?.role || 'student', classId, profile.uid)
         if (data) {
           setStats({
             chaptersRead: data.chaptersRead || 0,
