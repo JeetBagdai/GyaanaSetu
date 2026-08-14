@@ -33,17 +33,15 @@ const STUDENT_QUICK_ACTIONS = [
 
 // Base actions every teacher sees
 const TEACHER_ACTIONS_NO_MANAGE = [
-  { to: '/teacher-projects', label: 'Projects',         icon: FolderGit2,     color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/certificates',     label: 'Certificates',     icon: Award,          color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/attendance',       label: 'Attendance',       icon: ClipboardCheck, color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/performance',      label: 'Performance',      icon: BarChart3,      color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
-  { to: '/timetable',        label: 'My Schedule',      icon: Calendar,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/attendance', label: 'Attendance report', icon: ClipboardCheck, color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/timetable',  label: 'My Schedule',              icon: Calendar,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
 ]
 
-// Actions for teachers with timetable manager access (Totally 6)
+// Actions for teachers with timetable manager access
 const TEACHER_ACTIONS_WITH_MANAGE = [
-  ...TEACHER_ACTIONS_NO_MANAGE,
-  { to: '/timetable-manage', label: 'Manage Timetable', icon: LayoutGrid,     color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/attendance',       label: 'Attendance report', icon: ClipboardCheck, color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/timetable-manage', label: 'Manage Timetable',         icon: Calendar,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
+  { to: '/timetable',        label: 'My Schedule',              icon: Calendar,       color: 'var(--color-orange)', bg: 'var(--color-orange-soft)' },
 ]
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.07 } } }
