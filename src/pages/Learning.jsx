@@ -136,9 +136,13 @@ export default function Learning() {
             <select 
               className="select" 
               value={semester} 
-              onChange={e => setSemester(e.target.value)}
+              onChange={e => {
+                setSemester(e.target.value)
+                const subjects = getTheorySubjects(e.target.value) || []
+                if (subjects.length > 0) setSubject(subjects[0])
+              }}
               disabled={isStudent}
-              style={{ padding: '0.5rem', fontSize: '0.9rem', width: '100%', textOverflow: 'ellipsis', overflow: 'hidden' }}
+              style={{ padding: '0.5rem', paddingRight: '2.5rem', fontSize: '0.9rem', width: '100%', textOverflow: 'ellipsis', overflow: 'hidden' }}
             >
               {SEMESTERS.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
             </select>
@@ -150,7 +154,7 @@ export default function Learning() {
               className="select" 
               value={subject} 
               onChange={e => setSubject(e.target.value)}
-              style={{ padding: '0.5rem', fontSize: '0.9rem', width: '100%', textOverflow: 'ellipsis', overflow: 'hidden' }}
+              style={{ padding: '0.5rem', paddingRight: '2.5rem', fontSize: '0.9rem', width: '100%', textOverflow: 'ellipsis', overflow: 'hidden' }}
             >
               {(getTheorySubjects(semester) || []).map(s => <option key={s} value={s}>{s}</option>)}
             </select>
