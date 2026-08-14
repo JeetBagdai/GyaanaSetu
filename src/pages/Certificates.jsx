@@ -129,7 +129,7 @@ export default function Certificates() {
   })
 
   return (
-    <div className="certificates-page">
+    <div className="page-inner">
       <header className="page-header">
         <h1 className="page-title">Certificates & Achievements</h1>
         <p className="page-subtitle">

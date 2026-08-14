@@ -1,27 +1,4 @@
-.certificates-page {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
 
-.certificates-page .page-header {
-  margin-bottom: 0;
-}
-
-.certificates-page .page-title {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
-}
-
-.certificates-page .page-subtitle {
-  color: var(--text-muted);
-  font-size: 1.1rem;
-}
 
 .upload-card {
   background: var(--surface);
