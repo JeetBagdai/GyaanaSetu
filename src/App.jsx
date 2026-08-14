@@ -32,13 +32,11 @@ function AppLayout({ children }) {
   const { profile } = useAuth()
   const location = useLocation()
   
-  const [sidebarOpen, setSidebarOpen] = useState(() => {
-    if (location.pathname === '/learning' || location.pathname === '/quiz' || location.pathname.startsWith('/codeit/')) return false
-    return window.innerWidth > 768
-  })
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
-    if (location.pathname === '/learning' || location.pathname === '/quiz' || location.pathname.startsWith('/codeit/')) {
+    // Keep it closed when navigating to specific immersive pages
+    if (location.pathname === '/learning' || location.pathname === '/quiz' || location.pathname.startsWith('/codeit/') || location.pathname === '/dashboard') {
       setSidebarOpen(false)
     }
   }, [location.pathname])
