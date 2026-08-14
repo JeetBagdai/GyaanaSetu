@@ -3,11 +3,11 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getToken } from '../services/auth'
-import { getDashboardStats } from '../services/api'
+import { getDashboardStats, getAnnouncements, postAnnouncement } from '../services/api'
 import {
   Network, FlaskConical, Sigma, Layers,
   BookOpen, ClipboardCheck, Calendar,
-  MessageCircle, Brain,
+  MessageCircle, Brain, Megaphone, Send,
   Cpu, Eye, Database, Cloud, Code2, BarChart3, MapPin,
   FolderGit2, Award, LayoutGrid
 } from 'lucide-react'
@@ -55,7 +55,9 @@ export default function Dashboard() {
   const canManage   = isTeacher && profile?.timetableManager === true
   
   const [stats, setStats] = useState({ chaptersRead: 0, attendanceDays: 0, avgQuizScore: 0, streakDays: 0 })
-
+  const [announcements, setAnnouncements] = useState([])
+  const [annForm, setAnnForm] = useState({ title: '', message: '', target: 'All' })
+  const [postingAnn, setPostingAnn] = useState(false)
   useEffect(() => {
     async function loadStats() {
       try {
@@ -76,7 +78,22 @@ export default function Dashboard() {
       }
     }
     loadStats()
-  }, [profile])
+
+    async function loadAnnouncements() {
+      if (!isTeacher && profile) {
+        try {
+          const classId = profile.classId || 'default'
+          const data = await getAnnouncements(classId)
+          const studentSem = profile.semester || classId.replace('AIML-SEM', '') || '5'
+          const filtered = data.filter(a => a.classId === classId || a.classId === 'All' || a.semester === parseInt(studentSem))
+          setAnnouncements(filtered)
+        } catch (err) {
+          console.error(err)
+        }
+      }
+    }
+    loadAnnouncements()
+  }, [profile, isTeacher])
 
   const teacherActions = canManage ? TEACHER_ACTIONS_WITH_MANAGE : TEACHER_ACTIONS_NO_MANAGE
 
@@ -188,36 +205,101 @@ export default function Dashboard() {
             }
 
             return (
-              /* ── Teacher: flat grid ── */
-              <div className="card" style={{ padding: '1rem' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.75rem' }}>
-                  {parsedSubjects.map(subj => {
-                    const Icon = subj.icon
-                    return (
-                      <div
-                        key={subj.code}
-                        style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', padding: '0.75rem', borderRadius: 0, background: subj.bg, border: `1px solid ${subj.color}22` }}
-                      >
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                            <Icon size={16} color={subj.color} />
-                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: subj.color, background: `${subj.color}15`, padding: '0.15rem 0.4rem', borderRadius: '4px' }}>
-                              {(() => {
-                                const classMatch = profile?.classId?.match(/SEM(\d+)(?:-([A-Z]))?/);
-                                if (classMatch) {
-                                  return `Sem ${classMatch[1]}${classMatch[2] ? ` - ${classMatch[2]}` : ''}`;
-                                }
-                                return `Sem ${subj.sem}`;
-                              })()}
-                            </span>
+              /* ── Teacher: flat grid + Announcements ── */
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <div className="card" style={{ padding: '1rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.75rem' }}>
+                    {parsedSubjects.map(subj => {
+                      const Icon = subj.icon
+                      return (
+                        <div
+                          key={subj.code}
+                          style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', padding: '0.75rem', borderRadius: 0, background: subj.bg, border: `1px solid ${subj.color}22` }}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                              <Icon size={16} color={subj.color} />
+                              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: subj.color, background: `${subj.color}15`, padding: '0.15rem 0.4rem', borderRadius: '4px' }}>
+                                {(() => {
+                                  const classMatch = profile?.classId?.match(/SEM(\d+)(?:-([A-Z]))?/);
+                                  if (classMatch) {
+                                    return `Sem ${classMatch[1]}${classMatch[2] ? ` - ${classMatch[2]}` : ''}`;
+                                  }
+                                  return `Sem ${subj.sem}`;
+                                })()}
+                              </span>
+                            </div>
+                          </div>
+                          <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.3 }}>
+                            {subj.name}
                           </div>
                         </div>
-                        <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.3 }}>
-                          {subj.name}
-                        </div>
-                      </div>
-                    )
-                  })}
+                      )
+                    })}
+                  </div>
+                </div>
+                
+                {/* ── Teacher Quick Announcement Board ── */}
+                <div className="card" style={{ padding: '1.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+                    <Megaphone size={18} color="var(--color-orange)" />
+                    <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)' }}>Quick Announcement</h3>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    <input 
+                      type="text" 
+                      placeholder="Announcement Title" 
+                      className="input-field" 
+                      value={annForm.title} 
+                      onChange={e => setAnnForm({...annForm, title: e.target.value})}
+                    />
+                    <textarea 
+                      placeholder="What do you want to announce to your students?" 
+                      className="input-field" 
+                      rows={3} 
+                      style={{ resize: 'vertical' }}
+                      value={annForm.message}
+                      onChange={e => setAnnForm({...annForm, message: e.target.value})}
+                    />
+                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                      <select 
+                        className="input-field" 
+                        style={{ flex: 1, padding: '0.6rem' }}
+                        value={annForm.target}
+                        onChange={e => setAnnForm({...annForm, target: e.target.value})}
+                      >
+                        <option value="All">All My Classes</option>
+                        {parsedSubjects.map(s => (
+                          <option key={s.code} value={s.sem}>Semester {s.sem}</option>
+                        ))}
+                      </select>
+                      <button 
+                        className="btn-primary" 
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.5rem', borderRadius: '8px' }}
+                        disabled={postingAnn || !annForm.title || !annForm.message}
+                        onClick={async () => {
+                          setPostingAnn(true)
+                          try {
+                            await postAnnouncement({
+                              title: annForm.title,
+                              message: annForm.message,
+                              authorName: profile.name,
+                              classId: annForm.target === 'All' ? 'All' : `AIML-SEM${annForm.target}`,
+                              semester: annForm.target === 'All' ? null : parseInt(annForm.target)
+                            })
+                            setAnnForm({ title: '', message: '', target: 'All' })
+                            alert('Announcement posted successfully!')
+                          } catch (err) {
+                            alert('Failed to post: ' + err.message)
+                          }
+                          setPostingAnn(false)
+                        }}
+                      >
+                        <Send size={16} />
+                        {postingAnn ? 'Posting...' : 'Post'}
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             )
@@ -291,6 +373,40 @@ export default function Dashboard() {
               </div>
 
             </div>
+          </div>
+        </motion.div>
+      )}
+
+      {/* ── Student Announcements Feed ── */}
+      {!isTeacher && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} style={{ marginTop: '1.5rem', marginBottom: '2rem' }}>
+          <h2 className="section-title">Recent Announcements</h2>
+          <div className="card" style={{ padding: '1.5rem' }}>
+            {announcements.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>
+                No recent announcements.
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {announcements.map(ann => (
+                  <div key={ann.id} style={{ padding: '1rem', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '8px', borderLeft: '4px solid var(--color-orange)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+                      <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>{ann.title}</h3>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                        {ann.timestamp?.seconds ? new Date(ann.timestamp.seconds * 1000).toLocaleDateString() : 'Just now'}
+                      </span>
+                    </div>
+                    <p style={{ margin: '0 0 0.75rem 0', fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                      {ann.message}
+                    </p>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                      <Megaphone size={14} color="var(--primary)" />
+                      <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--primary)' }}>{ann.authorName}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </motion.div>
       )}

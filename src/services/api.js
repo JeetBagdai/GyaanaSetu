@@ -574,3 +574,30 @@ export const getTeacherPerformanceStats = async (classId, subject, token) => {
 
   return { studentPerformance };
 }
+
+// ── ANNOUNCEMENTS ──────────────────────────────────
+import { orderBy, limit, serverTimestamp } from 'firebase/firestore'
+
+export const postAnnouncement = async (data) => {
+  // data: { title, message, authorName, classId, semester }
+  const ref = doc(collection(db, 'announcements'))
+  await setDoc(ref, {
+    ...data,
+    timestamp: serverTimestamp(),
+  })
+  return { id: ref.id, success: true }
+}
+
+export const getAnnouncements = async (classId, semesterLimit = null) => {
+  const annRef = collection(db, 'announcements')
+  // For students, fetch announcements that target their specific class OR their semester in general
+  // Since Firestore 'OR' queries can be complex, we can fetch by classId, and if semester is provided, fetch by semester, or just fetch all recent and filter.
+  // Actually, easiest is to fetch the latest 20 announcements overall, and filter in client (since this is a small-scale app).
+  const q = query(annRef, orderBy('timestamp', 'desc'), limit(20))
+  const snap = await getDocs(q)
+  const results = []
+  snap.forEach(d => {
+    results.push({ id: d.id, ...d.data() })
+  })
+  return results
+}
