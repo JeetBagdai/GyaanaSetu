@@ -4,10 +4,10 @@
   "description": "GyaanaSetu Cloud Functions",
   "main": "index.js",
   "engines": {
-    "node": "20"
+    "node": "24.x"
   },
   "scripts": {
-    "deploy": "gcloud functions deploy gyanasetu-api --runtime=nodejs20 --trigger-http --allow-unauthenticated --entry-point=gyanasetu-api --region=asia-south1",
+    "deploy": "gcloud functions deploy gyanasetu-api --runtime=nodejs24 --trigger-http --allow-unauthenticated --entry-point=gyanasetu-api --region=asia-south1",
     "start": "node index.js"
   },
   "dependencies": {
