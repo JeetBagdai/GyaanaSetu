@@ -118,7 +118,7 @@ For each question object, use this exact structure:
 }`
 
     const completion = await groq.chat.completions.create({
-      model: 'llama3-8b-8192',
+      model: 'qwen/qwen3.8-27b',
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.7,
       response_format: { type: "json_object" }
@@ -157,7 +157,7 @@ Evaluate it against the expected answer and provide a JSON response with this ex
 Ensure the response is ONLY valid JSON, no markdown formatting like \`\`\`json.`
 
     const completion = await groq.chat.completions.create({
-      model: 'llama-3.2-11b-vision-preview',
+      model: 'qwen/qwen3.8-27b',
       messages: [
         {
           role: 'user',
