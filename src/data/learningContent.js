@@ -104,9 +104,9 @@ export function getModulesForSubject(subject) {
   if (MODULES_BY_SUBJECT[subject]) {
     return MODULES_BY_SUBJECT[subject];
   }
-  // Return dummy modules so the learning flow and quizzes can be tested
+  // Return dummy modules with placeholder PDFs so the learning flow and quizzes can be tested
   return [
-    { id: `${subject}_M1`, title: 'Module 1: Introduction', file: '' },
-    { id: `${subject}_M2`, title: 'Module 2: Core Concepts', file: '' }
+    { id: `${subject}_M1`, title: 'Module 1: Introduction', file: '/content/Sem3/COA/Module_1.pdf' },
+    { id: `${subject}_M2`, title: 'Module 2: Core Concepts', file: '/content/Sem3/COA/Module_2.pdf' }
   ];
 }
