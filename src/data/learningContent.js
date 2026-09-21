@@ -104,6 +104,9 @@ export function getModulesForSubject(subject) {
   if (MODULES_BY_SUBJECT[subject]) {
     return MODULES_BY_SUBJECT[subject];
   }
-  // Return empty list so we can show "Coming soon" state
-  return [];
+  // Return dummy modules so the learning flow and quizzes can be tested
+  return [
+    { id: `${subject}_M1`, title: 'Module 1: Introduction', file: '' },
+    { id: `${subject}_M2`, title: 'Module 2: Core Concepts', file: '' }
+  ];
 }
